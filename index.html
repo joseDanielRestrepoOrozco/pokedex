@@ -1,13 +1,321 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
+    <title>Pokédex Digital</title>
+    <link rel="stylesheet" href="/src/style.css" />
   </head>
   <body>
-    <div id="app"></div>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+
+      <div class="navbar-center">
+        <form class="search-form" autocomplete="off">
+            <img data-src="/src/assets/PokeTitulo.png" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="Pokédex" class="logo" />
+          <input type="text" class="search-input" placeholder="Buscar Pokémon..." name="pokemon" aria-label="Buscar Pokémon" />
+          <div class="type-buttons" role="group" aria-label="Filtros por tipo">
+            <button type="button" class="type-btn all" data-type="all" title="Todos los tipos">All</button>
+            <button type="button" class="type-btn fire" data-type="fire" title="Fuego">Fire</button>
+            <button type="button" class="type-btn water" data-type="water" title="Agua">Water</button>
+            <button type="button" class="type-btn grass" data-type="grass" title="Planta">Grass</button>
+            <button type="button" class="type-btn electric" data-type="electric" title="Eléctrico">Elec</button>
+            <button type="button" class="type-btn psychic" data-type="psychic" title="Psíquico">Psychic</button>
+            <button type="button" class="type-btn fav" data-type="fav" title="Favoritos">❤</button>
+          </div>
+          <button type="submit" class="search-btn">Buscar</button>
+        </form>
+      </div>
+    </nav>
+
+    <!-- Welcome overlay (UI-only, dismissible) -->
+    <div id="welcome-overlay" class="welcome-overlay" role="dialog" aria-modal="true">
+      <div class="welcome-inner">
+        <h2>Bienvenido a Pokédex</h2>
+        <p>Explora Pokémon. Usa los filtros para navegar — la integración con la API se hará en otra rama.</p>
+        <button id="welcome-close" class="filter-btn">Comenzar</button>
+      </div>
+    </div>
+
+    <!-- MAIN CONTENT: PANEL CENTRAL ESTÉTICO -->
+    <main class="main-content">
+      <section class="panel">
+        <div class="panel-inner">
+          <header class="panel-header">
+            <div class="filters-row">
+              <button class="filter-btn all" aria-pressed="false" title="Mostrar todos los tipos">
+                <!-- Pokéball SVG -->
+                <svg viewBox="0 0 100 100" width="18" height="18" aria-hidden="true"><circle cx="50" cy="50" r="45" fill="#ffffff" /><path d="M5,50 a45,45 0 0,0 90,0" fill="#ff5e62" /><circle cx="50" cy="50" r="14" fill="#222" /><circle cx="50" cy="50" r="8" fill="#fff" /></svg>
+                <span>Todos</span>
+              </button>
+
+              <button class="filter-btn gen" aria-pressed="false" title="Filtrar generación I">
+                <!-- Mini Pokémon (estático) -->
+                  <img class="mini-pkmn" data-src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="Bulbasaur mini" />
+                <span>Gen I</span>
+              </button>
+
+              <button class="filter-btn fav" aria-pressed="false" title="Favoritos">
+                <!-- Star icon -->
+                <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" fill="#ffdd57"><path d="M12 .587l3.668 7.431L24 9.748l-6 5.854L19.335 24 12 20.202 4.665 24 6 15.602 0 9.748l8.332-1.73z"></path></svg>
+                <span>Favoritos</span>
+              </button>
+            </div>
+          </header>
+
+          <!-- GRID DE TARJETAS: inicialmente vacío; contenido estático se inserta desde el template al pulsar 'All' -->
+          <div class="card-grid" role="list"></div>
+          <!-- static examples moved to template to avoid being present in DOM until requested -->
+          <template id="static-cards">
+            <!-- Ejemplos estáticos: 12 cartas -->
+            <article class="pokemon-card grass" role="listitem">
+              <div class="card-inner">
+                <div class="card">
+                  <div class="content">
+                    <div class="back">
+                      <div class="container noselect">
+                        <div class="canvas">
+                          <div class="tracker tr-1"></div>
+                          <div class="tracker tr-2"></div>
+                          <div class="tracker tr-3"></div>
+                          <div class="tracker tr-4"></div>
+                          <div class="tracker tr-5"></div>
+                          <div class="tracker tr-6"></div>
+                          <div class="tracker tr-7"></div>
+                          <div class="tracker tr-8"></div>
+                          <div class="tracker tr-9"></div>
+                          <div class="visual-card">
+                            <div class="card-content">
+                              <div class="card-glare"></div>
+                              <div class="cyber-lines"><span></span><span></span><span></span><span></span></div>
+                              <p class="prompt">PODER</p>
+                              <div class="title">CYBER<br/>CARD</div>
+                              <div class="glowing-elements"><div class="glow-1"></div><div class="glow-2"></div><div class="glow-3"></div></div>
+                              <div class="card-particles"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+                              <div class="corner-elements"><span></span><span></span><span></span><span></span></div>
+                              <div class="scan-line"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="front">
+                      <div class="img">
+                          <img class="pokemon-img" data-src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="Bulbasaur" />
+                      </div>
+                      <div class="front-content">
+                        <small class="badge">Grass</small>
+                        <div class="description">
+                          <div class="title"><p class="title"><strong>Bulbasaur</strong></p></div>
+                          <p class="card-footer">#001</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="pokemon-card grass" role="listitem">
+              <div class="card-inner">
+                <div class="card">
+                  <div class="content">
+                    <div class="back">
+                      <div class="container noselect">
+                        <div class="canvas">
+                          <div class="tracker tr-1"></div>
+                          <div class="tracker tr-2"></div>
+                          <div class="tracker tr-3"></div>
+                          <div class="tracker tr-4"></div>
+                          <div class="tracker tr-5"></div>
+                          <div class="tracker tr-6"></div>
+                          <div class="tracker tr-7"></div>
+                          <div class="tracker tr-8"></div>
+                          <div class="tracker tr-9"></div>
+                          <div class="visual-card">
+                            <div class="card-content">
+                              <div class="card-glare"></div>
+                              <div class="cyber-lines"><span></span><span></span><span></span><span></span></div>
+                              <p class="prompt">PODER</p>
+                              <div class="title">CYBER<br/>CARD</div>
+                              <div class="glowing-elements"><div class="glow-1"></div><div class="glow-2"></div><div class="glow-3"></div></div>
+                              <div class="card-particles"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+                              <div class="corner-elements"><span></span><span></span><span></span><span></span></div>
+                              <div class="scan-line"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="front">
+                      <div class="img">
+                          <img class="pokemon-img" data-src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/2.png" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="Ivysaur" />
+                      </div>
+                      <div class="front-content">
+                        <small class="badge">Grass</small>
+                        <div class="description">
+                          <div class="title"><p class="title"><strong>Ivysaur</strong></p></div>
+                          <p class="card-footer">#002</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="pokemon-card grass" role="listitem">
+              <div class="card-inner">
+                <div class="card">
+                  <div class="content">
+                    <div class="back">
+                      <div class="container noselect">
+                        <div class="canvas">
+                          <div class="tracker tr-1"></div>
+                          <div class="tracker tr-2"></div>
+                          <div class="tracker tr-3"></div>
+                          <div class="tracker tr-4"></div>
+                          <div class="tracker tr-5"></div>
+                          <div class="tracker tr-6"></div>
+                          <div class="tracker tr-7"></div>
+                          <div class="tracker tr-8"></div>
+                          <div class="tracker tr-9"></div>
+                          <div class="visual-card">
+                            <div class="card-content">
+                              <div class="card-glare"></div>
+                              <div class="cyber-lines"><span></span><span></span><span></span><span></span></div>
+                              <p class="prompt">PODER</p>
+                              <div class="title">CYBER<br/>CARD</div>
+                              <div class="glowing-elements"><div class="glow-1"></div><div class="glow-2"></div><div class="glow-3"></div></div>
+                              <div class="card-particles"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+                              <div class="corner-elements"><span></span><span></span><span></span><span></span></div>
+                              <div class="scan-line"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="front">
+                      <div class="img">
+                          <img class="pokemon-img" data-src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/3.png" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="Venusaur" />
+                      </div>
+                      <div class="front-content">
+                        <small class="badge">Grass</small>
+                        <div class="description">
+                          <div class="title"><p class="title"><strong>Venusaur</strong></p></div>
+                          <p class="card-footer">#003</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="pokemon-card fire" role="listitem">
+              <div class="card-inner">
+                  <img class="pokemon-img" data-src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="Charmander" />
+                <div class="card-body">
+                  <h3 class="pokemon-name">Charmander</h3>
+                  <small class="pokemon-id">#004</small>
+                  <div class="badges"><span class="badge fire">Fire</span></div>
+                </div>
+              </div>
+            </article>
+
+            <article class="pokemon-card fire" role="listitem">
+              <div class="card-inner">
+                  <img class="pokemon-img" data-src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/5.png" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="Charmeleon" />
+                <div class="card-body">
+                  <h3 class="pokemon-name">Charmeleon</h3>
+                  <small class="pokemon-id">#005</small>
+                  <div class="badges"><span class="badge fire">Fire</span></div>
+                </div>
+              </div>
+            </article>
+
+            <article class="pokemon-card fire flying" role="listitem">
+              <div class="card-inner">
+                  <img class="pokemon-img" data-src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="Charizard" />
+                <div class="card-body">
+                  <h3 class="pokemon-name">Charizard</h3>
+                  <small class="pokemon-id">#006</small>
+                  <div class="badges"><span class="badge fire">Fire</span><span class="badge flying">Flying</span></div>
+                </div>
+              </div>
+            </article>
+
+            <article class="pokemon-card water" role="listitem">
+              <div class="card-inner">
+                  <img class="pokemon-img" data-src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/7.png" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="Squirtle" />
+                <div class="card-body">
+                  <h3 class="pokemon-name">Squirtle</h3>
+                  <small class="pokemon-id">#007</small>
+                  <div class="badges"><span class="badge water">Water</span></div>
+                </div>
+              </div>
+            </article>
+
+            <article class="pokemon-card water" role="listitem">
+              <div class="card-inner">
+                  <img class="pokemon-img" data-src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/8.png" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="Wartortle" />
+                <div class="card-body">
+                  <h3 class="pokemon-name">Wartortle</h3>
+                  <small class="pokemon-id">#008</small>
+                  <div class="badges"><span class="badge water">Water</span></div>
+                </div>
+              </div>
+            </article>
+
+            <article class="pokemon-card water" role="listitem">
+              <div class="card-inner">
+                  <img class="pokemon-img" data-src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/9.png" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="Blastoise" />
+                <div class="card-body">
+                  <h3 class="pokemon-name">Blastoise</h3>
+                  <small class="pokemon-id">#009</small>
+                  <div class="badges"><span class="badge water">Water</span></div>
+                </div>
+              </div>
+            </article>
+
+            <article class="pokemon-card bug" role="listitem">
+              <div class="card-inner">
+                  <img class="pokemon-img" data-src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10.png" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="Caterpie" />
+                <div class="card-body">
+                  <h3 class="pokemon-name">Caterpie</h3>
+                  <small class="pokemon-id">#010</small>
+                  <div class="badges"><span class="badge bug">Bug</span></div>
+                </div>
+              </div>
+            </article>
+
+            <article class="pokemon-card bug" role="listitem">
+              <div class="card-inner">
+                  <img class="pokemon-img" data-src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/11.png" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="Metapod" />
+                <div class="card-body">
+                  <h3 class="pokemon-name">Metapod</h3>
+                  <small class="pokemon-id">#011</small>
+                  <div class="badges"><span class="badge bug">Bug</span></div>
+                </div>
+              </div>
+            </article>
+
+            <article class="pokemon-card bug flying" role="listitem">
+              <div class="card-inner">
+                  <img class="pokemon-img" data-src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/12.png" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="Butterfree" />
+                <div class="card-body">
+                  <h3 class="pokemon-name">Butterfree</h3>
+                  <small class="pokemon-id">#012</small>
+                  <div class="badges"><span class="badge bug">Bug</span><span class="badge flying">Flying</span></div>
+                </div>
+              </div>
+            </article>
+          </template>
+        </div>
+      </section>
+    </main>
+
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
