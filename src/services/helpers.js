@@ -15,6 +15,7 @@ export function parsePokemonData(data) {
     types: data.types.map(t => t.type.name),
     stats: data.stats.map(s => ({ name: s.stat.name, value: s.base_stat })),
     sprite: data.sprites?.front_default,
+    artwork: data.sprites?.other?.['official-artwork']?.front_default || data.sprites?.front_default || '',
   };
 }
 

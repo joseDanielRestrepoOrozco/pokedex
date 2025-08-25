@@ -8,17 +8,17 @@ import axios from 'axios';
  */
 // Obtener información relevante de todos los Pokémon de un tipo
 export async function getPokemonsInfoByType(type) {
-	const names = await getPokemonsByType(type);
-	if (names.error) return { error: names.error };
-	// Limitar la cantidad para evitar demasiadas peticiones (opcional)
-	// const limitedNames = names.slice(0, 20);
-	const results = await Promise.all(
-		names.map(async (name) => {
-			const data = await getPokemon(name);
-			return parsePokemonData(data);
-		})
-	);
-	return results;
+  const names = await getPokemonsByType(type);
+  if (names.error) return { error: names.error };
+  // Limitar la cantidad para evitar demasiadas peticiones (opcional)
+  // const limitedNames = names.slice(0, 20);
+  const results = await Promise.all(
+	names.map(async (name) => {
+	  const data = await getPokemon(name);
+	  return parsePokemonData(data);
+	})
+  );
+  return results;
 }
 
 // ===============================
@@ -27,8 +27,6 @@ export async function getPokemonsInfoByType(type) {
 
 // Usar la variable de entorno definida en .env
 const BASE_URL = import.meta.env.VITE_POKEAPI_BASE_URL;
-
-
 
 /**
  * Obtiene los datos básicos de un Pokémon por id o nombre.
@@ -44,8 +42,6 @@ export async function getPokemon(idOrName) {
 	}
 }
 
-
-
 /**
  * Obtiene información adicional de la especie de un Pokémon.
  * @param {string|number} idOrName - ID o nombre del Pokémon.
@@ -60,8 +56,6 @@ export async function getPokemonSpecies(idOrName) {
 	}
 }
 
-
-
 /**
  * Obtiene todos los tipos de Pokémon disponibles en la API.
  * @returns {Promise<Object|{error: string}>} Objeto con los tipos o { error }
@@ -75,7 +69,19 @@ export async function getAllTypes() {
 	}
 }
 
-
+/**
+ * Obtiene información detallada de un tipo específico (incluyendo sprites)
+ * @param {string} type - Nombre del tipo
+ * @returns {Promise<Object|{error: string}>} Objeto con información detallada del tipo
+ */
+export async function getTypeDetails(type) {
+	try {
+		const res = await axios.get(`${BASE_URL}/type/${type}`);
+		return res.data;
+	} catch (error) {
+		return { error: error.response?.data?.detail || 'Información del tipo no encontrada' };
+	}
+}
 
 /**
  * Obtiene los nombres de todos los Pokémon de un tipo específico.

@@ -8,63 +8,9 @@
     <link rel="stylesheet" href="/src/style.css" />
   </head>
   <body>
-    <!-- NAVBAR -->
-    <nav class="navbar">
-
-      <div class="navbar-center">
-        <form class="search-form" autocomplete="off">
-            <img data-src="/src/assets/PokeTitulo.png" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" alt="Pokédex" class="logo" />
-          <input type="text" class="search-input" placeholder="Buscar Pokémon..." name="pokemon" aria-label="Buscar Pokémon" />
-          <div class="type-buttons" role="group" aria-label="Filtros por tipo">
-            <button type="button" class="type-btn all" data-type="all" title="Todos los tipos">🧢 All</button>
-            <button type="button" class="type-btn fire" data-type="fire" title="Fuego">🔥 Fire</button>
-            <button type="button" class="type-btn water" data-type="water" title="Agua">💧 Water</button>
-            <button type="button" class="type-btn grass" data-type="grass" title="Planta">🌿 Grass</button>
-            <button type="button" class="type-btn electric" data-type="electric" title="Eléctrico">⚡ Elec</button>
-            <button type="button" class="type-btn psychic" data-type="psychic" title="Psíquico">🔮 Psychic</button>
-          </div>
-          <button type="submit" class="search-btn">
-            <!-- Pokéball SVG -->
-            <svg viewBox="0 0 100 100" width="18" height="18" aria-hidden="true"><circle cx="50" cy="50" r="45" fill="#ffffff" /><path d="M5,50 a45,45 0 0,0 90,0" fill="#ff5e62" /><circle cx="50" cy="50" r="14" fill="#222" /><circle cx="50" cy="50" r="8" fill="#fff" /></svg>
-            Buscar
-          </button>
-        </form>
-      </div>
-    </nav>
-
-    <!-- Welcome banner -->
-    <div id="welcome-banner" class="welcome-banner" aria-live="polite">
-      <div class="welcome-inner">
-        <h2>Bienvenido a Pokédex</h2>
-        <p>Explora Pokémon. Usa los filtros para navegar</p>
-      </div>
-    </div>
-
-    <!-- MAIN CONTENT: PANEL CENTRAL ESTÉTICO -->
-    <main class="main-content">
-      <section class="panel">
-        <div class="panel-inner">
-          <header class="panel-header">
-            <div class="filters-row">
-              <button class="filter-btn all" aria-pressed="false" title="Mostrar todos los tipos">
-           
-
-              
-
-                <!-- Star icon -->
-              </button>
-            </div>
-          </header>
-
-          <!-- GRID DE TARJETAS: inicialmente vacío; contenido estático se inserta desde el template al pulsar 'All' -->
-          <div class="card-grid" role="list"></div>
-          <!-- static examples moved to template to avoid being present in DOM until requested -->
-          <template id="static-cards">
-            <!-- Template vacío - las tarjetas se generan dinámicamente desde main.js -->
-          </template>
-        </div>
-      </section>
-    </main>
-  <script type="module" src="/src/main.js"></script>
+    <!-- La estructura será creada dinámicamente por JavaScript -->
+    <div id="app"></div>
+    
+    <script type="module" src="/src/main.js"></script>
   </body>
 </html>
