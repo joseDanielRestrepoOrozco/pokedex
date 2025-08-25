@@ -2,7 +2,7 @@ import './style.css'
 import {
   getPokemon,
   getPokemonsByType,
-} from './data/api.js'
+} from './services/api.js'
 
 // Small UX limits
 const ALL_LIMIT = 151 // número máximo a pedir en 'Ver todos' (puedes ajustar)

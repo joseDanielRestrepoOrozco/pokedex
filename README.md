@@ -1,30 +1,30 @@
-# 🔥 Pokédex Interactiva
+#  Pokédex Interactiva
 
 Una aplicación web moderna para explorar el mundo de Pokémon, construida con **Vanilla JavaScript**, **CSS puro** y la **PokéAPI**. Presenta cartas interactivas con animaciones de volteo y un diseño temático inspirado en los colores Pokémon.
 
-## ✨ Características
+## Características
 
-### 🎮 Funcionalidades Principales
+###  Funcionalidades Principales
 - **Búsqueda por nombre**: Encuentra cualquier Pokémon escribiendo su nombre
 - **Filtrado por tipo**: Explora Pokémon por categorías (Fuego, Agua, Planta, etc.)
 - **Vista completa**: Muestra los primeros 151 Pokémon de la región de Kanto
 - **Cartas animadas**: Efecto de volteo 3D para revelar estadísticas
 - **Diseño responsive**: Optimizado para dispositivos móviles y escritorio
 
-### 🎨 Diseño Visual
+### Diseño Visual
 - **Paleta temática**: Colores oficiales Pokémon (Rojo, Azul Cerúleo, Amarillo Dorado)
 - **Gradientes dinámicos**: Fondos que reflejan los tipos de Pokémon
 - **Indicadores por tipo**: Emojis identificativos para cada tipo (🔥 Fuego, 💧 Agua, etc.)
 - **Efectos de luz**: Animaciones de brillo y resplandor
 - **Tipografía moderna**: Sistema de fuentes optimizado para legibilidad
 
-### 📊 Información Detallada
+###  Información Detallada
 - **Estadísticas completas**: HP, Ataque, Defensa, Velocidad, etc.
 - **Imágenes oficiales**: Artwork de alta calidad de cada Pokémon
 - **Barras de progreso**: Visualización gráfica de las estadísticas
 - **Numeración Pokédex**: Números oficiales de la Pokédex Nacional
 
-## 🚀 Tecnologías Utilizadas
+##  Tecnologías Utilizadas
 
 ### Frontend
 - **HTML5**: Estructura semántica moderna
@@ -43,7 +43,7 @@ Una aplicación web moderna para explorar el mundo de Pokémon, construida con *
 - **Manejo de errores**: Gestión robusta de fallos de red
 - **Accesibilidad**: Navegación por teclado y roles ARIA
 
-## 🛠️ Instalación y Configuración
+##  Instalación y Configuración
 
 ### Prerrequisitos
 - Node.js (versión 16 o superior)
@@ -83,7 +83,7 @@ npm run build        # Construcción para producción
 npm run preview      # Vista previa de la build
 ```
 
-## 📁 Estructura del Proyecto
+## Estructura del Proyecto
 
 ```
 pokedex/
@@ -102,7 +102,7 @@ pokedex/
 └── README.md               # Documentación
 ```
 
-## 🎯 Funcionalidades Detalladas
+##  Funcionalidades Detalladas
 
 ### Sistema de Cartas
 - **Cara frontal**: Nombre, número y estadísticas del Pokémon
@@ -122,7 +122,7 @@ pokedex/
 - **Cache de peticiones**: Evita solicitudes duplicadas
 - **Fallbacks de imagen**: Placeholders para imágenes faltantes
 
-## 🎨 Personalización
+##  Personalización
 
 ### Variables CSS
 El proyecto utiliza variables CSS personalizables:
@@ -144,7 +144,7 @@ Modifica el archivo `.env` para cambiar la URL base:
 const BASE_URL = import.meta.env.VITE_POKEAPI_BASE_URL;
 ```
 
-## 🐛 Solución de Problemas
+##  Solución de Problemas
 
 ### Errores Comunes
 
@@ -160,7 +160,7 @@ const BASE_URL = import.meta.env.VITE_POKEAPI_BASE_URL;
    - Usar el servidor de desarrollo de Vite
    - No abrir directamente el archivo HTML
 
-## 🤝 Contribuciones
+##  Contribuciones
 
 ### Cómo contribuir
 1. Fork del repositorio
