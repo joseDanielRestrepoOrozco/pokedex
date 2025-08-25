@@ -1,7 +1,10 @@
-import { afterEach } from 'vitest'
-import { cleanup } from '@testing-library/react'
 import '@testing-library/jest-dom/vitest'
+import App from './src/app'
 
-afterEach(() => {
-  cleanup()
+beforeEach(() => {
+  document.body.innerHTML = ''
+  const divApp = document.createElement('div')
+  divApp.id = 'app'
+  document.body.appendChild(divApp)
+  App()
 })
