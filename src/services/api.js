@@ -1,4 +1,5 @@
 import { parsePokemonData } from './helpers.js';
+import axios from 'axios';
 
 /**
  * Obtiene información relevante de todos los Pokémon de un tipo.
@@ -28,6 +29,7 @@ export async function getPokemonsInfoByType(type) {
 const BASE_URL = import.meta.env.VITE_POKEAPI_BASE_URL;
 
 
+
 /**
  * Obtiene los datos básicos de un Pokémon por id o nombre.
  * @param {string|number} idOrName - ID o nombre del Pokémon.
@@ -35,13 +37,13 @@ const BASE_URL = import.meta.env.VITE_POKEAPI_BASE_URL;
  */
 export async function getPokemon(idOrName) {
 	try {
-		const res = await fetch(`${BASE_URL}/pokemon/${idOrName}`);
-		if (!res.ok) throw new Error('Pokémon no encontrado');
-		return await res.json();
+		const res = await axios.get(`${BASE_URL}/pokemon/${idOrName}`);
+		return res.data;
 	} catch (error) {
-		return { error: error.message };
+		return { error: error.response?.data?.detail || 'Pokémon no encontrado' };
 	}
 }
+
 
 
 /**
@@ -51,13 +53,13 @@ export async function getPokemon(idOrName) {
  */
 export async function getPokemonSpecies(idOrName) {
 	try {
-		const res = await fetch(`${BASE_URL}/pokemon-species/${idOrName}`);
-		if (!res.ok) throw new Error('Especie no encontrada');
-		return await res.json();
+		const res = await axios.get(`${BASE_URL}/pokemon-species/${idOrName}`);
+		return res.data;
 	} catch (error) {
-		return { error: error.message };
+		return { error: error.response?.data?.detail || 'Especie no encontrada' };
 	}
 }
+
 
 
 /**
@@ -66,13 +68,13 @@ export async function getPokemonSpecies(idOrName) {
  */
 export async function getAllTypes() {
 	try {
-		const res = await fetch(`${BASE_URL}/type`);
-		if (!res.ok) throw new Error('No se pudieron obtener los tipos');
-		return await res.json();
+		const res = await axios.get(`${BASE_URL}/type`);
+		return res.data;
 	} catch (error) {
-		return { error: error.message };
+		return { error: error.response?.data?.detail || 'No se pudieron obtener los tipos' };
 	}
 }
+
 
 
 /**
@@ -82,12 +84,10 @@ export async function getAllTypes() {
  */
 export async function getPokemonsByType(type) {
 	try {
-		const res = await fetch(`${BASE_URL}/type/${type}`);
-		if (!res.ok) throw new Error('Tipo no encontrado');
-		const data = await res.json();
+		const res = await axios.get(`${BASE_URL}/type/${type}`);
 		// Devuelve solo los nombres de los Pokémon
-		return data.pokemon.map(p => p.pokemon.name);
+		return res.data.pokemon.map(p => p.pokemon.name);
 	} catch (error) {
-		return { error: error.message };
+		return { error: error.response?.data?.detail || 'Tipo no encontrado' };
 	}
 }
