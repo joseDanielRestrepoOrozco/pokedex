@@ -25,12 +25,6 @@ export class Layout {
     const mainContainer = document.createElement('div')
     mainContainer.className = 'app-container'
 
-    // Botón hamburguesa para móvil
-    const mobileMenuBtn = document.createElement('button')
-    mobileMenuBtn.className = 'mobile-menu-btn'
-    mobileMenuBtn.innerHTML = '☰'
-    mobileMenuBtn.setAttribute('aria-label', 'Abrir menú')
-
     // Overlay para sidebar móvil
     const sidebarOverlay = document.createElement('div')
     sidebarOverlay.className = 'sidebar-overlay'
@@ -53,7 +47,6 @@ export class Layout {
     bodyContainer.appendChild(sidebar)
     bodyContainer.appendChild(contentContainer)
 
-    mainContainer.appendChild(mobileMenuBtn)
     mainContainer.appendChild(header)
     mainContainer.appendChild(bodyContainer)
 
@@ -72,21 +65,23 @@ export class Layout {
     }
 
     // Lógica para mostrar/ocultar sidebar en móvil
-    mobileMenuBtn.addEventListener('click', () => {
-      const isOpen = !sidebar.classList.contains('open')
-      sidebar.classList.toggle('open')
-      sidebarOverlay.classList.toggle('active')
-      document.body.style.overflow = isOpen ? 'hidden' : ''
-      // Añadir clase para bloquear scroll y estado accesible
-      document.body.classList.toggle('sidebar-open', isOpen)
-      mobileMenuBtn.setAttribute('aria-expanded', String(isOpen))
-    })
+    const mobileMenuBtn = header.mobileMenuBtn
+    if (mobileMenuBtn) {
+      mobileMenuBtn.addEventListener('click', () => {
+        const isOpen = !sidebar.classList.contains('open')
+        sidebar.classList.toggle('open')
+        sidebarOverlay.classList.toggle('active')
+        document.body.style.overflow = isOpen ? 'hidden' : ''
+        document.body.classList.toggle('sidebar-open', isOpen)
+        mobileMenuBtn.setAttribute('aria-expanded', String(isOpen))
+      })
+    }
     sidebarOverlay.addEventListener('click', () => {
       sidebar.classList.remove('open')
       sidebarOverlay.classList.remove('active')
       document.body.style.overflow = ''
       document.body.classList.remove('sidebar-open')
-      mobileMenuBtn.setAttribute('aria-expanded', 'false')
+      if (mobileMenuBtn) mobileMenuBtn.setAttribute('aria-expanded', 'false')
     })
 
     // Paginación: wiring con botones prev/next si existen

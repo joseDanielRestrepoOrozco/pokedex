@@ -1,3 +1,71 @@
+@media (max-width: 600px) {
+  .sidebar .type-btn .type-icon {
+    width: 28px;
+    height: 28px;
+  }
+}
+@media (max-width: 600px) {
+  .sidebar .type-btn {
+    font-size: 1.15rem;
+    min-width: 90px;
+    min-height: 44px;
+    padding: 12px 18px;
+  }
+}
+/* Botón cerrar sidebar */
+.sidebar-close-btn {
+  display: none;
+}
+@media (max-width: 600px) {
+  .sidebar {
+    position: fixed;
+  }
+  .sidebar-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-bottom: 4px;
+    margin-bottom: 0;
+  }
+  .sidebar-close-btn {
+    display: block;
+    position: static;
+    margin-left: auto;
+    background: var(--pk-chip-bg);
+    color: var(--pk-text);
+    border: none;
+    font-size: 1.3rem;
+    padding: 0.1em 0.5em;
+    border-radius: 8px;
+    cursor: pointer;
+    z-index: 20;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    transition: background 0.2s, color 0.2s;
+  }
+  .sidebar-close-btn:hover {
+    background: var(--color-golden-yellow);
+    color: #181830;
+  }
+  .sidebar-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+  .sidebar-content {
+    margin-top: 0;
+    padding-top: 0;
+  }
+}
+/* Mostrar el botón de menú solo en pantallas pequeñas */
+.mobile-menu-btn {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .mobile-menu-btn {
+    display: block;
+  }
+}
 /* Fix definitivo: el sidebar siempre por encima y siempre interactivo */
 .sidebar,
 .sidebar.open,
@@ -44,12 +112,50 @@ body.sidebar-open .sidebar {
     padding: 0;
     box-sizing: border-box;
   }
+  /* Header con botón a la izquierda y logo centrado */
   .main-header {
-    /* Header centrado y ancho completo en móvil */
     width: 100vw;
     min-width: 100vw;
     padding: 10px 0 0 0;
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: transparent;
+  }
+
+  .header-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    position: relative;
+  }
+
+  .mobile-menu-btn {
+    position: absolute;
+    left: 16px;
+    background: var(--pk-chip-bg);
+    color: var(--pk-text);
+    border: none;
+    font-size: 2rem;
+    padding: 0.3em 0.7em;
+    border-radius: 8px;
+    cursor: pointer;
+    z-index: 10;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    transition: background 0.2s, color 0.2s;
+  }
+  .mobile-menu-btn:hover {
+    background: var(--color-golden-yellow);
+    color: #181830;
+  }
+
+  .logo-section {
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .title-primary {
     /* Título principal adaptado para móvil */
@@ -140,22 +246,7 @@ body.sidebar-open .sidebar {
     /* Sidebar visible cuando está abierto */
     left: 0;
   }
-  .mobile-menu-btn {
-    /* Botón para abrir el menú lateral en móvil */
-    display: block;
-    position: fixed;
-    top: 18px;
-    left: 18px;
-    z-index: 2100;
-    background: #ffd700;
-    border: none;
-    border-radius: 8px;
-    padding: 14px;
-    cursor: pointer;
-    font-size: 1.7rem;
-    color: #181830;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-  }
+
   .sidebar-overlay {
     display: none;
     position: fixed;
@@ -584,15 +675,6 @@ button:focus-visible {
   /* Permitir interacción con el sidebar aunque el overlay esté activo */
   .sidebar.open {
     pointer-events: auto !important;
-  }
-
-  /* Ensure the menu button stays on top but under the sidebar so it's clickable when sidebar closed */
-  .mobile-menu-btn {
-    position: fixed !important;
-    top: 16px !important;
-    left: 16px !important;
-    z-index: 100070 !important;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.25) !important;
   }
 
   /* Keep welcome banner below the sidebar/modal */
@@ -1909,7 +1991,7 @@ body.welcome-open img[data-src] {
 }
 
 .filter-section .type-btn .type-icon {
-  width: 110px;                            /* Sprites aún más grandes */
+  width: 200px;                            /* Sprites aún más grandes */
   height: 110px;
   object-fit: contain;
 }
@@ -2126,9 +2208,6 @@ body.welcome-open img[data-src] {
   /* Make sidebar sit above overlay */
   .sidebar { z-index: 2050 !important; }
 
-  /* Ensure header/menu button stays above overlay but below sidebar button */
-  .mobile-menu-btn { z-index: 2060 !important; }
-
   /* Reserve space at top of sidebar for header spacing */
   .sidebar::before {
     content: '';
@@ -2158,10 +2237,7 @@ body.welcome-open img[data-src] {
     gap: 12px !important;
     box-sizing: border-box !important;
   }
-  .filter-section .type-btn .type-icon {
-    width: 56px !important;
-    height: 56px !important;
-  }
+
   .filter-section .type-btn .type-icon-wrapper { font-size: 2.6rem !important; min-width: 56px !important; }
 
   /* Card grid — allow 1 or 2 columns depending on width */
@@ -2216,9 +2292,6 @@ body.welcome-open img[data-src] {
     align-items: center !important;
   }
   .welcome-banner.hidden { display: none !important; opacity: 0 !important; visibility: hidden !important; }
-
-  /* Larger tap targets for mobile buttons */
-  .mobile-menu-btn { padding: 12px !important; border-radius: 10px !important; }
 
   /* Small tweaks for text readability */
   .title, .card-footer, .stat-name, .stat-val { font-size: clamp(0.9rem, 2.4vw, 1.1rem) !important; }

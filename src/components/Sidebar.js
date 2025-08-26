@@ -16,9 +16,9 @@ export class Sidebar {
 
     sidebar.innerHTML = `
       <div class="sidebar-header">
+        <button type="button" class="sidebar-close-btn" aria-label="Cerrar menú">✖</button>
         <h3>🔍 Buscar & Filtrar</h3>
       </div>
-      
       <div class="sidebar-content">
         <!-- Botón aleatorio al principio -->
         <div class="quick-actions">
@@ -55,30 +55,60 @@ export class Sidebar {
     // Cargar tipos dinámicamente
     this.loadTypesAsync(sidebar)
 
-    // Añadir listener para botón aleatorio
     setTimeout(() => {
+      // Botón aleatorio
       const rb = sidebar.querySelector('#random-btn')
       if (rb) {
         rb.addEventListener('click', async () => {
           await PokemonService.fetchRandom()
         })
       }
+
       // Cerrar sidebar al hacer click en cualquier botón de tipo (solo móvil)
       sidebar.addEventListener('click', e => {
         if (e.target.closest('.type-btn')) {
           const isMobile = window.matchMedia('(max-width: 768px)').matches
           if (isMobile) {
-            sidebar.classList.remove('open')
-            const overlay = document.querySelector('.sidebar-overlay')
-            if (overlay) overlay.classList.remove('active')
-            document.body.classList.remove('sidebar-open')
-            document.body.style.overflow = ''
-            const menuBtn = document.querySelector('.mobile-menu-btn')
-            if (menuBtn) menuBtn.setAttribute('aria-expanded', 'false')
+            Sidebar.closeSidebar()
           }
         }
       })
+
+      // Cerrar sidebar al buscar un Pokémon (submit del form)
+      const searchForm = sidebar.querySelector('.search-form')
+      if (searchForm) {
+        searchForm.addEventListener('submit', e => {
+          const isMobile = window.matchMedia('(max-width: 768px)').matches
+          if (isMobile) {
+            setTimeout(() => Sidebar.closeSidebar(), 200)
+          }
+        })
+      }
+
+      // Botón cerrar sidebar
+      const closeBtn = sidebar.querySelector('.sidebar-close-btn')
+      if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+          Sidebar.closeSidebar()
+        })
+      }
     }, 80)
+
+    return sidebar
+  }
+
+  /**
+   * Cierra el sidebar y overlay en móvil
+   */
+  static closeSidebar() {
+    const sidebar = document.querySelector('.sidebar')
+    const overlay = document.querySelector('.sidebar-overlay')
+    sidebar?.classList.remove('open')
+    overlay?.classList.remove('active')
+    document.body.classList.remove('sidebar-open')
+    document.body.style.overflow = ''
+    const menuBtn = document.querySelector('.mobile-menu-btn')
+    if (menuBtn) menuBtn.setAttribute('aria-expanded', 'false')
 
     return sidebar
   }
