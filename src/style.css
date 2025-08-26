@@ -1,13 +1,237 @@
-@import "tailwindcss";
+/* Fix definitivo: el sidebar siempre por encima y siempre interactivo */
+.sidebar,
+.sidebar.open,
+body.sidebar-open .sidebar {
+  z-index: 2147483647 !important;
+  pointer-events: auto !important;
+  user-select: auto !important;
+}
 
+/* El overlay nunca bloquea el sidebar */
+.sidebar-overlay {
+  z-index: 2147483646 !important;
+}
+/* Forzar que el sidebar siempre sea interactivo aunque el fondo esté bloqueado */
+.sidebar,
+.sidebar.open,
+body.sidebar-open .sidebar {
+  pointer-events: auto !important;
+  user-select: auto !important;
+}
+/* =============================
+  Adaptaciones para móviles
+  Layout y tamaños para pantallas pequeñas
+  ============================= */
+@media (max-width: 600px) {
+  html {
+    font-size: 16px; /* Fuente base para móviles */
+  }
+  body {
+    /* Layout principal y fondo para móviles */
+    padding-top: 70px;
+    margin: 0;
+    width: 100vw;
+    min-width: 100vw;
+    box-sizing: border-box;
+    background-size: cover;
+    font-family: 'Roboto', Arial, sans-serif;
+  }
+  .app-container {
+    /* Contenedor principal: ocupa todo el ancho en móvil */
+    width: 100vw;
+    min-width: 100vw;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  .main-header {
+    /* Header centrado y ancho completo en móvil */
+    width: 100vw;
+    min-width: 100vw;
+    padding: 10px 0 0 0;
+    text-align: center;
+  }
+  .title-primary {
+    /* Título principal adaptado para móvil */
+    font-size: 1.5rem;
+    text-align: center;
+    margin: 0 auto 8px auto;
+    word-break: break-word;
+  }
+  .welcome-banner {
+    /* Banner de bienvenida centrado y ancho completo */
+    width: 100vw;
+    min-width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 10px auto;
+    box-sizing: border-box;
+  }
+  .welcome-banner .welcome-inner {
+    /* Contenido interno del banner: centrado y con padding adaptable */
+    padding: 10px 6vw;
+    margin: 0 auto;
+    max-width: 95vw;
+    min-width: 140px;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    border-radius: 16px;
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .main-content {
+    /* Área principal: layout vertical y centrado */
+    width: 100vw;
+    max-width: 100vw;
+    padding: 8px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    box-sizing: border-box;
+  }
+  .card {
+    /* Tarjeta de Pokémon: tamaño y margen para móvil */
+    width: 98vw;
+    max-width: 340px;
+    min-width: 140px;
+    height: 320px;
+    margin: 0 auto 14px auto;
+    border-radius: 16px;
+    font-size: 1rem;
+    box-sizing: border-box;
+  }
+  .card-grid {
+    /* Grid de tarjetas: una columna en móvil */
+    width: 100vw;
+    max-width: 100vw;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    justify-items: center;
+    margin: 0 auto;
+    padding: 0 0 16px 0;
+    box-sizing: border-box;
+  }
+  .sidebar {
+    /* Sidebar móvil: oculto por defecto, ocupa toda la pantalla al abrir */
+    position: fixed;
+    top: 0;
+    left: -100vw;
+    width: 100vw;
+    max-width: 100vw;
+    height: 100vh;
+    background: #181830;
+    z-index: 2000;
+    transition: left 0.3s ease;
+    box-shadow: 2px 0 16px rgba(0,0,0,0.2);
+    padding: 0 0 8px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+  }
+  .sidebar.open {
+    /* Sidebar visible cuando está abierto */
+    left: 0;
+  }
+  .mobile-menu-btn {
+    /* Botón para abrir el menú lateral en móvil */
+    display: block;
+    position: fixed;
+    top: 18px;
+    left: 18px;
+    z-index: 2100;
+    background: #ffd700;
+    border: none;
+    border-radius: 8px;
+    padding: 14px;
+    cursor: pointer;
+    font-size: 1.7rem;
+    color: #181830;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+  .sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.7);
+    z-index: 1999;
+  }
+  .sidebar-overlay.active {
+    display: block;
+  }
+  .type-btn {
+    min-width: 70px;
+    font-size: 1rem;
+    padding: 10px 8px;
+    margin: 4px 2px;
+    box-sizing: border-box;
+    text-align: center;
+    border-radius: 8px;
+  }
+  .type-btn.with-text {
+    padding: 10px 15px;
+    font-size: 1.1rem;
+    box-sizing: border-box;
+    text-align: center;
+  }
+  .search-input {
+    width: 100%;
+    min-width: 140px;
+    font-size: 1.1rem;
+    padding: 12px 15px;
+    box-sizing: border-box;
+  }
+  .search-input-container {
+    width: 100%;
+    max-width: none;
+  }
+}
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
+  /* Enhanced Pokémon Color Palette - Colores exactos especificados */
+  --color-red: #FF0000;
+  --color-bu-red: #CC0000;
+  --color-cerulean: #3B4CCA;
+  --color-golden-yellow: #FFDE00;
+  --color-gold-foil: #B3A125;
+
+  /* Enhanced themed backgrounds and accents - Tonos más suaves */
+  --pk-bg-start: #1a1d2e;        
+  --pk-bg-end: #2c1810;          
+  --pk-nav: linear-gradient(135deg, #1e2338 0%, #2a2f4a 100%);        
+  --pk-panel-bg: linear-gradient(135deg, #ffffff 0%, #f8f9ff 30%, #fff9e6 100%);
+  --pk-accent-1: var(--color-gold-foil);        
+  --pk-accent-2: var(--color-golden-yellow);    
+  --pk-accent-red: var(--color-bu-red);
+  --pk-accent-blue: var(--color-cerulean);
+  --pk-chip-bg: linear-gradient(135deg, #2a2f4a 0%, #1e2338 100%);        
+  --pk-text: #f4f6f8;        
+  --pk-muted: #a8b2c8;       
+
+  /* Card type colors más sutiles */
+  --pk-fire-gradient: linear-gradient(135deg, var(--color-red) 0%, var(--color-bu-red) 100%);
+  --pk-water-gradient: linear-gradient(135deg, var(--color-cerulean) 0%, #2a3a9f 100%);
+  --pk-electric-gradient: linear-gradient(135deg, var(--color-golden-yellow) 0%, var(--color-gold-foil) 100%);
+
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: var(--pk-text);
+  /* Altura del header usada para calcular áreas visibles */
+  --app-header-height: 120px;
+  --pagination-height: 76px;
+  background-color: var(--pk-bg-start);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -17,31 +241,38 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: var(--color-cerulean);
   text-decoration: inherit;
+  transition: color 0.3s ease;
 }
 a:hover {
-  color: #535bf2;
+  color: var(--color-golden-yellow);
 }
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  padding: 0;  /* Sin padding superior ya que usamos layout flex */
+  background: linear-gradient(135deg, var(--pk-bg-start) 0%, var(--pk-bg-end) 60%, #1a1a2e 100%);
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  background: linear-gradient(45deg, var(--color-golden-yellow), var(--color-gold-foil));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 #app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  width: 100%;          /* Ocupar todo el ancho */
+  height: 100vh;        /* Ocupar toda la altura */
+  margin: 0;            /* Sin márgenes */
+  padding: 0;           /* Sin padding */
+  text-align: left;     /* Alineación normal */
 }
 
 .logo {
@@ -51,18 +282,14 @@ h1 {
   transition: filter 300ms;
 }
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+  filter: drop-shadow(0 0 2em var(--color-cerulean)aa);
 }
 .logo.vanilla:hover {
-  filter: drop-shadow(0 0 2em #f7df1eaa);
-}
-
-.card {
-  padding: 2em;
+  filter: drop-shadow(0 0 2em var(--color-golden-yellow)aa);
 }
 
 .read-the-docs {
-  color: #888;
+  color: var(--pk-muted);
 }
 
 button {
@@ -72,27 +299,1927 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background: var(--pk-chip-bg);
+  color: var(--pk-text);
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 button:hover {
-  border-color: #646cff;
+  border-color: var(--color-golden-yellow);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 222, 0, 0.3);
 }
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: 2px solid var(--color-cerulean);
+  outline-offset: 2px;
 }
 
+/* Enhanced NAVBAR with better Pokémon theming */
+.navbar {
+  width: 100%;
+  background: var(--pk-nav);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.6rem 1.5rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4), 0 0 30px rgba(255, 222, 0, 0.1);
+  position: fixed; 
+  top: 0; 
+  left: 0; 
+  right: 0; 
+  z-index: 120;
+  border-bottom: 2px solid rgba(255, 222, 0, 0.2);
+}
+
+.navbar-center { 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  gap: 6px; 
+}
+
+.search-form { 
+  display: flex; 
+  gap: 0.5rem; 
+  align-items: center; 
+  flex-wrap: wrap;
+}
+
+.search-input, .type-select, .search-btn { 
+  padding: 0.45rem 0.9rem; 
+  border-radius: 8px; 
+  border: 0; 
+  font-size: 0.95rem; 
+  transition: all 0.3s ease;
+}
+
+.search-input { 
+  background: linear-gradient(135deg, #1e2338 0%, #2a2f4a 100%); 
+  color: var(--pk-text); 
+  width: 180px; 
+  border: 2px solid rgba(255, 222, 0, 0.3); 
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+.search-input:focus {
+  border-color: var(--color-golden-yellow);
+  box-shadow: 0 0 20px rgba(255, 222, 0, 0.4);
+  outline: none;
+}
+
+.search-btn { 
+  background: linear-gradient(135deg, #B3A125 0%, #D4B836 100%); 
+  color: #1a1d2e; 
+  cursor: pointer; 
+  border: 0; 
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(179, 161, 37, 0.4);
+  position: relative;
+  padding: 0.45rem 1.2rem;
+  border: 2px solid rgba(255, 215, 0, 0.6);
+}
+.search-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(179, 161, 37, 0.6);
+  background: linear-gradient(135deg, #D4B836 0%, #B3A125 100%);
+  border-color: var(--color-golden-yellow);
+}
+
+/* Enhanced type buttons con fondos específicos para cada tipo */
+/* Type buttons enhanced with dynamic loading */
+.type-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  margin: 12px 0;
+}
+
+.type-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border: 2px solid transparent;
+  border-radius: 20px;
+  background: var(--pk-chip-bg);
+  color: var(--pk-text);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: capitalize;
+  min-height: 36px;
+  position: relative;
+  overflow: hidden;
+}
+
+.type-btn:hover {
+  border-color: var(--type-color, var(--color-golden-yellow));
+  background: linear-gradient(135deg, 
+    rgba(var(--type-color-rgb, 255, 222, 0), 0.1) 0%, 
+    rgba(var(--type-color-rgb, 255, 222, 0), 0.2) 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.type-btn.is-active {
+  border-color: var(--type-color, var(--color-golden-yellow));
+  background: linear-gradient(135deg, 
+    var(--type-color, var(--color-golden-yellow)) 0%, 
+    color-mix(in srgb, var(--type-color, var(--color-golden-yellow)) 80%, black 20%) 100%);
+  color: white;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+/* Type icon styles */
+.type-icon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3));
+}
+
+.type-btn.is-active .type-icon {
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)) brightness(1.1);
+}
+
+/* Loading state for types */
+.loading-types {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  color: var(--pk-muted);
+  font-size: 0.9rem;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Responsive type buttons */
+@media (max-width: 768px) {
+  .type-buttons {
+    gap: 6px;
+    margin: 8px 0;
+  }
+  
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -100vw;
+    width: 100vw;
+    height: 100vh;
+    background: #181830;
+    z-index: 2000;
+    transition: left 0.3s ease;
+    box-shadow: 2px 0 16px rgba(0,0,0,0.2);
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    overflow-y: auto;
+  }
+
+  .sidebar.open {
+    left: 0;
+  }
+  border-color: rgba(21, 77, 113, 0.6);
+  /* Ocultar el contenido principal cuando el sidebar está abierto */
+  body.sidebar-open .content-container:not(.sidebar),
+  body.sidebar-open .main-content:not(.sidebar) {
+    filter: blur(6px) brightness(0.5);
+    pointer-events: none;
+    user-select: none;
+  }
+}
+
+/* Paginación: estilos básicos */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 12px 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+.pagination .page-btn {
+  background: linear-gradient(135deg, #B3A125 0%, #D4B836 100%);
+  color: #12121a;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.pagination .page-btn[disabled] {
+  opacity: 0.45;
+  cursor: not-allowed;
+  filter: grayscale(0.25) brightness(0.85);
+  transform: none;
+  box-shadow: none;
+}
+.pagination .page-info {
+  color: var(--pk-muted);
+  font-weight: 600;
+}
+
+@media (max-width: 420px) {
+  .pagination { gap: 8px; padding: 10px 8px; }
+  .pagination .page-info { font-size: 0.9rem; }
+  .pagination .page-btn { padding: 6px 10px; font-size: 0.9rem; }
+}
+
+/* ======= MOBILE SIDEBAR OVERRIDES (strong) ======= */
+@media (max-width: 768px) {
+  /* Force full-screen modal sidebar using transform (more reliable than left) */
+  .sidebar {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    transform: translateX(-100%) !important;
+    transition: transform 320ms cubic-bezier(.2,.9,.2,1) !important;
+    z-index: 100100 !important; /* Asegura que el sidebar esté por encima del overlay */
+    box-shadow: 0 12px 40px rgba(0,0,0,0.6) !important;
+    background: linear-gradient(180deg, #181830 0%, #2a2f4a 100%) !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+    pointer-events: auto !important;
+  }
+
+  /* When open, slide into view */
+  .sidebar.open,
+  body.sidebar-open .sidebar {
+    transform: translateX(0) !important;
+    overflow: auto !important;
+    pointer-events: auto !important;
+  }
+
+  /* Overlay should sit below the sidebar but above the rest */
+  .sidebar-overlay {
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background: rgba(0,0,0,0.6) !important;
+    z-index: 100050 !important;
+    opacity: 0; visibility: hidden; transition: opacity 220ms ease !important;
+    pointer-events: none !important;
+  }
+  .sidebar-overlay.active,
+  body.sidebar-open .sidebar-overlay {
+    opacity: 1 !important; visibility: visible !important; pointer-events: auto !important;
+  }
+  /* Permitir interacción con el sidebar aunque el overlay esté activo */
+  .sidebar.open {
+    pointer-events: auto !important;
+  }
+
+  /* Ensure the menu button stays on top but under the sidebar so it's clickable when sidebar closed */
+  .mobile-menu-btn {
+    position: fixed !important;
+    top: 16px !important;
+    left: 16px !important;
+    z-index: 100070 !important;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.25) !important;
+  }
+
+  /* Keep welcome banner below the sidebar/modal */
+  .welcome-banner { z-index: 1000 !important; }
+
+  /* Lock body scroll when sidebar is open */
+  body.sidebar-open { overflow: hidden !important; }
+
+  /* Dim and prevent interaction with content while sidebar is open */
+  body.sidebar-open .content-container,
+  body.sidebar-open .main-content {
+    filter: blur(6px) brightness(0.6) !important;
+    /* pointer-events: none !important; */
+  }
+
+  /* Sidebar content padding to avoid top header overlap */
+  .sidebar-content {
+    max-height: calc(100vh - 72px) !important;
+    overflow-y: auto !important;
+    padding: 96px 6vw 24px 6vw !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Make sure images and icons scale inside sidebar */
+  .sidebar img, .type-icon, .type-sprite { max-width: 100% !important; height: auto !important; }
+}
+
+    width: 100vw;
+    max-width: 100vw;
+    padding: 80px 8vw 20px 8vw;
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.type-btn.grass { 
+    padding: 18px 8vw;
+    width: 100vw;
+    text-align: center;
+  border-color: rgba(21, 77, 113, 0.6);
+}
+
+.type-btn.electric { 
+  background: linear-gradient(135deg, #154D71 0%, #1A5A85 100%);
+  color: white;
+  border-color: rgba(21, 77, 113, 0.6);
+}
+
+.type-btn.psychic { 
+  background: linear-gradient(135deg, #154D71 0%, #1A5A85 100%);
+  color: white;
+  border-color: rgba(21, 77, 113, 0.6);
+}
+
+.type-btn:hover { 
+  transform: translateY(-3px); 
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4); 
+  border-color: var(--color-golden-yellow);
+}
+
+.type-btn:active { 
+  transform: translateY(0); 
+}
+
+.type-btn.is-active { 
+  transform: translateY(-3px); 
+  box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4), 0 0 15px rgba(255, 215, 0, 0.3); 
+  border-color: var(--color-golden-yellow);
+}
+
+/* Enhanced Welcome banner */
+.welcome-banner { 
+  position: fixed; 
+  left: calc(50% + 110px); /* Compensa ancho aproximado del sidebar para centrarse en el espacio libre */
+  top: 45%; 
+  transform: translate(-50%,-50%); 
+  z-index: 100; 
+  width: min(88%,760px);
+  transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
+}
+.welcome-banner.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.welcome-banner .welcome-inner { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 12px; 
+  align-items: center; 
+  justify-content: center; 
+  padding: 20px 24px; 
+  border-radius: 12px; 
+  background: linear-gradient(135deg, rgba(30, 35, 56, 0.95) 0%, rgba(42, 47, 74, 0.95) 100%); 
+  color: var(--pk-text); 
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5), 0 0 30px rgba(255, 222, 0, 0.2); 
+  text-align: center; 
+    transition: filter 0.3s;
+  border: 2px solid rgba(255, 222, 0, 0.3);
+  backdrop-filter: blur(10px);
+}
+  .card-grid {
+    width: 100vw;
+    max-width: 100vw;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+    justify-items: center;
+    margin: 0 auto;
+    padding: 0 8px 18px 8px;
+    box-sizing: border-box;
+  }
+  opacity: 0.9; 
+  font-size: 1rem; 
+  .card {
+    width: 100%;
+    max-width: 320px;
+    min-width: 180px;
+    height: 340px;
+    margin: 0 auto 14px auto;
+    border-radius: 16px;
+    font-size: 1.1rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  border: none;
+  color: var(--pk-muted);
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.welcome-close-btn:hover {
+  color: var(--color-golden-yellow);
+  background: rgba(255, 222, 0, 0.1);
+  transform: scale(1.1);
+}
+
+.welcome-inner {
+  position: relative;
+}
+
+/* MAIN - Actualizado para layout sidebar */
+.main-content { 
+  flex: 1;                    /* Ocupar todo el espacio disponible */
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  padding: 2rem;              /* Padding uniforme */
+  min-height: 0;              /* Permitir shrinking */
+  overflow-y: auto;           /* Scroll si es necesario */
+}
+
+/* Panel con fondo más sutil y menos contrastante */
+.panel { 
+  width: 100%;
+  margin: 0; 
+  padding: 0; 
+  background: transparent !important; 
+  border: none !important; 
+  box-shadow: none !important; 
+  backdrop-filter: none !important;
+  border-radius: 0; 
+}
+.panel-inner { 
+  max-width: none; 
+  margin: 0; 
+  padding: 0;
+}
+.panel-header { 
+  display: none; 
+}
+
+/* Hide panel filters since we have navbar filters */
+.panel .filters-row { 
+  display: none; 
+}
+
+/* Enhanced Grid with better spacing (ancho de carta fijo 360px) */
+.card-grid {
+  /* variables locales para control fácil */
+  --grid-gap: 36px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(320px, 1fr)); /* columnas fluidas pero amplias */
+  gap: var(--grid-gap);
+  margin-top: 2.6rem;
+  width: 100%;
+  max-width: 1700px; /* limitar ancho total para centrar mejor */
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 28px;
+  box-sizing: border-box;
+}
+
+.pokemon-card {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    max-width: 380px;  /* Aumentado de 320px */
+    justify-self: center;
+    position: relative;
+}
+
+/* Enhanced CARD FLIP con diseño más uniforme y tamaño mayor */
+.card {
+  position: relative;
+  overflow: visible;
+  width: 100%;
+  max-width: 300px;        /* Más pequeña */
+  height: 520px;           /* Altura acorde */
+  cursor: pointer;
+  margin: 0 auto;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.02);
+}
+
+.content {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 300ms;
+  box-shadow: 0px 0px 20px 2px rgba(179, 161, 37, 0.2), 0 0 30px rgba(255, 222, 0, 0.1);
+  border-radius: 12px;
+}
+
+.front, .back {
+  background: linear-gradient(145deg, #2a2f4a 0%, #1e2338 100%);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid rgba(255, 222, 0, 0.2);
+}
+
+.back {
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: linear-gradient(145deg, 
+    rgba(255, 40, 40, 0.25) 0%, 
+    rgba(255, 0, 0, 0.2) 20%,
+    var(--color-cerulean) 40%, 
+    #2c3a9f 80%, 
+    rgba(204, 0, 0, 0.3) 100%);
+}
+
+.back .img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.back .back-content {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card:hover .content,
+.card.is-flipped .content {
+  transform: rotateY(180deg);
+}
+
+@keyframes rotation_pokemon {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(360deg);
+  }
+}
+
+.front {
+  transform: rotateY(180deg);
+  color: #f4f6f8;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: linear-gradient(135deg, #FF0000 0%, #CC0000 100%);
+}
+
+.front::before {
+  position: absolute;
+  content: ' ';
+  display: block;
+  width: 160px;
+  height: 160%;
+  background: linear-gradient(90deg, transparent, var(--color-golden-yellow), var(--color-gold-foil), var(--color-golden-yellow), transparent);
+  animation: rotation_pokemon 4000ms infinite linear;
+  opacity: 0.6;
+}
+
+.front .front-content {
+  position: absolute;
+  width: 99%;
+  height: 99%;
+  background: linear-gradient(145deg, 
+    rgba(255, 0, 0, 0.06) 0%, 
+    #1e2338 20%, 
+    #2a2f4a 80%, 
+    rgba(204, 0, 0, 0.08) 100%);
+  border-radius: 12px;
+  color: #f4f6f8;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;            
+  align-items: center;                    
+  gap: 6px;                              
+  padding: 10px 15px;                      
+  overflow-y: auto;
+  border: 1px solid rgba(255, 222, 0, 0.15);
+    background-clip: padding-box;
+
+}
+
+/* Emoji superior eliminado */
+.pokemon-card::after { display:none !important; }
+
+.description {
+  box-shadow: 0px 0px 15px 2px rgba(59, 76, 202, 0.2);
+  width: 100%;
+  padding: 20px;
+  background: linear-gradient(135deg, 
+    rgba(255, 0, 0, 0.08) 0%, 
+    rgba(59, 76, 202, 0.12) 30%, 
+    rgba(30, 35, 56, 0.95) 100%);
+  backdrop-filter: blur(8px);
+  border-radius: 12px;
+  border: 1px solid rgba(59, 76, 202, 0.25);
+}
+
+.title {
+  font-size: 18px;
+  max-width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title p {
+  width: 70%;
+  font-size: 20px;
+  margin: 0;                               /* Sin margen para el título */
+  font-weight: bold;
+  color: var(--color-golden-yellow);
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+.card-footer {
+  min-height: calc(2 * 520px + var(--grid-gap) + 64px); /* 2 filas de cartas + espacio extra */
+  height: calc(2 * 520px + var(--grid-gap) + 64px); /* Más alto para mostrar 2 filas completas */
+  max-height: 100vh;
+  overflow-y: auto;
+  font-size: 16px;
+  font-weight: 600;
+  max-height: none; /* Elimina el límite de altura */
+  overflow: visible; /* Permite que la segunda fila se muestre completa */
+}
+
+.front .img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.circle {
+  display: none;                           /* Ocultar círculos decorativos */
+}
+
+#bottom {
+  background: linear-gradient(135deg, var(--color-gold-foil) 0%, var(--color-golden-yellow) 100%);
+  left: 80px;
+  top: 30px;
+  width: 220px;
+  height: 220px;
+  animation-delay: -800ms;
+}
+
+#right {
+  background: linear-gradient(135deg, var(--color-cerulean) 0%, var(--color-golden-yellow) 100%);
+  left: 250px;
+  top: -100px;
+  width: 50px;
+  height: 50px;
+  animation-delay: -1800ms;
+}
+
+@keyframes floating {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.back .img .pokemon-img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 240px;
+  height: 240px;
+  object-fit: contain;
+  z-index: 10;
+}
+
+.stats-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.stats-icon {
+  width: 80px;   /* icono más grande */
+  height: 80px;
+  display: block;
+  margin: 0 auto 5px; /* centrado arriba del texto */
+  filter: drop-shadow(0 0 6px rgba(255, 222, 0, 0.3));
+}
+
+.stats-title {
+  text-align: center;
+  font-size: 1.1em;
+  font-weight: bold;
+  color: var(--color-golden-yellow);
+  margin-bottom: 4px;                      /* Menos espacio antes de las stats */
+}
+
+.stats-title {
+  color: var(--color-golden-yellow);
+  font-size: 14px;
+  text-align: center;
+  margin: 15px 0 8px 0;
+  font-weight: bold;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+.front-content svg {
+  width: 32px;                             /* Icono de stats más pequeño */
+  height: 32px;
+  margin: 3px 0;                           /* Margen mínimo */
+  filter: drop-shadow(0 0 6px rgba(255, 222, 0, 0.3));
+}
+
+.front .stats {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;                 /* Menos espacio entre filas */
+  max-height: none;
+  overflow-y: visible;
+  padding: 0 14px 14px;      /* Menos padding lateral y abajo */
+  flex: 1;
+  align-items: flex-start;   /* Alinear a la izquierda para ganar espacio */
+  justify-content: flex-start;
+}
+
+.stat-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;                 /* Más compacto */
+  font-size: 12px;
+  min-height: 20px;         /* Menos alto */
+  width: 100%;
+  max-width: 230px;         /* Ligeramente más angosto */
+  margin: 2px 0;            /* Menor separación vertical */
+}
+
+.stat-name {
+  flex: 0 0 60px;                          /* Más ancho para texto más grande */
+  text-transform: capitalize;
+  color: #f4f6f8;
+  font-weight: 600;                        /* Más bold */
+  font-size: 14px;                         /* Fuente más grande */
+  text-align: center;
+}
+
+.stat-val {
+  flex: 0 0 35px;                          /* Más ancho para números más grandes */
+  text-align: center;
+  font-weight: 700;
+  color: var(--color-golden-yellow);
+  font-size: 14px;                         /* Fuente más grande */
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+.stat-bar {
+  flex: 1;
+  height: 5px;
+  background: rgba(59, 76, 202, 0.3);
+  border-radius: 999px;
+  overflow: hidden;
+  max-width: 120px;
+  border: 1px solid rgba(255, 222, 0, 0.2);
+}
+
+.stat-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-gold-foil), var(--color-golden-yellow));
+  border-radius: 999px;
+  box-shadow: 0 0 6px rgba(255, 222, 0, 0.3);
+}
+
+/* Estilos para tipos Pokemon en las cartas - Sin recuadros */
+.pokemon-types {
+  display: flex;
+  gap: 6px;                                /* Menos espacio entre tipos */
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0;                               /* Sin margen */
+}
+
+.pokemon-type {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0;                              /* Sin padding */
+  background: transparent;                 /* Sin fondo */
+  border: none;                            /* Sin borde */
+  border-radius: 0;                        /* Sin bordes redondeados */
+  font-size: 1rem;                         /* Fuente más grande */
+  font-weight: 600;
+  color: var(--color-golden-yellow);
+  text-transform: capitalize;
+  transition: all 0.2s ease;
+}
+
+.pokemon-type .type-emoji {
+  display: none;                           /* Ocultar emojis */
+}
+
+.pokemon-type .type-sprite {
+  width: 78px;                             /* Más grande para stats */
+  height: 78px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.35));
+  margin-bottom: 0;                        /* Sin margen inferior */
+}
+
+.pokemon-type .type-name {
+  display: none;                           /* Ocultar el texto, solo mostrar sprite */
+}
+
+/* Eliminar hover de tipos ya que no tienen recuadro */
+  box-shadow: 0 2px 8px rgba(255, 222, 0, 0.3);
+}
+
+.type-sprite {
+  width: 14px;
+  height: 14px;
+  object-fit: contain;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+}
+
+.type-emoji {
+  font-size: 12px;
+  line-height: 1;
+}
+
+.type-name {
+  font-size: 11px;
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Enhanced card effects más sutiles */
+.card .front, .card .back { 
+  box-shadow: inset 0 0 20px rgba(59, 76, 202, 0.1), 
+              0 0 25px rgba(179, 161, 37, 0.15), 
+              0 5px 15px rgba(0,0,0,0.2); 
+}
+.card .front::after { 
+  content:''; 
+  position:absolute; 
+  inset:0; 
+  background:linear-gradient(125deg, rgba(255, 222, 0, 0) 0%, rgba(255, 222, 0, 0.05) 50%, rgba(179, 161, 37, 0) 100%); 
+  opacity:0; 
+  transition:opacity .3s; 
+}
+.card:hover .front::after { opacity:1; }
+
+/* Ensure cards remain visible; banner is non-modal so we no longer hide images */
+body.welcome-open .card-grid { 
+  display: grid; 
+}
+body.welcome-open img[data-src] { 
+  visibility: visible; 
+}
+
+/* utility: hide cards when filtered (UI-only) */
+.hidden-by-filter { 
+  display: none !important; 
+}
+
+/* Enhanced scrollbar styling más sutil */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(30, 35, 56, 0.3);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, var(--color-gold-foil), var(--color-golden-yellow));
+  border-radius: 10px;
+  box-shadow: 0 0 6px rgba(255, 222, 0, 0.2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, var(--color-golden-yellow), var(--color-gold-foil));
+}
+
+/* Enhanced loading and hover effects más discretos */
+.card {
+  position: relative;
+  width: 360px;                 /* Fijar ancho exacto para que no se reduzca */
+}
+
+/* Estados de la aplicación: Carga y Sin resultados */
+.loading,
+.no-results {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+  color: var(--pk-muted);
+  font-size: 1.1rem;
+}
+
+.loading {
+  background: linear-gradient(135deg, rgba(30, 35, 56, 0.1) 0%, rgba(42, 47, 74, 0.1) 100%);
+  border-radius: 12px;
+  border: 2px dashed var(--pk-accent-1);
+}
+
+.loading::before {
+  content: '🔄';
+  font-size: 2rem;
+  margin-bottom: 15px;
+  animation: rotate 2s linear infinite;
+}
+
+.no-results {
+  background: linear-gradient(135deg, rgba(255, 0, 0, 0.1) 0%, rgba(204, 0, 0, 0.1) 100%);
+  border-radius: 12px;
+  border: 2px dashed var(--pk-accent-red);
+}
+
+.no-results::before {
+  content: '😔';
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.card::after {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  right: -1px;
+  bottom: -1px;
+  background: linear-gradient(45deg, var(--color-golden-yellow), var(--color-cerulean), var(--color-red), var(--color-gold-foil));
+  z-index: -1;
+  border-radius: 13px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card:hover::after {
+  opacity: 0.3;
+}
+
+/* Improved selection states */
+.search-input::selection {
+  background: rgba(255, 222, 0, 0.2);
+  color: var(--pk-text);
+}
+
+/* Enhanced focus indicators más sutiles */
+.search-input:focus,
+.search-btn:focus {
+  box-shadow: 0 0 0 2px rgba(255, 222, 0, 0.2), 0 0 15px rgba(255, 222, 0, 0.15);
+}
+
+/* RESPONSIVE ENHANCEMENTS */
+@media (min-width: 1400px) {
+  .card-grid {
+    grid-template-columns: repeat(4, 300px); /* Forzar 4 columnas también en grandes */
+    gap: 30px; /* Un poco más de espacio en muy grandes */
+  }
+}
+
+@media (min-width: 1000px) and (max-width: 1399px) {
+  .card-grid {
+    grid-template-columns: repeat(4, 300px); /* 4 columnas en rango medio */
+    gap: 26px;
+  }
+}
+
+@media (max-width: 999px) {
+  .card-grid {
+    grid-template-columns: repeat(2, 300px); /* 2 columnas */
+    gap: 22px;
+    padding: 0 15px;
+  }
+}
+
+@media (max-width: 760px) {
+  .card-grid {
+    grid-template-columns: 300px;           /* 1 columna en móviles */
+  }
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: 0.5rem 1rem;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    
+    .search-form {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .search-input { 
+        width: 140px; 
+        font-size: 0.9rem;
+    } 
+    
+    .search-btn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+    }
+    
+    .panel {
+        padding: 2rem 1.5rem;
+        margin: 1.5rem auto;
+    }
+    
+    /* Indicador más grande en móviles para mejor visibilidad */
+    .pokemon-card::after {
+        padding: 4px 8px;
+        font-size: 14px;
+        top: 6px;
+        right: 6px;
+    }
+    
+    .type-buttons {
+        gap: 6px;
+    }
+    
+    .type-btn {
+        padding: 5px 10px;
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 600px) { 
+    body {
+        padding-top: 120px;
+    }
+    
+    .search-input { 
+        width: 120px; 
+        font-size: 0.85rem;
+    } 
+    .card { 
+        width: 100%; 
+        max-width: 320px; 
+        height: 380px; 
+    } 
+    .card-grid { 
+        grid-template-columns: 1fr; 
+        gap: 18px;
+        padding: 0 10px;
+    } 
+    
+    .welcome-banner .welcome-inner {
+        padding: 15px 20px;
+        margin: 0 10px;
+    }
+    
+    .welcome-banner h2 {
+        font-size: 1.1rem;
+    }
+    
+    .welcome-banner p {
+        font-size: 0.9rem;
+    }
+    
+    .type-btn {
+        padding: 4px 8px;
+        font-size: 0.75rem;
+    }
+}
+
+/* Dark theme refinements más sutiles */
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    --pk-text: #1a1d2e;
+    --pk-muted: #666;
+    --pk-bg-start: #f0f2f5;
+    --pk-bg-end: #e8e8e8;
   }
-  a:hover {
-    color: #747bff;
+  
+  body {
+    background: linear-gradient(135deg, var(--pk-bg-start) 0%, var(--pk-bg-end) 60%, #f5f5f5 100%);
   }
-  button {
-    background-color: #f9f9f9;
+  
+  .navbar {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08), 0 0 30px rgba(255, 222, 0, 0.03);
+    border-bottom: 1px solid rgba(255, 222, 0, 0.1);
   }
+  
+  .search-input {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+    color: var(--pk-text);
+    border: 1px solid rgba(255, 222, 0, 0.25);
+  }
+  
+  .welcome-banner .welcome-inner {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 255, 0.95) 100%);
+    color: var(--pk-text);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1), 0 0 30px rgba(255, 222, 0, 0.05);
+  }
+  
+  /* Indicadores más visibles en tema claro */
+  .pokemon-card::after {
+    border: 2px solid rgba(255, 215, 0, 0.8);
+    opacity: 0.95;
+  }
+}
+
+/* ===================================
+   NUEVO LAYOUT CON SIDEBAR
+   ================================== */
+
+/* Enhanced App Layout with Sidebar */
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, var(--pk-bg-start) 0%, var(--pk-bg-end) 100%);
+}
+
+.app-body {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+/* Paginação fija: mostrar 2 filas x 4 columnas en pantallas de escritorio
+   y mantener el paginador visible en la parte inferior del área de contenido. */
+.cards-viewport {
+  width: 100%;
+  max-width: 1700px; /* ampliar viewport para alojar columnas más anchas */
+  margin: 0 auto;
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* Hacer que el viewport de cartas ocupe la misma altura que el sidebar */
+.cards-viewport.full-height {
+  height: calc(100vh - var(--app-header-height));
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: hidden;
+  align-items: stretch;
+}
+
+.card-grid.two-rows {
+  /* Forzar 4 columnas y 2 filas con altura fija por fila para evitar solapamientos */
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(340px, 1fr)) !important;
+  /* filas con altura fija controlada por variable --card-height */
+  --card-height-desktop: 520px;
+  grid-auto-rows: var(--card-height-desktop) !important;
+  gap: var(--grid-gap) !important; /* más espacio entre filas/columnas */
+  padding: 28px 20px !important;
+  /* fijar altura del viewport en base al número de filas + gap para que el paginador quede fuera */
+  height: calc(2 * var(--card-height-desktop) + var(--grid-gap) + 56px) !important;
+  overflow: hidden !important; /* evitar scroll dentro del viewport */
+  align-items: stretch !important; /* que las cartas llenen la altura de su celda */
+  justify-items: center !important;
+  flex: 1 1 auto;
+}
+
+/* Contenedor que hace sticky el paginador */
+.pagination-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: relative; /* ahora está debajo del grid */
+  height: var(--pagination-height);
+  margin-top: 8px;
+  left: 0;
+  z-index: 80;
+  pointer-events: auto;
+}
+
+.pagination.card-style {
+  background: rgba(12,12,20,0.6);
+  border-radius: 12px;
+  padding: 10px 14px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+  align-items: center;
+}
+
+.pagination .page-info { color: var(--pk-text); font-weight: 600; margin: 0 12px; }
+
+/* Ajustes estéticos para las cartas dentro del grid de 2 filas */
+.card-grid.two-rows .card {
+  width: 100% !important;
+  max-width: 520px !important; /* permitir cartas más anchas */
+  height: var(--card-height-desktop) !important; /* altura fija por carta */
+  margin: 0 !important;
+  border-radius: 14px !important;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.45), inset 0 0 14px rgba(255,222,0,0.03) !important;
+  transition: transform 220ms ease, box-shadow 220ms ease !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+.card-grid.two-rows .card:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 16px 40px rgba(0,0,0,0.6) !important; }
+
+/* Limitar tamaño de la imagen dentro de la carta para que no invada la fila */
+.card-grid.two-rows .back .img .pokemon-img,
+.card-grid.two-rows .front .img .pokemon-img {
+  width: auto !important;
+  height: auto !important;
+  max-height: 58% !important; /* limitar al 58% de la carta para que no rompa la altura */
+  object-fit: contain !important;
+}
+
+/* Asegurar que las caras de la carta llenen su contenedor y no desborden */
+.card-grid.two-rows .card .content,
+.card-grid.two-rows .card .front,
+.card-grid.two-rows .card .back {
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+}
+
+/* Ajustes responsive: si la pantalla no tiene ancho para 4 columnas, reducir a 2 */
+@media (max-width: 1199px) {
+  .card-grid.two-rows {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)) !important;
+    --card-height-desktop: 480px; /* cartas más pequeñas en tablet */
+    grid-auto-rows: var(--card-height-desktop) !important;
+    /* permitir que el grid sea fluido en tablet y no forzar altura fija */
+    height: auto !important;
+  }
+
+  /* En tablet no forzar la altura del viewport ni la sidebar: permitir scroll natural */
+  .cards-viewport.full-height { height: auto !important; }
+  .sidebar { height: auto !important; max-height: none !important; }
+}
+
+@media (max-width: 999px) {
+  .card-grid.two-rows {
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) !important;
+    --card-height-desktop: 420px; /* cartas más compactas en móvil */
+    grid-auto-rows: var(--card-height-desktop) !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  .cards-viewport.full-height { height: auto !important; }
+  .sidebar { height: auto !important; max-height: none !important; }
+}
+
+.pagination .page-btn { min-width: 100px; }
+
+/* En pantallas pequeñas, revertir al comportamiento por defecto */
+@media (max-width: 999px) {
+  .card-grid.two-rows {
+    grid-template-columns: repeat(2, 1fr) !important;
+    grid-auto-rows: auto !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+}
+
+/* Header Principal */
+.main-header {
+  background: var(--pk-nav);
+  border-bottom: 3px solid var(--color-golden-yellow);
+  padding: 20px 0;  /* Sin padding lateral */
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  position: relative;
+  z-index: 50;
+  width: 100%;     /* Asegurar que ocupe todo el ancho */
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;  /* Solo centrar el logo */
+  width: 100%;              /* Ocupar todo el ancho */
+  padding: 0;               /* Sin padding adicional */
+}
+
+.logo-section {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.logo-large {
+  height: 60px;
+  width: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.logo-large:hover {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+.main-title {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.title-primary {
+  font-size: 2.5rem;
+  font-weight: 800;
+  background: linear-gradient(45deg, var(--color-golden-yellow), var(--color-gold-foil));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.title-secondary {
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: var(--pk-muted);
+  margin-top: -5px;
+}
+
+/* Header Stats */
+.header-stats {
+  display: flex;
+  gap: 30px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--color-golden-yellow);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+  text-align: center;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: var(--pk-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-align: center;
+}
+
+/* Sidebar con scroll */
+.sidebar {
+  width: 360px;
+  background: linear-gradient(180deg, rgba(30, 35, 56, 0.95) 0%, rgba(42, 47, 74, 0.95) 100%);
+  border-right: 2px solid rgba(255, 222, 0, 0.2);
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - var(--app-header-height));        /* Altura fija igual al viewport menos header */
+  overflow: hidden;         /* Ocultar overflow del contenedor */
+  z-index: 40;
+  box-sizing: border-box;
+}
+
+.sidebar-content {
+  flex: 1;                  /* Tomar el espacio restante */
+  overflow-y: auto;         /* Scroll vertical cuando sea necesario */
+  padding: 20px;
+  /* Personalizar scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 222, 0, 0.3) rgba(30, 35, 56, 0.3);
+}
+
+.sidebar-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar-content::-webkit-scrollbar-track {
+  background: rgba(30, 35, 56, 0.3);
+  border-radius: 3px;
+}
+
+.sidebar-content::-webkit-scrollbar-thumb {
+  background: rgba(255, 222, 0, 0.3);
+  border-radius: 3px;
+}
+
+.sidebar-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 222, 0, 0.5);
+}
+
+.sidebar-header {
+  padding: 20px;
+  border-bottom: 1px solid rgba(255, 222, 0, 0.1);
+  background: linear-gradient(135deg, rgba(255, 222, 0, 0.1) 0%, rgba(179, 161, 37, 0.1) 100%);
+}
+
+.sidebar-header h3 {
+  margin: 0;
+  color: var(--color-golden-yellow);
+  font-size: 1.1rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sidebar-content {
+  padding: 20px;
+  flex: 1;
+}
+
+/* Secciones del sidebar */
+.search-section,
+.filter-section,
+.quick-actions {
+  margin-bottom: 30px;
+}
+
+.sidebar-content h4 {
+  margin: 0 0 15px 0;
+  color: var(--pk-text);
+  font-size: 1rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Search Section */
+.search-input-container {
+  display: flex;
+  gap: 8px;
+}
+
+.sidebar .search-input {
+  flex: 1;
+  padding: 12px 16px;
+  border: 2px solid rgba(255, 222, 0, 0.2);
+  border-radius: 25px;
+  background: rgba(30, 35, 56, 0.7);
+  color: var(--pk-text);
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+.sidebar .search-input:focus {
+  outline: none;
+  border-color: var(--color-golden-yellow);
+  background: rgba(30, 35, 56, 0.9);
+  box-shadow: 0 0 20px rgba(255, 222, 0, 0.2);
+}
+
+.sidebar .search-input::placeholder {
+  color: var(--pk-muted);
+}
+
+.sidebar .search-btn {
+  padding: 12px 16px;
+  border: none;
+  border-radius: 25px;
+  background: linear-gradient(135deg, var(--color-golden-yellow) 0%, var(--color-gold-foil) 100%);
+  color: var(--pk-bg-start);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 48px;
+}
+
+.sidebar .search-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 222, 0, 0.4);
+}
+
+/* Type Buttons en Sidebar - Sin recuadros, sprites gigantes */
+.filter-section .type-buttons {
+  display: grid;
+  grid-template-columns: 1fr;              /* Una sola columna */
+  gap: 12px;                               /* Más espacio entre sprites */
+}
+
+/* Botones con solo icono - Completamente sin fondo */
+.filter-section .type-btn.icon-only {
+  display: flex;
+  align-items: center;
+  justify-content: center;                 /* Centrar el icono */
+  padding: 0;                              /* Sin padding para eliminar bordes */
+  margin: 0;                               /* Sin margin */
+  border: none;                            /* Sin borde */
+  outline: none;                           /* Sin outline */
+  border-radius: 0;                        /* Sin bordes redondeados */
+  background: transparent;                 /* Completamente transparente */
+  box-shadow: none;                        /* Sin sombra */
+  color: var(--pk-text);
+  cursor: pointer;
+  transition: transform 0.2s ease;         /* Solo transición de escala */
+  width: 100%;
+  min-height: auto;                        /* Altura automática */
+}
+
+/* Botón "All" con texto - Mantener estilo con recuadro */
+.filter-section .type-btn.with-text {
+  display: flex;
+  align-items: center;
+  gap: 15px;                               /* Espacio entre icono y texto */
+  padding: 16px;                           /* Padding normal */
+  border: 2px solid transparent;
+  border-radius: 15px;
+  background: rgba(30, 35, 56, 0.6);
+  color: var(--pk-text);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  min-height: 60px;                        /* Altura normal */
+  justify-content: flex-start;             /* Alinear a la izquierda para el texto */
+  margin-bottom: 12px;                     /* Separar del resto */
+}
+
+/* Emoji específico para el botón "All" - más pequeño */
+.filter-section .type-btn.with-text .type-icon-wrapper {
+  font-size: 1.8rem;                       /* Emoji más pequeño para "All" */
+  min-width: auto;                         /* Sin ancho mínimo */
+}
+
+.filter-section .type-btn .type-icon-wrapper {
+  font-size: 6rem;                         /* Emojis aún más grandes */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 110px;                        /* Ancho aún más grande */
+  line-height: 1;                          /* Mejor alineación vertical */
+}
+
+.filter-section .type-btn .type-icon {
+  width: 110px;                            /* Sprites aún más grandes */
+  height: 110px;
+  object-fit: contain;
+}
+
+.filter-section .type-btn .type-label {
+  font-size: 1.1rem;                       /* Texto normal para "All" */
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Efectos hover solo para botones con recuadro (All) */
+.filter-section .type-btn.with-text:hover {
+  border-color: var(--type-color, var(--color-golden-yellow));
+  background: linear-gradient(135deg, 
+    rgba(var(--type-color-rgb, 255, 222, 0), 0.1) 0%, 
+    rgba(var(--type-color-rgb, 255, 222, 0), 0.2) 100%);
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+/* Efecto hover muy sutil para sprites sin recuadro */
+.filter-section .type-btn.icon-only:hover {
+  transform: scale(1.15);                  /* Escalar sprite */
+}
+
+/* Eliminar focus outline */
+.filter-section .type-btn.icon-only:focus {
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
+
+.filter-section .type-btn.with-text.is-active {
+  border-color: var(--type-color, var(--color-golden-yellow));
+  background: linear-gradient(135deg, 
+    var(--type-color, var(--color-golden-yellow)) 0%, 
+    color-mix(in srgb, var(--type-color, var(--color-golden-yellow)) 80%, black 20%) 100%);
+  color: white;
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+/* Efecto active para sprites sin recuadro - Solo brillo */
+.filter-section .type-btn.icon-only.is-active {
+  transform: scale(1.25);                  /* Más grande cuando está activo */
+  filter: brightness(1.4) drop-shadow(0 0 12px rgba(255, 222, 0, 0.8));
+}
+  transform: translateX(5px);
+}
+
+.type-icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+}
+
+.type-label {
+  flex: 1;
+  text-transform: capitalize;
+}
+
+/* Quick Actions */
+.action-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border: 2px solid rgba(255, 222, 0, 0.2);
+  border-radius: 12px;
+  background: rgba(30, 35, 56, 0.6);
+  color: var(--pk-text);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.action-btn:hover {
+  border-color: var(--color-golden-yellow);
+  background: linear-gradient(135deg, rgba(255, 222, 0, 0.1) 0%, rgba(255, 222, 0, 0.2) 100%);
+  transform: translateY(-2px);
+}
+
+/* Content Container - Actualizado para ocupar todo el espacio */
+.content-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  position: relative;
+  width: 100%;               /* Asegurar que ocupe todo el ancho disponible */
+  height: 100%;              /* Asegurar que ocupe toda la altura disponible */
+}
+
+/* Responsive design para sidebar */
+@media (max-width: 1024px) {
+  .sidebar {
+    width: 280px;
+  }
+  
+  .title-primary {
+    font-size: 2rem;
+  }
+  
+  .header-stats {
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .app-body {
+    flex-direction: column;
+  }
+  
+  .sidebar {
+    width: 100%;
+    height: auto;
+    max-height: 300px;
+    order: 1;
+  }
+  
+  .content-container {
+    order: 2;
+  }
+  
+  .header-content {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+  
+  .logo-section {
+    justify-content: center;
+  }
+  
+  .title-primary {
+    font-size: 1.8rem;
+  }
+  
+  .sidebar-content {
+    padding: 15px;
+  }
+  
+  .search-section,
+  .filter-section,
+  .quick-actions {
+    margin-bottom: 20px;
+  }
+  
+  .filter-section .type-buttons {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ======= MOBILE FIXES (stronger overrides) ======= */
+@media (max-width: 768px) {
+  /* Scale base font slightly for small screens */
+  html { font-size: 15px; }
+
+  /* Fluid title and body type scaling */
+  .title-primary { font-size: clamp(1.2rem, 4.5vw, 1.8rem); }
+  .title-secondary { font-size: clamp(0.9rem, 2.4vw, 1.1rem); }
+
+  /* Ensure body spacing leaves room for fixed header */
+  body { padding-top: 72px; }
+
+  /* Sidebar: full-screen modal behavior on mobile */
+  .sidebar {
+    left: -100vw !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    top: 0 !important;
+    position: fixed !important;
+    align-items: flex-start !important;
+    padding: 0 !important;
+    overflow-y: auto !important;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+  }
+  .sidebar.open { left: 0 !important; }
+
+  /* When open, lock background scroll and dim content */
+  body.sidebar-open { overflow: hidden; }
+  body.sidebar-open .content-container,
+  body.sidebar-open .main-content {
+    filter: blur(6px) brightness(0.6);
+    pointer-events: none;
+  }
+
+  /* Show sidebar also when body has class (some JS toggles body instead of sidebar) */
+  body.sidebar-open .sidebar { left: 0 !important; }
+
+  /* Overlay handling: fade in/out */
+  .sidebar-overlay {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.6);
+    z-index: 2040;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 220ms ease, visibility 220ms ease;
+  }
+  .sidebar-overlay.active,
+  body.sidebar-open .sidebar-overlay {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* Make sidebar sit above overlay */
+  .sidebar { z-index: 2050 !important; }
+
+  /* Ensure header/menu button stays above overlay but below sidebar button */
+  .mobile-menu-btn { z-index: 2060 !important; }
+
+  /* Reserve space at top of sidebar for header spacing */
+  .sidebar::before {
+    content: '';
+    display: block;
+    height: 72px; /* same as header height */
+    width: 100%;
+    flex: 0 0 72px;
+  }
+
+  /* Sidebar content alignment and sizing */
+  .sidebar-content {
+    padding: 100px 6vw 24px 6vw !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    align-items: flex-start !important;
+  }
+  .sidebar-header { padding: 18px 6vw !important; text-align: left !important; }
+
+  /* Type buttons full width and centered icons */
+  .filter-section .type-btn.with-text,
+  .filter-section .type-btn.icon-only {
+    width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    padding: 12px 14px !important;
+    gap: 12px !important;
+    box-sizing: border-box !important;
+  }
+  .filter-section .type-btn .type-icon {
+    width: 56px !important;
+    height: 56px !important;
+  }
+  .filter-section .type-btn .type-icon-wrapper { font-size: 2.6rem !important; min-width: 56px !important; }
+
+  /* Card grid — allow 1 or 2 columns depending on width */
+  .card-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+    gap: 16px !important;
+    padding: 0 12px 18px 12px !important;
+  }
+
+  /* Cards: make images responsive and remove absolute positioning on small screens */
+  .card, .pokemon-card { max-width: 100% !important; width: 100% !important; }
+  .front .img, .back .img, .back .img .pokemon-img, .front .front-content {
+    position: relative !important;
+    width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    object-fit: contain !important;
+    margin: 0 auto !important;
+  }
+  .back .back-content, .front .front-content {
+    position: relative !important;
+    padding: 12px !important;
+    height: auto !important;
+  }
+  .back .img .pokemon-img {
+    position: relative !important;
+    width: 160px !important;
+    height: auto !important;
+    transform: none !important;
+    margin: 6px auto !important;
+  }
+
+  /* Ensure any <img> scale within containers */
+  img, .pokemon-img, .type-icon, .type-sprite { max-width: 100% !important; height: auto !important; }
+
+  /* Welcome banner: center, responsive text and dismissable */
+  .welcome-banner {
+    position: fixed !important;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: min(92vw, 520px) !important;
+    padding: 0 !important;
+    z-index: 3050 !important;
+  }
+  .welcome-banner .welcome-inner {
+    padding: 18px 20px !important;
+    border-radius: 14px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+    align-items: center !important;
+  }
+  .welcome-banner.hidden { display: none !important; opacity: 0 !important; visibility: hidden !important; }
+
+  /* Larger tap targets for mobile buttons */
+  .mobile-menu-btn { padding: 12px !important; border-radius: 10px !important; }
+
+  /* Small tweaks for text readability */
+  .title, .card-footer, .stat-name, .stat-val { font-size: clamp(0.9rem, 2.4vw, 1.1rem) !important; }
 }

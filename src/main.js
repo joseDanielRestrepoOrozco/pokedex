@@ -1,4 +1,10 @@
-import './style.css'
-import App from './app'
+/**
+ * Archivo principal de la aplicación Pokédex
+ * Ahora utiliza componentes modulares y reutilizables
+ */
 
-document.addEventListener('DOMContentLoaded', App)
+import './style.css';
+import { App } from './components/App.js';
+
+// Inicializar la aplicación
+App.init();
