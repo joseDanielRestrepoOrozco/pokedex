@@ -51,9 +51,6 @@ export class App {
    * Inicializa todos los componentes de la aplicación
    */
   static initializeComponents() {
-    // Inicializar banner de bienvenida
-    WelcomeBanner.init();
-
     // Inicializar formulario de búsqueda
     SearchForm.init((query) => {
       PokemonService.fetchAndRenderByName(query);

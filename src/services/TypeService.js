@@ -87,9 +87,13 @@ export class TypeService {
         name: typeName,
         displayName: this.capitalizeFirst(typeName),
         emoji: this.getTypeEmoji(typeName),
-        sprite: typeDetails.sprites?.['generation-viii']?.['legends-arceus']?.name_icon || 
-               typeDetails.sprites?.['generation-vi']?.['x-y']?.name_icon || 
-               null,
+        // La PokeAPI no siempre expone sprites para los "types". Usar primero
+        // cualquier sprite proporcionado por la respuesta y, si no existe,
+        // construir una URL pública conocida con iconos por tipo.
+        sprite: typeDetails.sprites?.['generation-viii']?.['legends-arceus']?.name_icon ||
+                typeDetails.sprites?.['generation-vi']?.['x-y']?.name_icon ||
+                this.getTypeSpriteUrl(typeName) ||
+                null,
         color: this.getTypeColor(typeName),
         id: typeDetails.id
       };
@@ -107,26 +111,41 @@ export class TypeService {
    * @returns {Array} Array de tipos básicos
    */
   static getFallbackTypes() {
+    // Añadir sprite por defecto usando getTypeSpriteUrl para mejorar la carga
     return [
       { name: 'all', displayName: 'Todos', emoji: '🧢', sprite: null, color: '#6C7B7F' },
-      { name: 'fire', displayName: 'Fuego', emoji: '🔥', sprite: null, color: '#FF5722' },
-      { name: 'water', displayName: 'Agua', emoji: '💧', sprite: null, color: '#2196F3' },
-      { name: 'grass', displayName: 'Planta', emoji: '🌿', sprite: null, color: '#4CAF50' },
-      { name: 'electric', displayName: 'Eléctrico', emoji: '⚡', sprite: null, color: '#FFEB3B' },
-      { name: 'psychic', displayName: 'Psíquico', emoji: '🔮', sprite: null, color: '#E91E63' },
-      { name: 'ice', displayName: 'Hielo', emoji: '❄️', sprite: null, color: '#00BCD4' },
-      { name: 'dragon', displayName: 'Dragón', emoji: '🐉', sprite: null, color: '#3F51B5' },
-      { name: 'dark', displayName: 'Siniestro', emoji: '🌑', sprite: null, color: '#424242' },
-      { name: 'fairy', displayName: 'Hada', emoji: '🧚', sprite: null, color: '#E1BEE7' },
-      { name: 'fighting', displayName: 'Lucha', emoji: '👊', sprite: null, color: '#FF9800' },
-      { name: 'poison', displayName: 'Veneno', emoji: '☠️', sprite: null, color: '#9C27B0' },
-      { name: 'ground', displayName: 'Tierra', emoji: '🌍', sprite: null, color: '#795548' },
-      { name: 'flying', displayName: 'Volador', emoji: '🦅', sprite: null, color: '#03A9F4' },
-      { name: 'bug', displayName: 'Bicho', emoji: '🐛', sprite: null, color: '#8BC34A' },
-      { name: 'rock', displayName: 'Roca', emoji: '�', sprite: null, color: '#607D8B' },
-      { name: 'ghost', displayName: 'Fantasma', emoji: '👻', sprite: null, color: '#673AB7' },
-      { name: 'steel', displayName: 'Acero', emoji: '⚙️', sprite: null, color: '#9E9E9E' }
+      { name: 'fire', displayName: 'Fuego', emoji: '🔥', sprite: this.getTypeSpriteUrl('fire'), color: '#FF5722' },
+      { name: 'water', displayName: 'Agua', emoji: '💧', sprite: this.getTypeSpriteUrl('water'), color: '#2196F3' },
+      { name: 'grass', displayName: 'Planta', emoji: '🌿', sprite: this.getTypeSpriteUrl('grass'), color: '#4CAF50' },
+      { name: 'electric', displayName: 'Eléctrico', emoji: '⚡', sprite: this.getTypeSpriteUrl('electric'), color: '#FFEB3B' },
+      { name: 'psychic', displayName: 'Psíquico', emoji: '🔮', sprite: this.getTypeSpriteUrl('psychic'), color: '#E91E63' },
+      { name: 'ice', displayName: 'Hielo', emoji: '❄️', sprite: this.getTypeSpriteUrl('ice'), color: '#00BCD4' },
+      { name: 'dragon', displayName: 'Dragón', emoji: '🐉', sprite: this.getTypeSpriteUrl('dragon'), color: '#3F51B5' },
+      { name: 'dark', displayName: 'Siniestro', emoji: '🌑', sprite: this.getTypeSpriteUrl('dark'), color: '#424242' },
+      { name: 'fairy', displayName: 'Hada', emoji: '🧚', sprite: this.getTypeSpriteUrl('fairy'), color: '#E1BEE7' },
+      { name: 'fighting', displayName: 'Lucha', emoji: '👊', sprite: this.getTypeSpriteUrl('fighting'), color: '#FF9800' },
+      { name: 'poison', displayName: 'Veneno', emoji: '☠️', sprite: this.getTypeSpriteUrl('poison'), color: '#9C27B0' },
+      { name: 'ground', displayName: 'Tierra', emoji: '🌍', sprite: this.getTypeSpriteUrl('ground'), color: '#795548' },
+      { name: 'flying', displayName: 'Volador', emoji: '🦅', sprite: this.getTypeSpriteUrl('flying'), color: '#03A9F4' },
+      { name: 'bug', displayName: 'Bicho', emoji: '🐛', sprite: this.getTypeSpriteUrl('bug'), color: '#8BC34A' },
+      { name: 'rock', displayName: 'Roca', emoji: '🪨', sprite: this.getTypeSpriteUrl('rock'), color: '#607D8B' },
+      { name: 'ghost', displayName: 'Fantasma', emoji: '👻', sprite: this.getTypeSpriteUrl('ghost'), color: '#673AB7' },
+      { name: 'steel', displayName: 'Acero', emoji: '⚙️', sprite: this.getTypeSpriteUrl('steel'), color: '#9E9E9E' }
     ];
+  }
+
+  /**
+   * Construye una URL pública para iconos de tipo si la API no los provee.
+   * Usa un repo público con iconos por tipo (SVG/PNG). El navegador
+   * intentará cargarlos cuando se usen como src.
+   * @param {string} typeName
+   * @returns {string|null}
+   */
+  static getTypeSpriteUrl(typeName) {
+    if (!typeName) return null;
+    const t = String(typeName).toLowerCase();
+    // Repo público con iconos por tipo (SVG). Si cambias la fuente, actualiza aquí.
+    return `https://raw.githubusercontent.com/duiker101/pokemon-type-icons/master/icons/${t}.svg`;
   }
 
   /**
@@ -135,7 +154,7 @@ export class TypeService {
    * @returns {string} Emoji correspondiente
    */
   static getTypeEmoji(type) {
-    const emojiMap = {
+  const emojiMap = {
       'normal': '⚪',
       'fire': '🔥',
       'water': '💧',
@@ -155,7 +174,9 @@ export class TypeService {
       'steel': '⚙️',
       'fairy': '🧚'
     };
-    return emojiMap[type] || '❓';
+  if (!type || typeof type !== 'string') return '❓';
+  const key = type.toLowerCase();
+  return emojiMap[key] || '❓';
   }
 
   /**

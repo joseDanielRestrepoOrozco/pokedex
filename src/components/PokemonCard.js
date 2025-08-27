@@ -27,7 +27,9 @@ export class PokemonCard {
                      pokemonData.sprites?.front_default || '';
 
       const article = document.createElement('article');
-      article.className = `pokemon-card ${types.join(' ')}`;
+  article.className = `pokemon-card ${types.join(' ')}`;
+  // Exponer el id en el DOM para evitar duplicados y facilitar búsquedas
+  if (typeof id !== 'undefined') article.setAttribute('data-pokemon-id', String(id));
       article.setAttribute('role', 'listitem');
 
       // Asegurar que tengamos una imagen para mostrar
@@ -78,39 +80,36 @@ export class PokemonCard {
    * @returns {string} HTML de los tipos con sprites
    */
   static async buildTypesHtml(types) {
-    const BASE_URL = 'https://pokeapi.co/api/v2';
+    // Evitar múltiples fetch a la API de tipos (que no siempre incluye sprites útiles).
+    // Intentamos usar una URL generada por TypeService si está disponible.
     const typesHtml = [];
+    // Importar TypeService dinámicamente para evitar ciclo de dependencias en la carga
+    let TypeService = null;
+    try {
+      TypeService = (await import('../services/TypeService.js')).TypeService;
+    } catch (e) {
+      // Si falla, TypeService seguirá siendo null y usaremos emoji fallback
+    }
 
     for (const typeName of types) {
       try {
-        // Intentar obtener el sprite del tipo
-        const response = await fetch(`${BASE_URL}/type/${typeName}`);
-        if (response.ok) {
-          const typeData = await response.json();
-          const sprite = typeData.sprites?.['generation-viii']?.['legends-arceus']?.name_icon || 
-                        typeData.sprites?.['generation-vi']?.['x-y']?.name_icon ||
-                        null;
-          
-          if (sprite) {
-            typesHtml.push(`
-              <div class="pokemon-type" data-type="${typeName}">
-                <img src="${sprite}" alt="${typeName}" class="type-sprite" />
-                <span class="type-name">${capitalize(typeName)}</span>
-              </div>
-            `);
-          } else {
-            // Fallback con emoji si no hay sprite
-            const emoji = this.getTypeEmoji(typeName);
-            typesHtml.push(`
-              <div class="pokemon-type" data-type="${typeName}">
-                <span class="type-emoji">${emoji}</span>
-                <span class="type-name">${capitalize(typeName)}</span>
-              </div>
-            `);
-          }
+        let sprite = null;
+        if (TypeService) {
+          // Intentar obtener sprite conocido a partir del servicio (cache o URL pública)
+          const cached = TypeService.typeCache.get(typeName);
+          if (cached && cached.sprite) sprite = cached.sprite;
+          else sprite = TypeService.getTypeSpriteUrl(typeName);
+        }
+
+        if (sprite) {
+          typesHtml.push(`
+            <div class="pokemon-type" data-type="${typeName}">
+              <img src="${sprite}" alt="${typeName}" class="type-sprite" />
+              <span class="type-name">${capitalize(typeName)}</span>
+            </div>
+          `);
         } else {
-          // Fallback con emoji si falla la petición
-          const emoji = this.getTypeEmoji(typeName);
+          const emoji = this.getTypeEmoji(typeName) || '\u2753';
           typesHtml.push(`
             <div class="pokemon-type" data-type="${typeName}">
               <span class="type-emoji">${emoji}</span>
@@ -118,9 +117,8 @@ export class PokemonCard {
             </div>
           `);
         }
-      } catch {
-        // Fallback con emoji si hay error
-        const emoji = this.getTypeEmoji(typeName);
+      } catch (err) {
+        const emoji = this.getTypeEmoji(typeName) || '\u2753';
         typesHtml.push(`
           <div class="pokemon-type" data-type="${typeName}">
             <span class="type-emoji">${emoji}</span>
@@ -157,9 +155,11 @@ export class PokemonCard {
       'dragon': '🐉',
       'dark': '🌑',
       'steel': '⚙️',
-      'fairy': '🧚'
+      'fairy': '🧚',
+      'all': '🧢'
     };
-    return emojiMap[type] || '❓';
+    if (!type || typeof type !== 'string') return '❓';
+    return emojiMap[type.toLowerCase()] || '❓';
   }
 
   /**
@@ -203,10 +203,11 @@ export class PokemonCard {
               <div class="circle"></div>
               <div class="circle" id="right"></div>
               <div class="circle" id="bottom"></div>
-              <img class="pokemon-img" 
-                   data-src="${safeDataSrc}" 
-                   src="${safeDataSrc ? 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==' : placeholder}" 
-                   alt="${name}" />
+        <img class="pokemon-img" 
+          data-src="${safeDataSrc}" 
+          src="${safeDataSrc ? 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==' : placeholder}" 
+          alt="${name}" 
+          loading="lazy" />
             </div>
             <div class="back-content">
               <div class="description">
@@ -222,7 +223,8 @@ export class PokemonCard {
             </div>
           </div>
           <div class="front">
-              <div class="front-content">
+            <div class="front-content">
+              <!-- TÍTULO AGREGADO AQUÍ - MISMO FORMATO QUE EL BACK -->
               <div class="title" style="width:100%; display:flex; flex-direction:column; align-items:center; margin-bottom:10px;">
                 <p class="pokemon-name" style="font-size:1.2em; font-weight:bold; color:var(--color-golden-yellow); margin:0;">
                   <strong>${capitalize(name)}</strong>
@@ -231,6 +233,8 @@ export class PokemonCard {
                   #${String(id).padStart(3,'0')}
                 </span>
               </div>
+              <!-- FIN DEL TÍTULO -->
+              
               <div class="types-section" style="width:100%; display:flex; justify-content:center; margin-bottom:15px;">
                 <div class="pokemon-types" style="display:flex; gap:8px; flex-wrap:wrap; justify-content:center;">
                   ${typesHtml}
@@ -240,7 +244,7 @@ export class PokemonCard {
                 <svg class="stats-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#B3A125">
                   <path d="M3 13H5V18H3V13ZM7 9H9V18H7V9ZM11 5H13V18H11V5ZM15 8H17V18H15V8ZM19 11H21V18H19V11Z"/>
                 </svg>
-                <h3 class="stats-title">Estatistic</h3>
+                <h3 class="stats-title">Estadísticas</h3>
               </div>
               <div class="stats">${statsHtml}</div>
             </div>
@@ -273,6 +277,34 @@ export class PokemonCard {
         // Hacer que sea focusable
         cardEl.setAttribute('tabindex', '0');
       }
+      // Lazy-load de imagen usando IntersectionObserver para mejorar rendimiento
+      try {
+        const img = article.querySelector('.pokemon-img')
+        if (img) {
+          const loadImage = () => {
+            const dataSrc = img.getAttribute('data-src')
+            if (dataSrc) img.src = dataSrc
+            img.removeAttribute('data-src')
+          }
+
+          if ('IntersectionObserver' in window) {
+            const io = new IntersectionObserver((entries, observer) => {
+              entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                  loadImage()
+                  observer.disconnect()
+                }
+              })
+            }, { rootMargin: '200px' })
+            io.observe(img)
+          } else {
+            // Fallback inmediato
+            loadImage()
+          }
+        }
+      } catch (e) {
+        // noop
+      }
     } catch (error) {
       console.warn('Error adding event listeners to card:', error);
     }
@@ -285,7 +317,8 @@ export class PokemonCard {
    */
   static buildFallbackTypesHtml(types) {
     return types.map(typeName => {
-      const emoji = this.getTypeEmoji(typeName);
+      let emoji = this.getTypeEmoji(typeName);
+      if (!emoji || emoji === 'undefined') emoji = '❓';
       return `
         <div class="pokemon-type" data-type="${typeName}">
           <span class="type-emoji">${emoji}</span>
@@ -303,10 +336,10 @@ export class PokemonCard {
   static createFallbackCard(pokemonData) {
     const article = document.createElement('article');
     article.className = 'pokemon-card';
-    
-    const name = pokemonData?.name || 'Unknown';
-    const id = pokemonData?.id || 0;
-    
+  // Añadir id si está disponible para consistencia
+  const name = pokemonData?.name || 'Unknown';
+  const id = pokemonData?.id || 0;
+  article.setAttribute('data-pokemon-id', String(id));
     article.innerHTML = `
       <div class="card">
         <div class="content">

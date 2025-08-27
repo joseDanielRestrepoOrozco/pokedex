@@ -15,11 +15,7 @@ export class MainContent {
       <section class="panel">
         <div class="panel-inner">
           <header class="panel-header">
-            <div class="filters-row">
-              <button class="filter-btn all" aria-pressed="false" title="Mostrar todos los tipos">
-                <!-- Filtros adicionales se pueden agregar aquí -->
-              </button>
-            </div>
+            <div class="filters-row"></div>
           </header>
           
           <!-- Viewport que contiene el grid y la paginación sticky -->

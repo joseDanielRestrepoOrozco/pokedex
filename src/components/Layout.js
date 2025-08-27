@@ -53,6 +53,9 @@ export class Layout {
     // Agregar al DOM
     app.appendChild(mainContainer)
 
+  // Asegurar estado inicial en el body (sidebar expandida por defecto)
+  try { document.body.classList.remove('sidebar-collapsed', 'sidebar-open') } catch (e) {}
+
     // Sincronizar la variable CSS con la altura real del header para calcular áreas
     try {
       const headerHeight = header.getBoundingClientRect().height || 120
@@ -64,24 +67,177 @@ export class Layout {
       // si algo falla, dejar la variable por defecto
     }
 
-    // Lógica para mostrar/ocultar sidebar en móvil
-    const mobileMenuBtn = header.mobileMenuBtn
+    // Asegurar que exista un único botón toggle; preferir el del header si existe
+    let toggleBtn = document.querySelector('.sidebar-toggle-btn')
+    if (!toggleBtn) {
+      toggleBtn = document.createElement('button')
+      toggleBtn.className = 'sidebar-toggle-btn'
+      toggleBtn.setAttribute('aria-label', 'Toggle sidebar')
+      toggleBtn.setAttribute('aria-expanded', 'false')
+      toggleBtn.innerHTML = '☰'
+      // Insertar al inicio del header para mejor accesibilidad
+      try {
+        header.insertBefore(toggleBtn, header.firstChild)
+      } catch (e) {
+        // Si por alguna razón el header no está en el DOM o falla, añadir al body como fallback
+        document.body.appendChild(toggleBtn)
+      }
+      // Forzar visibilidad en caso de que reglas CSS estén ocultándolo en algunos entornos
+      toggleBtn.style.display = 'flex'
+      toggleBtn.style.zIndex = '3005'
+    }
+    // Usar el toggleBtn creado arriba como el único controlador del sidebar
+    const mobileMenuBtn = toggleBtn
     if (mobileMenuBtn) {
       mobileMenuBtn.addEventListener('click', () => {
-        const isOpen = !sidebar.classList.contains('open')
-        sidebar.classList.toggle('open')
-        sidebarOverlay.classList.toggle('active')
-        document.body.style.overflow = isOpen ? 'hidden' : ''
-        document.body.classList.toggle('sidebar-open', isOpen)
-        mobileMenuBtn.setAttribute('aria-expanded', String(isOpen))
+        const isMobile = window.matchMedia('(max-width: 768px)').matches
+        const welcome = document.querySelector('.welcome-banner')
+        const sidebarEl = sidebar
+        if (isMobile) {
+          const willOpen = !sidebarEl.classList.contains('open')
+          if (willOpen) {
+            Sidebar.openSidebar()
+            mobileMenuBtn.setAttribute('aria-expanded', 'true')
+          } else {
+            Sidebar.closeSidebar()
+            mobileMenuBtn.setAttribute('aria-expanded', 'false')
+          }
+          // Mostrar/ocultar el banner según el estado
+          try {
+            if (welcome) {
+              if (willOpen) welcome.classList.add('hidden')
+              else welcome.classList.remove('hidden')
+            }
+          } catch (e) {}
+        } else {
+          // Desktop: toggle de colapso (usuario decide cuándo cerrar)
+          const isCollapsed = sidebarEl.classList.contains('collapsed')
+          if (isCollapsed) {
+            Sidebar.openSidebar()
+            mobileMenuBtn.setAttribute('aria-expanded', 'true')
+            try { document.body.classList.remove('sidebar-collapsed') } catch (e) {}
+          } else {
+            Sidebar.closeSidebar()
+            mobileMenuBtn.setAttribute('aria-expanded', 'false')
+            try { document.body.classList.add('sidebar-collapsed') } catch (e) {}
+          }
+        }
       })
     }
+
+    // --- Mobile fallback button: en algunos entornos el toggle puede no mostrarse; crear un botón flotante visible en móviles ---
+    try {
+      let mobileFallback = document.querySelector('.sidebar-toggle-mobile')
+      if (!mobileFallback) {
+        mobileFallback = document.createElement('button')
+        mobileFallback.className = 'sidebar-toggle-mobile'
+        mobileFallback.setAttribute('aria-label', 'Toggle sidebar mobile')
+        mobileFallback.setAttribute('aria-expanded', 'false')
+        mobileFallback.innerHTML = '☰'
+        // Estilos inline para forzar visibilidad sobre el overlay en móviles
+        Object.assign(mobileFallback.style, {
+          position: 'fixed',
+          left: '12px',
+          top: '12px',
+          zIndex: '4005',
+          width: '44px',
+          height: '44px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          borderRadius: '10px',
+          background: 'var(--pk-chip-bg)',
+          color: 'var(--pk-text)',
+          border: '1px solid rgba(0,0,0,0.18)',
+          boxShadow: '0 6px 18px rgba(0,0,0,0.28)',
+          cursor: 'pointer'
+        })
+        document.body.appendChild(mobileFallback)
+      }
+
+      const mobileToggleHandler = () => {
+        const isMobile = window.matchMedia('(max-width: 768px)').matches
+        const sidebarEl = document.querySelector('.sidebar')
+        if (!sidebarEl) return
+        if (isMobile) {
+          const willOpen = !sidebarEl.classList.contains('open')
+          if (willOpen) {
+            Sidebar.openSidebar()
+            mobileFallback.setAttribute('aria-expanded', 'true')
+            if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'true')
+          } else {
+            Sidebar.closeSidebar()
+            mobileFallback.setAttribute('aria-expanded', 'false')
+            if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'false')
+          }
+          try { const welcome = document.querySelector('.welcome-banner'); if (welcome) { if (willOpen) welcome.classList.add('hidden'); else welcome.classList.remove('hidden') } } catch (e) {}
+        } else {
+          // En desktop reutilizar comportamiento del toggle principal
+          const isCollapsed = sidebarEl.classList.contains('collapsed')
+          if (isCollapsed) {
+            Sidebar.openSidebar()
+            mobileFallback.setAttribute('aria-expanded', 'true')
+            if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'true')
+            try { document.body.classList.remove('sidebar-collapsed') } catch (e) {}
+          } else {
+            Sidebar.closeSidebar()
+            mobileFallback.setAttribute('aria-expanded', 'false')
+            if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'false')
+            try { document.body.classList.add('sidebar-collapsed') } catch (e) {}
+          }
+        }
+      }
+
+      // Evitar doble registro
+      mobileFallback.addEventListener('click', mobileToggleHandler)
+
+      // Mostrar/ocultar el fallback según tamaño (optimización visual)
+      const mq = window.matchMedia('(max-width: 768px)')
+      const updateVisibility = () => {
+        if (mq.matches) mobileFallback.style.display = 'flex'
+        else mobileFallback.style.display = 'none'
+      }
+      updateVisibility()
+      mq.addEventListener?.('change', updateVisibility)
+    } catch (e) {
+      // no crítico
+    }
+
+    // Overlay: usar la API del Sidebar para cerrar y mantener consistencia
     sidebarOverlay.addEventListener('click', () => {
-      sidebar.classList.remove('open')
-      sidebarOverlay.classList.remove('active')
-      document.body.style.overflow = ''
-      document.body.classList.remove('sidebar-open')
-      if (mobileMenuBtn) mobileMenuBtn.setAttribute('aria-expanded', 'false')
+      Sidebar.closeSidebar()
+      if (toggleBtn) toggleBtn.setAttribute('aria-expanded', 'false')
+      // Mostrar el banner de bienvenida cuando se cierra el overlay en móvil
+      try {
+        const welcome = document.querySelector('.welcome-banner')
+        if (welcome) welcome.classList.remove('hidden')
+      } catch (e) {}
+    })
+
+    // Cuando los tipos se carguen dinámicamente, cerrar la sidebar en móvil al seleccionar
+    document.addEventListener('typesLoaded', () => {
+      const typeBtns = sidebar.querySelectorAll('.type-btn')
+      typeBtns.forEach(btn => {
+        // evitar listeners repetidos
+        if (btn.__close_on_mobile__) btn.removeEventListener('click', btn.__close_on_mobile__)
+        const handler = () => {
+          const isMobile = window.matchMedia('(max-width: 768px)').matches
+          if (isMobile) Sidebar.closeSidebar()
+        }
+        btn.__close_on_mobile__ = handler
+        btn.addEventListener('click', handler)
+      })
+
+      const randomBtn = sidebar.querySelector('#random-btn')
+      if (randomBtn) {
+        if (randomBtn.__close_on_mobile__) randomBtn.removeEventListener('click', randomBtn.__close_on_mobile__)
+        const rHandler = () => {
+          const isMobile = window.matchMedia('(max-width: 768px)').matches
+          if (isMobile) Sidebar.closeSidebar()
+        }
+        randomBtn.__close_on_mobile__ = rHandler
+        randomBtn.addEventListener('click', rHandler)
+      }
     })
 
     // Paginación: wiring con botones prev/next si existen

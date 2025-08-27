@@ -3,6 +3,7 @@
  */
 
 import { getPokemon, getPokemonsByType } from './api.js';
+import axios from 'axios';
 import { PokemonGrid } from '../components/PokemonGrid.js';
 import { WelcomeBanner } from '../components/WelcomeBanner.js';
 
@@ -76,14 +77,17 @@ export class PokemonService {
     
     PokemonGrid.clear();
     PokemonGrid.showLoading();
+      if (this._busy) {
+        console.debug('[PokemonService.fetchAndRenderAll] skipped - busy');
+        return;
+      }
+      this._busy = true;
     
     const BASE = import.meta.env.VITE_POKEAPI_BASE_URL || 'https://pokeapi.co/api/v2';
     
     try {
-      const listRes = await fetch(`${BASE}/pokemon?limit=${limit}`);
-      if (!listRes.ok) throw new Error(`List request failed ${listRes.status}`);
-
-      const list = await listRes.json();
+  const listRes = await axios.get(`${BASE}/pokemon?limit=${limit}`);
+  const list = listRes.data;
 
       PokemonGrid.clear();
 
@@ -107,6 +111,7 @@ export class PokemonService {
       PokemonGrid.clear();
       PokemonGrid.showNoResults('Error al cargar los Pokémon');
     }
+        this._busy = false;
   }
 
   /**
@@ -121,6 +126,11 @@ export class PokemonService {
     
     PokemonGrid.clear();
     PokemonGrid.showLoading();
+      if (this._busy) {
+        console.debug('[PokemonService.fetchAndRenderByType] skipped - busy');
+        return;
+      }
+      this._busy = true;
     
     try {
       const names = await getPokemonsByType(type);
@@ -154,5 +164,6 @@ export class PokemonService {
       PokemonGrid.clear();
       PokemonGrid.showNoResults('Error al cargar los Pokémon por tipo');
     }
+        this._busy = false;
   }
 }

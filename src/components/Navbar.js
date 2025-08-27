@@ -27,7 +27,6 @@ export class Navbar {
                  aria-label="Buscar Pokémon" />
           <div class="type-buttons" role="group" aria-label="Filtros por tipo">
             <!-- Los botones se cargarán dinámicamente -->
-            <div class="loading-types">🔄 Cargando tipos...</div>
           </div>
           <button type="submit" class="search-btn">
             ${this.createPokeBallIcon()}
@@ -54,6 +53,19 @@ export class Navbar {
       
       if (typeButtonsContainer) {
         typeButtonsContainer.innerHTML = this.createTypeButtonsFromData(types);
+        try {
+          const btns = typeButtonsContainer.querySelectorAll('.type-btn');
+          btns.forEach(b => {
+            const e = b.querySelector('.type-emoji');
+            const t = b.dataset.type;
+            if (e) {
+              const text = (e.textContent || '').trim();
+              if (!text || text.toLowerCase() === 'undefined' || text.toLowerCase() === 'null') {
+                e.textContent = TypeService.getTypeEmoji(t) || '❓';
+              }
+            }
+          })
+        } catch (err) {}
       }
     } catch (error) {
       console.error('Error loading types:', error);
@@ -72,17 +84,40 @@ export class Navbar {
    */
   static createTypeButtonsFromData(types) {
     return types.map(type => {
-      const icon = type.sprite ? 
-        `<img src="${type.sprite}" alt="${type.name}" class="type-icon" />` : 
-        type.emoji;
-      
+      const name = type?.name || type?.type || 'unknown';
+      const displayName = type?.displayName || type?.label || (typeof name === 'string' ? name.charAt(0).toUpperCase() + name.slice(1) : 'Tipo');
+      let sprite = type?.sprite || null;
+      if (sprite === 'undefined' || sprite === undefined) sprite = null;
+      // usar siempre el emoji canónico de TypeService, salvo que type.emoji sea un string válido
+      let emoji = TypeService.getTypeEmoji(name) || '❓';
+      const providedEmoji = type?.emoji;
+      if (typeof providedEmoji === 'string' && providedEmoji.trim() && providedEmoji.trim().toLowerCase() !== 'undefined') {
+        emoji = providedEmoji.trim();
+      }
+      if (typeof emoji !== 'string') emoji = String(emoji || '❓');
+      const icon = sprite ? `<img src="${sprite}" alt="${name}" class="type-icon" />` : `<span class="type-emoji">${emoji}</span>`;
       return `
         <button type="button" 
-                class="type-btn ${type.name}" 
-                data-type="${type.name}" 
-                title="${type.displayName}"
-                style="--type-color: ${type.color}">
-          ${icon} ${type.displayName}
+                class="type-btn ${name}" 
+                data-type="${name}" 
+                title="${displayName}"
+                style="--type-color: ${type?.color}">
+          ${icon} ${displayName}
+          <svg class="voltage-svg" viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <path id="spark-path-1" d="M10 5 L15 15 L12 20 L18 30 L15 35 L20 45 L17 50 L25 65 L22 70 L30 80"/>
+              <path id="spark-path-2" d="M110 5 L105 15 L108 20 L102 30 L105 35 L100 45 L103 50 L95 65 L98 70 L90 80"/>
+            </defs>
+            <use href="#spark-path-1" class="spark-line-1"/>
+            <use href="#spark-path-2" class="spark-line-2"/>
+          </svg>
+          <div class="voltage-dots">
+            <div class="voltage-dot dot-1"></div>
+            <div class="voltage-dot dot-2"></div>
+            <div class="voltage-dot dot-3"></div>
+            <div class="voltage-dot dot-4"></div>
+            <div class="voltage-dot dot-5"></div>
+          </div>
         </button>
       `;
     }).join('');
@@ -105,6 +140,21 @@ export class Navbar {
     return types.map(({ type, emoji, label, title }) => 
       `<button type="button" class="type-btn ${type}" data-type="${type}" title="${title}">
         ${emoji} ${label}
+        <svg class="voltage-svg" viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <path id="spark-path-1" d="M10 5 L15 15 L12 20 L18 30 L15 35 L20 45 L17 50 L25 65 L22 70 L30 80"/>
+            <path id="spark-path-2" d="M110 5 L105 15 L108 20 L102 30 L105 35 L100 45 L103 50 L95 65 L98 70 L90 80"/>
+          </defs>
+          <use href="#spark-path-1" class="spark-line-1"/>
+          <use href="#spark-path-2" class="spark-line-2"/>
+        </svg>
+        <div class="voltage-dots">
+          <div class="voltage-dot dot-1"></div>
+          <div class="voltage-dot dot-2"></div>
+          <div class="voltage-dot dot-3"></div>
+          <div class="voltage-dot dot-4"></div>
+          <div class="voltage-dot dot-5"></div>
+        </div>
       </button>`
     ).join('');
   }

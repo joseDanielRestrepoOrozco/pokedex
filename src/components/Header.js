@@ -11,12 +11,6 @@ export class Header {
     const header = document.createElement('header')
     header.className = 'main-header'
 
-    // Botón hamburguesa para abrir sidebar
-    const mobileMenuBtn = document.createElement('button')
-    mobileMenuBtn.className = 'mobile-menu-btn'
-    mobileMenuBtn.innerHTML = '☰'
-    mobileMenuBtn.setAttribute('aria-label', 'Abrir menú')
-
     // Contenedor del logo/título
     const logoSection = document.createElement('div')
     logoSection.className = 'logo-section'
@@ -27,16 +21,15 @@ export class Header {
            class="logo-large" />
     `
 
-    // Contenedor flexible para centrar el logo y alinear el botón a la izquierda
-    const headerContent = document.createElement('div')
-    headerContent.className = 'header-content'
-    headerContent.appendChild(mobileMenuBtn)
-    headerContent.appendChild(logoSection)
+  // Contenedor flexible para centrar el logo
+  const headerContent = document.createElement('div')
+  headerContent.className = 'header-content'
+  headerContent.appendChild(logoSection)
 
     header.appendChild(headerContent)
+  
+  // No crear botón móvil aquí: usamos un único `.sidebar-toggle-btn` centralizado en Layout
 
-    // Exponer el botón para que Layout pueda usarlo
-    header.mobileMenuBtn = mobileMenuBtn
     return header
   }
 }

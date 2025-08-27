@@ -1,292 +1,8 @@
-@media (max-width: 600px) {
-  .sidebar .type-btn .type-icon {
-    width: 28px;
-    height: 28px;
-  }
-}
-@media (max-width: 600px) {
-  .sidebar .type-btn {
-    font-size: 1.15rem;
-    min-width: 90px;
-    min-height: 44px;
-    padding: 12px 18px;
-  }
-}
-/* Botón cerrar sidebar */
-.sidebar-close-btn {
-  display: none;
-}
-@media (max-width: 600px) {
-  .sidebar {
-    position: fixed;
-  }
-  .sidebar-header {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding-bottom: 4px;
-    margin-bottom: 0;
-  }
-  .sidebar-close-btn {
-    display: block;
-    position: static;
-    margin-left: auto;
-    background: var(--pk-chip-bg);
-    color: var(--pk-text);
-    border: none;
-    font-size: 1.3rem;
-    padding: 0.1em 0.5em;
-    border-radius: 8px;
-    cursor: pointer;
-    z-index: 20;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-    transition: background 0.2s, color 0.2s;
-  }
-  .sidebar-close-btn:hover {
-    background: var(--color-golden-yellow);
-    color: #181830;
-  }
-  .sidebar-header h3 {
-    margin: 0;
-    font-size: 1.1rem;
-    font-weight: 700;
-  }
-  .sidebar-content {
-    margin-top: 0;
-    padding-top: 0;
-  }
-}
-/* Mostrar el botón de menú solo en pantallas pequeñas */
-.mobile-menu-btn {
-  display: none;
-}
-
-@media (max-width: 600px) {
-  .mobile-menu-btn {
-    display: block;
-  }
-}
-/* Fix definitivo: el sidebar siempre por encima y siempre interactivo */
-.sidebar,
-.sidebar.open,
-body.sidebar-open .sidebar {
-  z-index: 2147483647 !important;
-  pointer-events: auto !important;
-  user-select: auto !important;
-}
-
-/* El overlay nunca bloquea el sidebar */
-.sidebar-overlay {
-  z-index: 2147483646 !important;
-}
-/* Forzar que el sidebar siempre sea interactivo aunque el fondo esté bloqueado */
-.sidebar,
-.sidebar.open,
-body.sidebar-open .sidebar {
-  pointer-events: auto !important;
-  user-select: auto !important;
-}
 /* =============================
-  Adaptaciones para móviles
-  Layout y tamaños para pantallas pequeñas
-  ============================= */
-@media (max-width: 600px) {
-  html {
-    font-size: 16px; /* Fuente base para móviles */
-  }
-  body {
-    /* Layout principal y fondo para móviles */
-    padding-top: 70px;
-    margin: 0;
-    width: 100vw;
-    min-width: 100vw;
-    box-sizing: border-box;
-    background-size: cover;
-    font-family: 'Roboto', Arial, sans-serif;
-  }
-  .app-container {
-    /* Contenedor principal: ocupa todo el ancho en móvil */
-    width: 100vw;
-    min-width: 100vw;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  /* Header con botón a la izquierda y logo centrado */
-  .main-header {
-    width: 100vw;
-    min-width: 100vw;
-    padding: 10px 0 0 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: transparent;
-  }
+   POKEMON APP CSS CORREGIDO
+   Sin zoom excesivo y duplicaciones
+   ============================= */
 
-  .header-content {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    width: 100vw;
-    position: relative;
-  }
-
-  .mobile-menu-btn {
-    position: absolute;
-    left: 16px;
-    background: var(--pk-chip-bg);
-    color: var(--pk-text);
-    border: none;
-    font-size: 2rem;
-    padding: 0.3em 0.7em;
-    border-radius: 8px;
-    cursor: pointer;
-    z-index: 10;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-    transition: background 0.2s, color 0.2s;
-  }
-  .mobile-menu-btn:hover {
-    background: var(--color-golden-yellow);
-    color: #181830;
-  }
-
-  .logo-section {
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .title-primary {
-    /* Título principal adaptado para móvil */
-    font-size: 1.5rem;
-    text-align: center;
-    margin: 0 auto 8px auto;
-    word-break: break-word;
-  }
-  .welcome-banner {
-    /* Banner de bienvenida centrado y ancho completo */
-    width: 100vw;
-    min-width: 100vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto 10px auto;
-    box-sizing: border-box;
-  }
-  .welcome-banner .welcome-inner {
-    /* Contenido interno del banner: centrado y con padding adaptable */
-    padding: 10px 6vw;
-    margin: 0 auto;
-    max-width: 95vw;
-    min-width: 140px;
-    width: 100%;
-    box-sizing: border-box;
-    text-align: center;
-    border-radius: 16px;
-    font-size: 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  .main-content {
-    /* Área principal: layout vertical y centrado */
-    width: 100vw;
-    max-width: 100vw;
-    padding: 8px 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    box-sizing: border-box;
-  }
-  .card {
-    /* Tarjeta de Pokémon: tamaño y margen para móvil */
-    width: 98vw;
-    max-width: 340px;
-    min-width: 140px;
-    height: 320px;
-    margin: 0 auto 14px auto;
-    border-radius: 16px;
-    font-size: 1rem;
-    box-sizing: border-box;
-  }
-  .card-grid {
-    /* Grid de tarjetas: una columna en móvil */
-    width: 100vw;
-    max-width: 100vw;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 14px;
-    justify-items: center;
-    margin: 0 auto;
-    padding: 0 0 16px 0;
-    box-sizing: border-box;
-  }
-  .sidebar {
-    /* Sidebar móvil: oculto por defecto, ocupa toda la pantalla al abrir */
-    position: fixed;
-    top: 0;
-    left: -100vw;
-    width: 100vw;
-    max-width: 100vw;
-    height: 100vh;
-    background: #181830;
-    z-index: 2000;
-    transition: left 0.3s ease;
-    box-shadow: 2px 0 16px rgba(0,0,0,0.2);
-    padding: 0 0 8px 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    overflow-y: auto;
-  }
-  .sidebar.open {
-    /* Sidebar visible cuando está abierto */
-    left: 0;
-  }
-
-  .sidebar-overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0,0,0,0.7);
-    z-index: 1999;
-  }
-  .sidebar-overlay.active {
-    display: block;
-  }
-  .type-btn {
-    min-width: 70px;
-    font-size: 1rem;
-    padding: 10px 8px;
-    margin: 4px 2px;
-    box-sizing: border-box;
-    text-align: center;
-    border-radius: 8px;
-  }
-  .type-btn.with-text {
-    padding: 10px 15px;
-    font-size: 1.1rem;
-    box-sizing: border-box;
-    text-align: center;
-  }
-  .search-input {
-    width: 100%;
-    min-width: 140px;
-    font-size: 1.1rem;
-    padding: 12px 15px;
-    box-sizing: border-box;
-  }
-  .search-input-container {
-    width: 100%;
-    max-width: none;
-  }
-}
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -322,6 +38,7 @@ body.sidebar-open .sidebar {
   /* Altura del header usada para calcular áreas visibles */
   --app-header-height: 120px;
   --pagination-height: 76px;
+  --sidebar-width: 380px; /* Actualizado para el nuevo ancho */
   background-color: var(--pk-bg-start);
 
   font-synthesis: none;
@@ -344,7 +61,7 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  padding: 0;  /* Sin padding superior ya que usamos layout flex */
+  padding: 0;
   background: linear-gradient(135deg, var(--pk-bg-start) 0%, var(--pk-bg-end) 60%, #1a1a2e 100%);
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
@@ -359,28 +76,11 @@ h1 {
 }
 
 #app {
-  width: 100%;          /* Ocupar todo el ancho */
-  height: 100vh;        /* Ocupar toda la altura */
-  margin: 0;            /* Sin márgenes */
-  padding: 0;           /* Sin padding */
-  text-align: left;     /* Alineación normal */
-}
-
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em var(--color-cerulean)aa);
-}
-.logo.vanilla:hover {
-  filter: drop-shadow(0 0 2em var(--color-golden-yellow)aa);
-}
-
-.read-the-docs {
-  color: var(--pk-muted);
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  text-align: left;
 }
 
 button {
@@ -403,512 +103,1007 @@ button:hover {
 }
 button:focus,
 button:focus-visible {
-  outline: 2px solid var(--color-cerulean);
+  outline: 2px solid var(--color-golden-yellow);
   outline-offset: 2px;
+  box-shadow: 0 0 0 3px rgba(255, 222, 0, 0.3);
 }
 
-/* Enhanced NAVBAR with better Pokémon theming */
-.navbar {
-  width: 100%;
+/* ===================================
+   APP LAYOUT CON SIDEBAR
+   ================================== */
+
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(135deg, var(--pk-bg-start) 0%, var(--pk-bg-end) 100%);
+}
+
+.app-body {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+/* Header Principal */
+.main-header {
   background: var(--pk-nav);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0.6rem 1.5rem;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.4), 0 0 30px rgba(255, 222, 0, 0.1);
-  position: fixed; 
-  top: 0; 
-  left: 0; 
-  right: 0; 
-  z-index: 120;
-  border-bottom: 2px solid rgba(255, 222, 0, 0.2);
-}
-
-.navbar-center { 
-  display: flex; 
-  flex-direction: column; 
-  align-items: center; 
-  gap: 6px; 
-}
-
-.search-form { 
-  display: flex; 
-  gap: 0.5rem; 
-  align-items: center; 
-  flex-wrap: wrap;
-}
-
-.search-input, .type-select, .search-btn { 
-  padding: 0.45rem 0.9rem; 
-  border-radius: 8px; 
-  border: 0; 
-  font-size: 0.95rem; 
-  transition: all 0.3s ease;
-}
-
-.search-input { 
-  background: linear-gradient(135deg, #1e2338 0%, #2a2f4a 100%); 
-  color: var(--pk-text); 
-  width: 180px; 
-  border: 2px solid rgba(255, 222, 0, 0.3); 
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-}
-.search-input:focus {
-  border-color: var(--color-golden-yellow);
-  box-shadow: 0 0 20px rgba(255, 222, 0, 0.4);
-  outline: none;
-}
-
-.search-btn { 
-  background: linear-gradient(135deg, #B3A125 0%, #D4B836 100%); 
-  color: #1a1d2e; 
-  cursor: pointer; 
-  border: 0; 
-  font-weight: 700;
-  box-shadow: 0 4px 12px rgba(179, 161, 37, 0.4);
+  border-bottom: 3px solid var(--color-golden-yellow);
+  padding: 20px 0;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
   position: relative;
-  padding: 0.45rem 1.2rem;
-  border: 2px solid rgba(255, 215, 0, 0.6);
-}
-.search-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(179, 161, 37, 0.6);
-  background: linear-gradient(135deg, #D4B836 0%, #B3A125 100%);
-  border-color: var(--color-golden-yellow);
+  z-index: 50;
+  width: 100%;
 }
 
-/* Enhanced type buttons con fondos específicos para cada tipo */
-/* Type buttons enhanced with dynamic loading */
-.type-buttons {
+.header-content {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 0;
+}
+
+.logo-section {
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.logo-large {
+  height: 60px;
+  width: auto;
+  cursor: pointer;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.logo-large:hover {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+.main-title {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.title-primary {
+  font-size: 2.5rem;
+  font-weight: 800;
+  background: linear-gradient(45deg, var(--color-golden-yellow), var(--color-gold-foil));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.title-secondary {
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: var(--pk-muted);
+  margin-top: -5px;
+}
+
+/* Sidebar principal */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 380px; /* Aumentado de 280px */
+  height: 100vh; /* Altura completa del viewport */
+  /* Usar paleta del proyecto para mantener consistencia */
+  background: linear-gradient(135deg, var(--pk-nav) 0%, color-mix(in srgb, var(--pk-nav) 60%, #2c1810 40%) 100%);
+  border-right: 3px solid var(--color-golden-yellow);
+  z-index: 1000;
+  overflow-y: auto;
+  padding: 0; /* Sin padding general */
+  transition: transform 240ms ease;
+}
+
+/* Estado colapsado: ocultar la sidebar desplazándola fuera del viewport */
+.sidebar.collapsed {
+  transform: translateX(-380px); /* Actualizado para el nuevo ancho */
+}
+
+/* Remover el botón de cerrar completamente */
+.sidebar-close-btn {
+  display: none !important;
+}
+
+/* Botón toggle para colapsar/expandir el sidebar (mantener si se usa) */
+.sidebar-toggle-btn {
+  position: fixed;
+  left: calc(380px + 12px); /* Actualizado para el nuevo ancho */
+  top: 12px;
+  z-index: 1100;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--pk-chip-bg);
+  color: var(--pk-text);
+  border: 1px solid rgba(0,0,0,0.18);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.28);
+  cursor: pointer;
+}
+
+/* Mostrar flecha según estado aria-expanded */
+.sidebar-toggle-btn::after {
+  content: '◀';
+  font-size: 16px;
+  color: var(--color-golden-yellow);
+  display: block;
+  transform-origin: center;
+}
+.sidebar-toggle-btn[aria-expanded="false"]::after {
+  content: '▶';
+}
+.sidebar-toggle-btn[aria-expanded="true"] {
+  left: calc(380px + 12px); /* Actualizado para el nuevo ancho */
+}
+.sidebar-toggle-btn[aria-expanded="false"] {
+  left: 12px; /* cuando está colapsado, mover el toggle al borde */
+}
+
+/* Si el body tiene la clase sidebar-collapsed, forzar la posición del toggle */
+body.sidebar-collapsed .sidebar-toggle-btn {
+  left: 12px !important;
+}
+body:not(.sidebar-collapsed) .sidebar-toggle-btn {
+  left: calc(380px + 12px) !important; /* Actualizado para el nuevo ancho */
+}
+
+/* Header del sidebar */
+.sidebar h2,
+.sidebar .sidebar-header h3 {
+  color: var(--color-golden-yellow);
+  text-align: center;
+  margin: 15px 0;
+  font-size: 1.1rem;
+  padding: 0 15px;
+  display: flex;
   justify-content: center;
   align-items: center;
-  margin: 12px 0;
+  width: 100%;
 }
 
+/* Contenedor de filtros */
+.filter-section {
+  padding: 0; /* Sin padding para eliminar márgenes */
+}
+
+/* Botón "Todos": tamaño aumentado a 170x170 y sin hover */
+.filter-section .filter-button.all-types,
+.filter-section .type-btn.with-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 170px; /* solicitado */
+  height: 170px; /* solicitado */
+  background: transparent;
+  border: none;
+  color: var(--pk-text);
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+  padding: 8px;
+  margin: 0 auto 10px auto;
+  cursor: pointer;
+  transition: none; /* desactivar transiciones para hover */
+  position: relative;
+  overflow: visible; /* permitir mostrar sprites completos */
+  border-radius: 12px;
+}
+
+/* Contorno personalizado para botón "Todos" */
+.filter-section .filter-button.all-types::before,
+.filter-section .type-btn.with-text::before {
+  content: '';
+  position: absolute;
+  inset: 0; /* ocupar exactamente el contorno del botón */
+  border-radius: inherit;
+  background: transparent; /* no cubrir el contenido */
+  border: 2px solid rgba(255, 222, 0, 0.16); /* contorno dorado sutil */
+  z-index: 0; /* dejar el contenido por encima */
+  opacity: 1;
+  pointer-events: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.filter-section .filter-button.all-types:hover::before,
+.filter-section .filter-button.all-types:focus::before,
+.filter-section .filter-button.all-types:focus-visible::before,
+.filter-section .type-btn.with-text:hover::before,
+.filter-section .type-btn.with-text:focus::before,
+.filter-section .type-btn.with-text:focus-visible::before {
+  /* Hover effects removed */
+}
+
+/* Efecto de fondo animado para botón "Todos" */
+.filter-section .filter-button.all-types::after,
+.filter-section .type-btn.with-text::after {
+  /* pseudo-element usado antes para brillo: lo retiramos para no cubrir el contenido */
+  content: none;
+}
+
+.filter-section .filter-button.all-types:hover::after,
+.filter-section .filter-button.all-types:focus::after,
+.filter-section .filter-button.all-types:focus-visible::after,
+.filter-section .type-btn.with-text:hover::after,
+.filter-section .type-btn.with-text:focus::after,
+.filter-section .type-btn.with-text:focus-visible::after {
+  /* Hover effects removed */
+}
+
+@keyframes button-glow-intense {
+  0% {
+    transform: scale(1) rotate(0deg);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.08) rotate(3deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.05) rotate(6deg);
+    opacity: 0.9;
+  }
+}
+
+/* Filtros SVG para efectos avanzados */
+<svg width="0" height="0" style="position: absolute;">
+  <defs>
+    <filter id="unopaq">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2"/>
+      <feColorMatrix values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.5 0"/>
+    </filter>
+    <filter id="unopaq2">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="0.25"/>
+      <feColorMatrix values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.8 0"/>
+    </filter>
+    <filter id="unopaq3">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="2"/>
+      <feColorMatrix values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.3 0"/>
+    </filter>
+    <filter id="golden-glow">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="3"/>
+      <feColorMatrix values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.8 0"/>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+</svg>
+
+/* Mejorar el efecto de contorno para botones activos (neutralizar azul) */
+.filter-section .type-btn.is-active::before {
+  /* reemplazamos el azul por un contorno dorado sutil */
+  background: linear-gradient(45deg, rgba(255, 222, 0, 0.95), rgba(179, 161, 37, 0.95));
+  opacity: 1;
+  filter: drop-shadow(0 0 12px rgba(255, 222, 0, 0.55));
+}
+
+.filter-section .filter-button.all-types.is-active::before,
+.filter-section .type-btn.with-text.is-active::before {
+  background: linear-gradient(45deg, rgba(255, 222, 0, 0.95), rgba(179, 161, 37, 0.95));
+  opacity: 1;
+  filter: drop-shadow(0 0 18px rgba(255, 222, 0, 0.5)) blur(0.8px);
+}
+
+/* Transiciones suaves para todos los efectos */
+.filter-section .type-btn,
+.filter-section .filter-button.all-types,
+.filter-section .type-btn.with-text {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Efecto de presión para botones */
+.filter-section .type-btn:active::after,
+.filter-section .filter-button.all-types:active::after,
+.filter-section .type-btn.with-text:active::after {
+  opacity: 1;
+  transform: scale(0.98);
+}
+
+.filter-section .filter-button.all-types:hover,
+.filter-section .filter-button.all-types:focus,
+.filter-section .type-btn.with-text:hover,
+.filter-section .type-btn.with-text:focus {
+  transform: none; /* quitar transform en hover */
+  box-shadow: none;
+}
+
+.filter-section .filter-button.all-types.active,
+.filter-section .type-btn.with-text.is-active {
+  /* Mantener sólo contorno y fondo leve, sin overlay que tape el texto */
+  background: rgba(255, 222, 0, 0.06) !important; /* muy leve */
+  color: var(--pk-text) !important;
+  font-size: 20px; /* Texto más grande cuando está activo */
+  font-weight: 800; /* Más negrita */
+  box-shadow: none !important; /* eliminar glow pesado */
+  border: 2px solid rgba(255, 222, 0, 0.22) !important; /* contorno visible */
+}
+
+/* Cuando el botón 'Todos' está activo, remover cualquier pseudo-elemento que cree una placa amarilla encima */
+.filter-section .filter-button.all-types.active::before,
+.filter-section .filter-button.all-types.is-active::before,
+.filter-section .type-btn.with-text.active::before,
+.filter-section .type-btn.with-text.is-active::before {
+  background: transparent !important;
+  box-shadow: none !important;
+  filter: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+.filter-section .filter-button.all-types.active::after,
+.filter-section .filter-button.all-types.is-active::after,
+.filter-section .type-btn.with-text.active::after,
+.filter-section .type-btn.with-text.is-active::after {
+  content: none !important;
+}
+
+/* Asegurar que el texto e icono del botón estén por encima */
+.filter-section .filter-button.all-types.active > *,
+.filter-section .filter-button.all-types.is-active > *,
+.filter-section .type-btn.with-text.active > *,
+.filter-section .type-btn.with-text.is-active > * {
+  position: relative !important;
+  z-index: 3 !important;
+}
+
+/* asegurar que el contenido del botón esté encima de los pseudo-elementos */
+.filter-section .filter-button.all-types > *,
+.filter-section .filter-button.all-types .type-icon-wrapper,
+.filter-section .filter-button.all-types .type-label {
+  position: relative;
+  z-index: 2;
+}
+
+/* Aumentar tamaño del botón 'Todos' a 200x200 en pantallas amplias */
+.filter-section .filter-button.all-types {
+  width: 200px !important;
+  height: 200px !important;
+}
+
+/* Botones de tipo Pokemon */
+.type-filters,
+.filter-section .type-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 14px; /* mayor espacio entre botones para selección cómoda */
+  align-items: flex-start; /* permitir botones con ancho fijo en desktop */
+}
+
+.type-button,
 .type-btn {
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 8px 14px;
-  border: 2px solid transparent;
-  border-radius: 20px;
-  background: var(--pk-chip-bg);
+  width: 100%;
+  height: 48px;
+  background: transparent;
+  border: none;
   color: var(--pk-text);
-  font-size: 0.85rem;
-  font-weight: 600;
+  font-size: 14px;
+  text-align: left;
+  padding: 0 12px; /* más área de toque horizontal */
+  margin: 8px 0; /* espacio vertical adicional entre botones */
   cursor: pointer;
-  transition: all 0.3s ease;
-  text-transform: capitalize;
-  min-height: 36px;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  font-weight: 600;
   position: relative;
-  overflow: hidden;
 }
 
+/* Sprite del tipo Pokemon */
+.type-button .type-icon,
+.type-btn .type-icon {
+  width: 24px;
+  height: 24px;
+  margin: 0 15px; /* Margen solo horizontal */
+  flex-shrink: 0;
+}
+
+/* Texto del tipo */
+.type-button .type-name,
+.type-btn .type-label {
+  flex: 1;
+}
+
+/* Asegurar que el emoji (gorra) esté al principio del texto en el botón 'Todos' */
+.filter-section .filter-button.all-types .type-icon-wrapper,
+.filter-section .type-btn.with-text .type-icon-wrapper {
+  margin-right: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px; /* Tamaño fijo para el icono */
+  height: 40px; /* Tamaño fijo para el icono */
+}
+
+.filter-section .filter-button.all-types .type-icon-wrapper img,
+.filter-section .filter-button.all-types .type-icon-wrapper span,
+.filter-section .type-btn.with-text .type-icon-wrapper img,
+.filter-section .type-btn.with-text .type-icon-wrapper span {
+  width: 32px; /* Tamaño del icono interno */
+  height: 32px; /* Tamaño del icono interno */
+}
+
+/* Ajustes: botón 'Todos' más notable y con gorra al inicio */
+.filter-section .filter-button.all-types {
+  width: 170px; /* Aumentado a 170px según solicitud */
+  justify-content: center;
+  align-items: center;
+  padding-left: 14px; /* mayor área para tocar el icono y texto */
+  margin: 0 auto 8px auto; /* Centrar horizontalmente */
+  height: 170px; /* Altura igual al ancho para hacerlo cuadrado */
+  transition: none !important; /* Desactivar transiciones/hover */
+  overflow: visible; /* Asegurar que el sprite no se recorte */
+}
+.filter-section .filter-button.all-types .type-label {
+  margin-left: 6px;
+  font-size: 1.15rem; /* Aumentado ligeramente para mejor legibilidad */
+  font-weight: 700;
+  text-transform: none;
+}
+
+/* Desactivar efectos hover/transform para el botón 'Todos' y su variante con texto */
+.filter-section .filter-button.all-types:hover,
+.filter-section .type-btn.with-text:hover,
+.filter-section .filter-button.all-types:focus:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.filter-section .type-btn.with-text {
+  transition: none !important; /* asegurar que la variante con texto no tenga hover */
+}
+
+/* En móvil, permitir que el botón 'Todos' ocupe el ancho disponible */
+@media (max-width: 768px) {
+  .filter-section .filter-button.all-types {
+  width: 140px; /* más pequeño en móvil */
+  height: 140px;
+  }
+}
+
+/* Desktop: forzar ancho fijo en pantallas anchas, y dejar responsive por debajo */
+@media (min-width: 1000px) {
+  .filter-section .type-buttons,
+  .type-filters {
+    align-items: flex-start;
+  }
+  .filter-section .type-buttons .type-btn,
+  .type-filters .type-button {
+    width: 220px; /* Aumentado para aprovechar el espacio */
+    height: 80px; /* Aumentado */
+    padding: 0 24px; /* Más padding para mejor apariencia */
+  }
+  .filter-section .filter-button.all-types {
+    width: 170px; /* Forzar 170px en pantallas anchas */
+    height: 170px;
+  }
+}
+
+@media (max-width: 999px) {
+  /* en tablet y móviles, los botones ocupan el 100% del contenedor */
+  .filter-section .type-buttons .type-btn,
+  .type-filters .type-button,
+  .filter-section .filter-button.all-types {
+    width: 170px; /* Mantener grande en tablets medianas si hay espacio */
+    height: 170px;
+  }
+}
+
+.type-button:hover,
 .type-btn:hover {
-  border-color: var(--type-color, var(--color-golden-yellow));
-  background: linear-gradient(135deg, 
-    rgba(var(--type-color-rgb, 255, 222, 0), 0.1) 0%, 
-    rgba(var(--type-color-rgb, 255, 222, 0), 0.2) 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  /* Hover effects removed */
 }
 
+.type-button.active,
 .type-btn.is-active {
-  border-color: var(--type-color, var(--color-golden-yellow));
-  background: linear-gradient(135deg, 
-    var(--type-color, var(--color-golden-yellow)) 0%, 
-    color-mix(in srgb, var(--type-color, var(--color-golden-yellow)) 80%, black 20%) 100%);
-  color: white;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+  /* Reemplazar fondo azul por un estado activo dorado y sutil */
+  background: rgba(255, 222, 0, 0.08) !important;
+  color: var(--pk-text) !important;
+  border: 2px solid rgba(255, 222, 0, 0.18) !important;
+  box-shadow: 0 6px 18px rgba(255, 222, 0, 0.12) !important;
 }
 
-/* Type icon styles */
-.type-icon {
-  width: 18px;
-  height: 18px;
-  object-fit: contain;
-  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3));
+/* Colores específicos por tipo (solo para el borde izquierdo como indicador sutil) */
+.type-button.bug.active::before,
+.type-btn.bug.is-active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: #a8b820;
 }
 
-.type-btn.is-active .type-icon {
-  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5)) brightness(1.1);
+.type-button.dragon.active::before,
+.type-btn.dragon.is-active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: #7038f8;
 }
 
-/* Loading state for types */
-.loading-types {
+.type-button.electric.active::before,
+.type-btn.electric.is-active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: #f8d030;
+}
+
+/* Sección de búsqueda */
+.search-section {
+  padding: 15px 20px;
+  border-top: 1px solid rgba(212, 175, 55, 0.3);
+  margin-top: 10px;
+}
+
+.search-section h3 {
+  color: #d4af37;
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
+/* Input de búsqueda */
+.pokemon-search,
+.sidebar .search-input {
+  width: 100%;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 5px;
+  color: #fff;
+  font-size: 14px;
+}
+
+.pokemon-search::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.pokemon-search:focus,
+.sidebar .search-input:focus {
+  outline: none;
+  border-color: #d4af37;
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 0 3px rgba(255, 222, 0, 0.4), 0 0 20px rgba(255, 222, 0, 0.2);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+  
+  .sidebar.open {
+    transform: translateX(0);
+  }
+}
+
+.sidebar-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 222, 0, 0.3) rgba(30, 35, 56, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centrar horizontalmente */
+  justify-content: flex-start;
+  max-width: 420px; /* Aumentado para dar más espacio */
+  margin: 0 auto; /* Centrar el contenido */
+  width: 100%;
+}
+
+.sidebar-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar-content::-webkit-scrollbar-track {
+  background: rgba(30, 35, 56, 0.3);
+  border-radius: 3px;
+}
+
+.sidebar-content::-webkit-scrollbar-thumb {
+  background: rgba(255, 222, 0, 0.3);
+  border-radius: 3px;
+}
+
+.sidebar-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 222, 0, 0.5);
+}
+
+.sidebar-header {
+  padding: 20px;
+  border-bottom: 1px solid rgba(255, 222, 0, 0.1);
+  background: linear-gradient(135deg, rgba(255, 222, 0, 0.1) 0%, rgba(179, 161, 37, 0.1) 100%);
+}
+
+.sidebar-header h3 {
+  justify-content: center;
+  text-align: center;
+  margin: 0;
+  color: var(--color-golden-yellow);
+  font-size: 1.1rem;
+  font-weight: 600;
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 12px 20px;
-  color: var(--pk-muted);
-  font-size: 0.9rem;
-  animation: pulse 1.5s infinite;
 }
 
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
-}
-
-/* Responsive type buttons */
-@media (max-width: 768px) {
-  .type-buttons {
-    gap: 6px;
-    margin: 8px 0;
-  }
-  
-  .sidebar {
-    position: fixed;
-    top: 0;
-    left: -100vw;
-    width: 100vw;
-    height: 100vh;
-    background: #181830;
-    z-index: 2000;
-    transition: left 0.3s ease;
-    box-shadow: 2px 0 16px rgba(0,0,0,0.2);
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    overflow-y: auto;
-  }
-
-  .sidebar.open {
-    left: 0;
-  }
-  border-color: rgba(21, 77, 113, 0.6);
-  /* Ocultar el contenido principal cuando el sidebar está abierto */
-  body.sidebar-open .content-container:not(.sidebar),
-  body.sidebar-open .main-content:not(.sidebar) {
-    filter: blur(6px) brightness(0.5);
-    pointer-events: none;
-    user-select: none;
-  }
-}
-
-/* Paginación: estilos básicos */
-.pagination {
+/* Secciones del sidebar */
+.search-section,
+.filter-section,
+.quick-actions {
+  margin-bottom: 30px;
+  width: 100%;
+  max-width: 400px; /* Aumentado para dar más espacio */
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  padding: 12px 10px;
-  width: 100%;
-  box-sizing: border-box;
-}
-.pagination .page-btn {
-  background: linear-gradient(135deg, #B3A125 0%, #D4B836 100%);
-  color: #12121a;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 10px;
-  font-weight: 700;
-  cursor: pointer;
-}
-.pagination .page-btn[disabled] {
-  opacity: 0.45;
-  cursor: not-allowed;
-  filter: grayscale(0.25) brightness(0.85);
-  transform: none;
-  box-shadow: none;
-}
-.pagination .page-info {
-  color: var(--pk-muted);
-  font-weight: 600;
-}
-
-@media (max-width: 420px) {
-  .pagination { gap: 8px; padding: 10px 8px; }
-  .pagination .page-info { font-size: 0.9rem; }
-  .pagination .page-btn { padding: 6px 10px; font-size: 0.9rem; }
-}
-
-/* ======= MOBILE SIDEBAR OVERRIDES (strong) ======= */
-@media (max-width: 768px) {
-  /* Force full-screen modal sidebar using transform (more reliable than left) */
-  .sidebar {
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100vw !important;
-    height: 100vh !important;
-    transform: translateX(-100%) !important;
-    transition: transform 320ms cubic-bezier(.2,.9,.2,1) !important;
-    z-index: 100100 !important; /* Asegura que el sidebar esté por encima del overlay */
-    box-shadow: 0 12px 40px rgba(0,0,0,0.6) !important;
-    background: linear-gradient(180deg, #181830 0%, #2a2f4a 100%) !important;
-    padding: 0 !important;
-    overflow: hidden !important;
-    display: flex !important;
-    flex-direction: column !important;
-    pointer-events: auto !important;
-  }
-
-  /* When open, slide into view */
-  .sidebar.open,
-  body.sidebar-open .sidebar {
-    transform: translateX(0) !important;
-    overflow: auto !important;
-    pointer-events: auto !important;
-  }
-
-  /* Overlay should sit below the sidebar but above the rest */
-  .sidebar-overlay {
-    position: fixed !important;
-    inset: 0 !important;
-    width: 100vw !important;
-    height: 100vh !important;
-    background: rgba(0,0,0,0.6) !important;
-    z-index: 100050 !important;
-    opacity: 0; visibility: hidden; transition: opacity 220ms ease !important;
-    pointer-events: none !important;
-  }
-  .sidebar-overlay.active,
-  body.sidebar-open .sidebar-overlay {
-    opacity: 1 !important; visibility: visible !important; pointer-events: auto !important;
-  }
-  /* Permitir interacción con el sidebar aunque el overlay esté activo */
-  .sidebar.open {
-    pointer-events: auto !important;
-  }
-
-  /* Keep welcome banner below the sidebar/modal */
-  .welcome-banner { z-index: 1000 !important; }
-
-  /* Lock body scroll when sidebar is open */
-  body.sidebar-open { overflow: hidden !important; }
-
-  /* Dim and prevent interaction with content while sidebar is open */
-  body.sidebar-open .content-container,
-  body.sidebar-open .main-content {
-    filter: blur(6px) brightness(0.6) !important;
-    /* pointer-events: none !important; */
-  }
-
-  /* Sidebar content padding to avoid top header overlap */
-  .sidebar-content {
-    max-height: calc(100vh - 72px) !important;
-    overflow-y: auto !important;
-    padding: 96px 6vw 24px 6vw !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
-  }
-
-  /* Make sure images and icons scale inside sidebar */
-  .sidebar img, .type-icon, .type-sprite { max-width: 100% !important; height: auto !important; }
-}
-
-    width: 100vw;
-    max-width: 100vw;
-    padding: 80px 8vw 20px 8vw;
-    flex: 1;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.type-btn.grass { 
-    padding: 18px 8vw;
-    width: 100vw;
-    text-align: center;
-  border-color: rgba(21, 77, 113, 0.6);
-}
-
-.type-btn.electric { 
-  background: linear-gradient(135deg, #154D71 0%, #1A5A85 100%);
-  color: white;
-  border-color: rgba(21, 77, 113, 0.6);
-}
-
-.type-btn.psychic { 
-  background: linear-gradient(135deg, #154D71 0%, #1A5A85 100%);
-  color: white;
-  border-color: rgba(21, 77, 113, 0.6);
-}
-
-.type-btn:hover { 
-  transform: translateY(-3px); 
-  box-shadow: 0 6px 20px rgba(0,0,0,0.4); 
-  border-color: var(--color-golden-yellow);
-}
-
-.type-btn:active { 
-  transform: translateY(0); 
-}
-
-.type-btn.is-active { 
-  transform: translateY(-3px); 
-  box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4), 0 0 15px rgba(255, 215, 0, 0.3); 
-  border-color: var(--color-golden-yellow);
-}
-
-/* Enhanced Welcome banner */
-.welcome-banner { 
-  position: fixed; 
-  left: calc(50% + 110px); /* Compensa ancho aproximado del sidebar para centrarse en el espacio libre */
-  top: 45%; 
-  transform: translate(-50%,-50%); 
-  z-index: 100; 
-  width: min(88%,760px);
-  transition: opacity 0.3s ease-out, visibility 0.3s ease-out;
-}
-.welcome-banner.hidden {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
-.welcome-banner .welcome-inner { 
-  display: flex; 
-  flex-direction: column; 
-  gap: 12px; 
-  align-items: center; 
-  justify-content: center; 
-  padding: 20px 24px; 
-  border-radius: 12px; 
-  background: linear-gradient(135deg, rgba(30, 35, 56, 0.95) 0%, rgba(42, 47, 74, 0.95) 100%); 
-  color: var(--pk-text); 
-  box-shadow: 0 10px 40px rgba(0,0,0,0.5), 0 0 30px rgba(255, 222, 0, 0.2); 
-  text-align: center; 
-    transition: filter 0.3s;
-  border: 2px solid rgba(255, 222, 0, 0.3);
-  backdrop-filter: blur(10px);
-}
-  .card-grid {
-    width: 100vw;
-    max-width: 100vw;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 18px;
-    justify-items: center;
-    margin: 0 auto;
-    padding: 0 8px 18px 8px;
-    box-sizing: border-box;
-  }
-  opacity: 0.9; 
-  font-size: 1rem; 
-  .card {
-    width: 100%;
-    max-width: 320px;
-    min-width: 180px;
-    height: 340px;
-    margin: 0 auto 14px auto;
-    border-radius: 16px;
-    font-size: 1.1rem;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-  }
-  border: none;
-  color: var(--pk-muted);
-  font-size: 1.2rem;
-  cursor: pointer;
-  padding: 5px;
-  border-radius: 50%;
-  transition: all 0.3s ease;
-  width: 30px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.welcome-close-btn:hover {
-  color: var(--color-golden-yellow);
-  background: rgba(255, 222, 0, 0.1);
-  transform: scale(1.1);
-}
-
-.welcome-inner {
-  position: relative;
-}
-
-/* MAIN - Actualizado para layout sidebar */
-.main-content { 
-  flex: 1;                    /* Ocupar todo el espacio disponible */
-  display: flex; 
-  flex-direction: column; 
-  align-items: center; 
-  padding: 2rem;              /* Padding uniforme */
-  min-height: 0;              /* Permitir shrinking */
-  overflow-y: auto;           /* Scroll si es necesario */
-}
-
-/* Panel con fondo más sutil y menos contrastante */
-.panel { 
-  width: 100%;
-  margin: 0; 
-  padding: 0; 
-  background: transparent !important; 
-  border: none !important; 
-  box-shadow: none !important; 
-  backdrop-filter: none !important;
-  border-radius: 0; 
-}
-.panel-inner { 
-  max-width: none; 
-  margin: 0; 
-  padding: 0;
-}
-.panel-header { 
-  display: none; 
-}
-
-/* Hide panel filters since we have navbar filters */
-.panel .filters-row { 
-  display: none; 
-}
-
-/* Enhanced Grid with better spacing (ancho de carta fijo 360px) */
-.card-grid {
-  /* variables locales para control fácil */
-  --grid-gap: 36px;
-  display: grid;
-  grid-template-columns: repeat(4, minmax(320px, 1fr)); /* columnas fluidas pero amplias */
-  gap: var(--grid-gap);
-  margin-top: 2.6rem;
-  width: 100%;
-  max-width: 1700px; /* limitar ancho total para centrar mejor */
+  flex-direction: column;
+  align-items: center; /* Centrar el contenido de las secciones */
   justify-content: center;
   margin-left: auto;
   margin-right: auto;
-  padding: 0 28px;
+}
+
+.sidebar-content h4 {
+  margin: 0 0 15px 0;
+  color: var(--pk-text);
+  font-size: 1rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Centrar los títulos */
+  gap: 8px;
+  text-align: center;
+  width: 100%;
+}
+
+/* Search Section */
+.search-input-container {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  max-width: 420px; /* Aumentado para acomodar sprites de 170px */
+  justify-content: center; /* Centrar el contenedor */
+  align-items: center; /* Centrar verticalmente */
+  margin: 0 auto; /* Centrar horizontalmente */
+}
+
+.sidebar .search-input {
+  flex: 1;
+  padding: 12px 16px;
+  border: 2px solid rgba(255, 222, 0, 0.2);
+  border-radius: 25px;
+  background: rgba(30, 35, 56, 0.7);
+  color: var(--pk-text);
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+.sidebar .search-input:focus {
+  outline: none;
+  border-color: var(--color-golden-yellow);
+  background: rgba(30, 35, 56, 0.9);
+  box-shadow: 0 0 0 3px rgba(255, 222, 0, 0.4), 0 0 20px rgba(255, 222, 0, 0.2);
+}
+
+.sidebar .search-input::placeholder {
+  color: var(--pk-muted);
+}
+
+.sidebar .search-btn {
+  padding: 12px 16px;
+  border: none;
+  border-radius: 25px;
+  background: linear-gradient(135deg, var(--color-golden-yellow) 0%, var(--color-gold-foil) 100%);
+  color: var(--pk-bg-start);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 48px;
+}
+
+.sidebar .search-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 222, 0, 0.4);
+}
+
+/* Type Buttons en Sidebar - MEJORADOS */
+.filter-section .type-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px; /* Más espacio entre botones */
+  align-items: center; /* Centrar los botones */
+  width: 100%;
+  justify-content: center;
+}
+
+.filter-section .type-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 2px; /* reducir aún más el padding para sprite grande */
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: var(--pk-text);
+  cursor: pointer;
+  transition: transform 0.12s ease;
+  width: auto; /* ajustar al contenido (sprite) */
+  min-height: 0;
+  margin: 8px auto; /* Centrar horizontalmente */
+  text-align: center !important;
+  position: relative;
+  overflow: visible; /* permitir que el sprite se muestre sin recortes */
+}
+
+/* Contorno personalizado para botones del sidebar */
+.filter-section .type-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 4px;
+  background: linear-gradient(45deg, rgba(255, 222, 0, 0.8), rgba(179, 161, 37, 0.9), rgba(255, 222, 0, 0.8));
+  border-radius: inherit;
+  clip-path: path("M 90 0 C 121 0 126 5 126 33 C 126 61 121 66 90 66 L 33 66 C 5 66 0 61 0 33 C 0 5 5 0 33 0 Z");
+  z-index: 1;
+  opacity: 0;
+  transition: opacity 0.4s ease, transform 0.3s ease;
+  filter: drop-shadow(0 0 8px rgba(255, 222, 0, 0.6));
+}
+
+.filter-section .type-btn:hover::before,
+.filter-section .type-btn:focus::before,
+.filter-section .type-btn:focus-visible::before {
+  /* Hover effects removed */
+}
+
+/* Efecto de fondo animado para botones */
+.filter-section .type-btn::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: radial-gradient(circle at 50% 50%, rgba(255, 222, 0, 0.3) 0%, rgba(255, 222, 0, 0.15) 30%, rgba(255, 222, 0, 0.05) 60%, transparent 80%);
+  background-size: 200% 200%;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0.4s ease, background-position 0.6s ease;
+  border-radius: inherit;
+  clip-path: path("M 90 0 C 121 0 126 5 126 33 C 126 61 121 66 90 66 L 33 66 C 5 66 0 61 0 33 C 0 5 5 0 33 0 Z");
+}
+
+.filter-section .type-btn:hover::after,
+.filter-section .type-btn:focus::after,
+.filter-section .type-btn:focus-visible::after {
+  /* Hover effects removed */
+}
+
+@keyframes button-glow {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  100% {
+    transform: scale(1.05) rotate(5deg);
+  }
+}
+
+.filter-section .type-btn .type-icon-wrapper {
+  font-size: 1rem;
+  min-width: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.filter-section .type-btn .type-icon {
+  width: 170px !important; /* 170px ancho en web normal */
+  height: 110px !important;
+  object-fit: contain !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 auto !important; /* Centrar horizontalmente */
+  display: block !important;
+}
+
+.filter-section .type-btn .type-label {
+  display: none; /* ocultar texto por defecto para que la mayoría de controles sean solo sprite */
+}
+
+/* Mostrar etiqueta solo en botones que requieran texto (ej. 'Todos') */
+.filter-section .type-btn.with-text {
+  flex-direction: column;
+  padding: 6px 4px; /* permitir espacio para la etiqueta bajo el sprite */
+  align-items: center;
+}
+.filter-section .type-btn.with-text .type-label {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 0.95rem;
+  color: var(--pk-text);
+}
+
+.filter-section .type-btn:hover {
+  /* Hover effects removed */
+}
+
+.filter-section .type-btn.is-active {
+  border-radius: 14px;
+  /* estado activo: dorado sutil en vez de azul */
+  background: rgba(255, 222, 0, 0.12) !important;
+  color: var(--pk-text) !important;
+  transform: scale(1.04) !important; /* ligero escalado para indicar selección sin ser agresivo */
+  box-shadow: 0 10px 30px rgba(255, 222, 0, 0.14) !important;
+  text-shadow: none !important;
+  border: 2px solid rgba(255, 222, 0, 0.22) !important;
+}
+
+/* Focus styles para botones del sidebar - reemplazar outline azul por brillo dorado */
+.filter-section .type-btn:focus,
+.filter-section .type-btn:focus-visible {
+  outline: none;
+  border-radius: 12px;
+  box-shadow: 0 0 0 3px rgba(255, 222, 0, 0.4), 0 0 20px rgba(255, 222, 0, 0.2);
+  background: linear-gradient(135deg, rgba(255, 222, 0, 0.15) 0%, rgba(179, 161, 37, 0.22) 100%);
+  transform: scale(1.02);
+}
+
+.filter-section .filter-button.all-types:focus,
+.filter-section .filter-button.all-types:focus-visible,
+.filter-section .type-btn.with-text:focus,
+.filter-section .type-btn.with-text:focus-visible {
+  outline: none;
+  border-radius: 12px;
+  box-shadow: 0 0 0 4px rgba(255, 222, 0, 0.5), 0 0 25px rgba(255, 222, 0, 0.3);
+  background: linear-gradient(135deg, rgba(255, 222, 0, 0.18) 0%, rgba(179, 161, 37, 0.25) 100%);
+  transform: scale(1.02);
+}
+
+/* Content Container */
+.content-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: margin-left 0.4s ease, transform 0.4s ease;
+}
+
+/* Mover las cartas hacia la derecha cuando el sidebar esté abierto */
+.sidebar:not(.collapsed) ~ .content-container .main-content {
+  transform: translateX(50px);
+  transition: transform 0.4s ease;
+}
+
+/* Ajustar el movimiento para diferentes tamaños de pantalla */
+@media (min-width: 1200px) {
+  .sidebar:not(.collapsed) ~ .content-container .main-content {
+    transform: translateX(80px);
+  }
+}
+
+@media (max-width: 1199px) {
+  .sidebar:not(.collapsed) ~ .content-container .main-content {
+    transform: translateX(40px);
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar:not(.collapsed) ~ .content-container .main-content {
+    transform: translateX(20px);
+  }
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  min-height: calc(100vh - var(--app-header-height));
+  overflow-y: auto;
+  padding-bottom: 120px;
+}
+
+/* ===================================
+   CARDS Y GRID - CORREGIDO SIN ZOOM EXCESIVO
+   ================================== */
+
+.cards-viewport {
+  width: 100%;
+  /* permitir un contenedor más amplio para que las cartas no se recorten */
+  max-width: 2000px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.cards-viewport.full-height {
+  height: auto !important;
+  min-height: calc(100vh - var(--app-header-height));
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow-y: auto;
+  align-items: stretch;
+}
+
+/* Grid de cartas corregido */
+.card-grid {
+  display: grid;
+  /* Forzar 3 columnas en pantallas grandes para layout 3x3 */
+  grid-template-columns: repeat(3, minmax(280px, 1fr));
+  gap: 36px;
+  margin-top: 2rem;
+  width: 100%;
+  /* Limitar el ancho máximo para que sólo entren 3 columnas en pantallas grandes */
+  max-width: calc(3 * 620px + 2 * 36px);
+  justify-content: center;
+  justify-items: center; /* asegurar que cada celda se centre */
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 24px;
   box-sizing: border-box;
 }
 
+/* Pokemon Cards - Tamaño corregido */
 .pokemon-card {
-    background: transparent;
-    border: none;
-    border-radius: 0;
-    padding: 0;
-    margin: 0;
-    width: 100%;
-    max-width: 380px;  /* Aumentado de 320px */
-    justify-self: center;
-    position: relative;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  max-width: none;
+  justify-self: center;
+  position: relative;
+  display: block;
 }
 
-/* Enhanced CARD FLIP con diseño más uniforme y tamaño mayor */
 .card {
+  /* cartas más anchas y altas para mostrar estadísticas cómodamente */
+  width: 100%;
+  max-width: 620px; /* objetivo: cartas más amplias */
+  min-width: 360px;
+  min-height: 520px;
+  perspective: 1000px;
   position: relative;
   overflow: visible;
-  width: 100%;
-  max-width: 300px;        /* Más pequeña */
-  height: 520px;           /* Altura acorde */
-  cursor: pointer;
-  margin: 0 auto;
-  transition: transform 0.3s ease;
+  border-radius: 10px;
 }
 
 .card:hover {
-  transform: scale(1.02);
+  transform: none;
 }
 
 .content {
@@ -916,79 +1111,109 @@ button:focus-visible {
   height: 100%;
   transform-style: preserve-3d;
   transition: transform 300ms;
-  box-shadow: 0px 0px 20px 2px rgba(179, 161, 37, 0.2), 0 0 30px rgba(255, 222, 0, 0.1);
-  border-radius: 12px;
+  box-shadow: 0px 0px 10px 1px #000000ee;
+  border-radius: 5px;
 }
 
 .front, .back {
-  background: linear-gradient(145deg, #2a2f4a 0%, #1e2338 100%);
+  background-color: #151515;
   position: absolute;
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  border-radius: 12px;
+  border-radius: 5px;
   overflow: hidden;
-  border: 2px solid rgba(255, 222, 0, 0.2);
 }
 
+/* Back side - Pokémon Image - CENTRADO MEJORADO */
 .back {
   width: 100%;
   height: 100%;
   justify-content: center;
-  display: flex;
+  min-height: 620px; /* alargada para que quepa toda la info */
   align-items: center;
   overflow: hidden;
-  background: linear-gradient(145deg, 
-    rgba(255, 40, 40, 0.25) 0%, 
-    rgba(255, 0, 0, 0.2) 20%,
-    var(--color-cerulean) 40%, 
-    #2c3a9f 80%, 
-    rgba(204, 0, 0, 0.3) 100%);
 }
 
-.back .img {
+  box-sizing: border-box;
+  padding: 18px; /* padding interior para que el contenido no toque los bordes */
+.back::before {
   position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
+  content: '';
+  display: block;
+  width: 300px;
+  height: 140%;
+  left: 50%;
+  top: -14%;
+  transform: translateX(-50%);
+  /* Degradado usando la paleta exacta solicitada */
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(255,222,0,0.06) 15%, /* Golden Yellow */
+    rgba(179,161,37,0.08) 28%, /* Gold Foil */
+    rgba(59,76,202,0.06) 42%, /* Cerulean subtle */
+    rgba(204,0,0,0.08) 62%, /* Boston Uni Red */
+    rgba(255,0,0,0.06) 74%, /* Red */
+    transparent 100%);
+  animation: rotation_481 6000ms linear infinite;
+  opacity: 0.95;
+  pointer-events: none;
+}
+
+.back-content {
+  position: absolute;
+  width: 99%;
+  height: 99%;
+  background-color: #151515;
+  border-radius: 5px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
 }
 
 .back .back-content {
-  position: absolute;
+  position: relative;
   width: 100%;
   height: 100%;
-  padding: 15px;
+  padding: 16px 18px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: 12px;
+  z-index: 2;
+  box-sizing: border-box;
 }
-
-.card:hover .content,
-.card.is-flipped .content {
-  transform: rotateY(180deg);
-}
-
-@keyframes rotation_pokemon {
-  0% {
-    transform: rotateZ(0deg);
-  }
-  100% {
-    transform: rotateZ(360deg);
-  }
-}
-
-.front {
-  transform: rotateY(180deg);
-  color: #f4f6f8;
+/* Image container: center and constrain the artwork to avoid growing the card */
+.back .img {
+  position: relative;
   width: 100%;
   height: 100%;
-  justify-content: center;
   display: flex;
+  justify-content: center;
   align-items: center;
-  overflow: hidden;
-  background: linear-gradient(135deg, #FF0000 0%, #CC0000 100%);
+  overflow: visible;
+}
+
+.pokemon-img {
+  max-width: 72%;
+  max-height: 72%;
+  width: auto;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  position: relative;
+  z-index: 3;
+}
+
+/* Front side - Stats and Details - CENTRADO MEJORADO */
+.front {
+  transform: rotateY(180deg);
+  background: linear-gradient(145deg,   #2a2f4a 0%, #1e2338 100%);
+  color: var(--pk-text);
 }
 
 .front::before {
@@ -999,74 +1224,61 @@ button:focus-visible {
   height: 160%;
   background: linear-gradient(90deg, transparent, var(--color-golden-yellow), var(--color-gold-foil), var(--color-golden-yellow), transparent);
   animation: rotation_pokemon 4000ms infinite linear;
-  opacity: 0.6;
+  opacity: 0.3;
+  z-index: 0; /* behind content */
+}
+
+@keyframes rotation_481 {
+  0% { transform: rotateZ(0deg); }
+  100% { transform: rotateZ(360deg); }
+}
+
+.card:hover .content {
+  transform: rotateY(180deg);
 }
 
 .front .front-content {
-  position: absolute;
-  width: 99%;
-  height: 99%;
-  background: linear-gradient(145deg, 
-    rgba(255, 0, 0, 0.06) 0%, 
-    #1e2338 20%, 
-    #2a2f4a 80%, 
-    rgba(204, 0, 0, 0.08) 100%);
-  border-radius: 12px;
-  color: #f4f6f8;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 14px 16px;
   display: flex;
   flex-direction: column;
-  justify-content: center;            
-  align-items: center;                    
-  gap: 6px;                              
-  padding: 10px 15px;                      
-  overflow-y: auto;
-  border: 1px solid rgba(255, 222, 0, 0.15);
-    background-clip: padding-box;
-
+  justify-content: flex-start;
+  box-sizing: border-box;
+  z-index: 10; /* asegurar que el contenido delantero esté sobre la franja decorativa */
 }
 
-/* Emoji superior eliminado */
-.pokemon-card::after { display:none !important; }
+.front-content .badge {
+  background-color: rgba(0,0,0,0.33);
+  padding: 2px 10px;
+  border-radius: 10px;
+  backdrop-filter: blur(2px);
+  width: fit-content;
+}
 
 .description {
-  box-shadow: 0px 0px 15px 2px rgba(59, 76, 202, 0.2);
+  box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.53);
   width: 100%;
-  padding: 20px;
-  background: linear-gradient(135deg, 
-    rgba(255, 0, 0, 0.08) 0%, 
-    rgba(59, 76, 202, 0.12) 30%, 
-    rgba(30, 35, 56, 0.95) 100%);
-  backdrop-filter: blur(8px);
-  border-radius: 12px;
-  border: 1px solid rgba(59, 76, 202, 0.25);
+  padding: 10px;
+  background-color: rgba(0,0,0,0.6);
+  backdrop-filter: blur(5px);
+  border-radius: 5px;
 }
 
 .title {
-  font-size: 18px;
+  font-size: 11px;
   max-width: 100%;
   display: flex;
   justify-content: space-between;
-  align-items: center;
 }
 
-.title p {
-  width: 70%;
-  font-size: 20px;
-  margin: 0;                               /* Sin margen para el título */
-  font-weight: bold;
-  color: var(--color-golden-yellow);
-  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
-}
+.title p { width: 50%; }
 
 .card-footer {
-  min-height: calc(2 * 520px + var(--grid-gap) + 64px); /* 2 filas de cartas + espacio extra */
-  height: calc(2 * 520px + var(--grid-gap) + 64px); /* Más alto para mostrar 2 filas completas */
-  max-height: 100vh;
-  overflow-y: auto;
-  font-size: 16px;
-  font-weight: 600;
-  max-height: none; /* Elimina el límite de altura */
-  overflow: visible; /* Permite que la segunda fila se muestre completa */
+  color: rgba(255,255,255,0.53);
+  margin-top: 5px;
+  font-size: 8px;
 }
 
 .front .img {
@@ -1078,267 +1290,286 @@ button:focus-visible {
 }
 
 .circle {
-  display: none;                           /* Ocultar círculos decorativos */
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background-color: var(--color-golden-yellow);
+  position: relative;
+  filter: blur(15px);
+  animation: floating 2600ms infinite linear;
 }
 
-#bottom {
-  background: linear-gradient(135deg, var(--color-gold-foil) 0%, var(--color-golden-yellow) 100%);
-  left: 80px;
-  top: 30px;
-  width: 220px;
-  height: 220px;
-  animation-delay: -800ms;
+#bottom { background-color: var(--color-golden-yellow); left: 50px; top: 0px; width: 150px; height: 150px; animation-delay: -800ms; }
+#right { background-color: var(--color-bu-red); left: 160px; top: -80px; width: 30px; height: 30px; animation-delay: -1800ms; }
+
+@keyframes floating { 0% { transform: translateY(0px); } 50% { transform: translateY(10px); } 100% { transform: translateY(0px); } }
+
+.card:hover .content,
+.card.is-flipped .content {
+  transform: rotateY(180deg);
 }
 
-#right {
-  background: linear-gradient(135deg, var(--color-cerulean) 0%, var(--color-golden-yellow) 100%);
-  left: 250px;
-  top: -100px;
-  width: 50px;
-  height: 50px;
-  animation-delay: -1800ms;
+.description {
+  box-shadow: 0px 0px 15px 2px rgba(59, 76, 202, 0.2);
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, 
+    rgba(255, 0, 0, 0.08) 0%, 
+    rgba(59, 76, 202, 0.12) 30%, 
+    rgba(30, 35, 56, 0.95) 100%);
+  backdrop-filter: blur(8px);
+  border-radius: 12px;
+  border: 1px solid rgba(59, 76, 202, 0.25);
 }
 
-@keyframes floating {
-  0% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(10px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
-}
-
-.back .img .pokemon-img {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 240px;
-  height: 240px;
-  object-fit: contain;
-  z-index: 10;
-}
-
-.stats-header {
+/* TÍTULO CENTRADO */
+.title {
+  font-size: 16px;
   display: flex;
-  flex-direction: column;
+  justify-content: center; /* Centrado */
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+  text-align: center; /* Centrado */
 }
 
-.stats-icon {
-  width: 80px;   /* icono más grande */
-  height: 80px;
-  display: block;
-  margin: 0 auto 5px; /* centrado arriba del texto */
-  filter: drop-shadow(0 0 6px rgba(255, 222, 0, 0.3));
-}
-
-.stats-title {
-  text-align: center;
-  font-size: 1.1em;
+.title p {
+  font-size: 18px;
+  margin: 0;
   font-weight: bold;
   color: var(--color-golden-yellow);
-  margin-bottom: 4px;                      /* Menos espacio antes de las stats */
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  text-align: center; /* Centrado */
 }
 
-.stats-title {
-  color: var(--color-golden-yellow);
+.card-footer {
   font-size: 14px;
+  font-weight: 600;
+  text-align: center; /* Centrado */
+}
+
+/* Pokemon Types */
+.pokemon-types {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 12px 0;
+}
+
+.pokemon-type {
+  display: flex;
+  flex-direction: column; /* apilar icono sobre texto */
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-golden-yellow);
+  text-transform: capitalize;
   text-align: center;
-  margin: 15px 0 8px 0;
-  font-weight: bold;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
 }
 
-.front-content svg {
-  width: 32px;                             /* Icono de stats más pequeño */
-  height: 32px;
-  margin: 3px 0;                           /* Margen mínimo */
-  filter: drop-shadow(0 0 6px rgba(255, 222, 0, 0.3));
+/* SPRITE DE TIPO MÁS GRANDE */
+.pokemon-type .type-sprite {
+  /* Ajustado: tamaño para sprites dentro de las estadísticas - proporcional a 170px */
+  width: 120px !important;
+  height: 75px !important;
+  object-fit: contain;
+  filter: none !important;
+  border: none !important;
+  background: transparent !important;
+  display: block;
+  margin: 0 auto;
+  padding: 0;
+  box-shadow: none !important;
 }
 
-.front .stats {
+.pokemon-type .type-name {
+  display: none;
+}
+
+.pokemon-type .type-emoji {
+  display: none;
+}
+
+/* Stats - CENTRADAS Y CON ÍCONO PEQUEÑO */
+.stats {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 4px;                 /* Menos espacio entre filas */
-  max-height: none;
-  overflow-y: visible;
-  padding: 0 14px 14px;      /* Menos padding lateral y abajo */
+  gap: 8px;
   flex: 1;
-  align-items: flex-start;   /* Alinear a la izquierda para ganar espacio */
-  justify-content: flex-start;
+  padding: 6px 0 12px 0;
+  align-items: stretch;
+  text-align: left;
+}
+
+.stats-title {
+  width: 100%;
+  text-align: left;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-golden-yellow);
+  margin: 0 0 8px 0;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
 }
 
 .stat-row {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 6px;                 /* Más compacto */
-  font-size: 12px;
-  min-height: 20px;         /* Menos alto */
+  gap: 12px;
+  font-size: 13px;
+  min-height: 28px;
   width: 100%;
-  max-width: 230px;         /* Ligeramente más angosto */
-  margin: 2px 0;            /* Menor separación vertical */
 }
-
 .stat-name {
-  flex: 0 0 60px;                          /* Más ancho para texto más grande */
+  flex: 0 0 110px;
   text-transform: capitalize;
-  color: #f4f6f8;
-  font-weight: 600;                        /* Más bold */
-  font-size: 14px;                         /* Fuente más grande */
-  text-align: center;
+  color: rgba(244,246,248,0.95);
+  font-weight: 600;
+  font-size: 13px;
 }
 
 .stat-val {
-  flex: 0 0 35px;                          /* Más ancho para números más grandes */
-  text-align: center;
+  flex: 0 0 48px;
+  text-align: right;
   font-weight: 700;
   color: var(--color-golden-yellow);
-  font-size: 14px;                         /* Fuente más grande */
+  font-size: 13px;
   text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 }
 
 .stat-bar {
-  flex: 1;
-  height: 5px;
-  background: rgba(59, 76, 202, 0.3);
+  flex: 1 1 auto;
+  height: 12px; /* un poco más visible */
+  background: rgba(59, 76, 202, 0.22);
   border-radius: 999px;
   overflow: hidden;
-  max-width: 120px;
-  border: 1px solid rgba(255, 222, 0, 0.2);
+  max-width: none;
+  border: 1px solid rgba(255, 222, 0, 0.14);
+  position: relative;
+  z-index: 9; /* por encima de la franja decorativa */
 }
 
 .stat-fill {
   height: 100%;
-  background: linear-gradient(90deg, var(--color-gold-foil), var(--color-golden-yellow));
+  width: var(--pct, 20%);
+  background: linear-gradient(90deg, var(--color-gold-foil) 0%, var(--color-golden-yellow) 60%);
   border-radius: 999px;
-  box-shadow: 0 0 6px rgba(255, 222, 0, 0.3);
+  box-shadow: 0 0 8px rgba(255, 222, 0, 0.35);
+  transition: width 450ms cubic-bezier(.2,.9,.3,1);
+  z-index: 11; /* encima del stat-bar */
 }
 
-/* Estilos para tipos Pokemon en las cartas - Sin recuadros */
-.pokemon-types {
+.pokemon-name, .pokemon-name p, .front .front-content .title {
+  position: relative;
+  z-index: 12; /* asegurar visibilidad del nombre */
+}
+
+/* Refuerzo: asegurar que el título y el número del frente estén visibles y encima de pseudo-elementos */
+.front .front-content .pokemon-name,
+.front .front-content .card-footer,
+.front .front-content .title p,
+.front .front-content .title {
+  color: var(--color-golden-yellow) !important; /* dorado brillante */
+  background: transparent !important;
+  opacity: 1 !important;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.65) !important;
+  -webkit-text-stroke: 0.6px rgba(0,0,0,0.35) !important; /* mejorar legibilidad sobre degradados */
+}
+
+/* Si hay una franja decorativa que reduce contraste, atenuarla */
+.front::before {
+  opacity: 0.08 !important;
+  z-index: 0 !important;
+}
+
+/* Type Icon Sprite Styles */
+.type-icon-sprite {
+  /* Usado para iconos en botones (sidebar/navbar). 170px ancho en web normal */
+  width: 170px;
+  height: 110px;
+  object-fit: contain;
+  display: inline-block;
+  vertical-align: middle;
+  filter: none;
+  margin: 0;
+}
+
+/* ÍCONO DE ESTADÍSTICAS MÁS PEQUEÑO */
+.stats-icon {
+  text-align: center;
+  width: 60px !important; /* Reducido */
+  height: 60px !important; /* Reducido */
+  display: block;
+  margin: 0 auto 8px;
+  filter: drop-shadow(0 0 6px rgba(255, 222, 0, 0.3));
+}
+
+/* Paginación mejorada */
+.pagination-wrap {
+  width: 100%;
   display: flex;
-  gap: 6px;                                /* Menos espacio entre tipos */
-  flex-wrap: wrap;
   justify-content: center;
-  margin: 0;                               /* Sin margen */
+  position: relative;
+  height: var(--pagination-height);
+  margin-top: 40px;
+  z-index: 100;
 }
 
-.pokemon-type {
+/* Ocultar paginación cuando el welcome banner está visible */
+.welcome-banner:not(.hidden) ~ .main-content .pagination-wrap {
+  display: none;
+}
+
+.pagination {
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 0;                              /* Sin padding */
-  background: transparent;                 /* Sin fondo */
-  border: none;                            /* Sin borde */
-  border-radius: 0;                        /* Sin bordes redondeados */
-  font-size: 1rem;                         /* Fuente más grande */
+  justify-content: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: rgba(30, 35, 56, 0.9);
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.4);
+  border: 2px solid rgba(255, 222, 0, 0.2);
+}
+
+.pagination .page-btn {
+  background: linear-gradient(135deg, #B3A125 0%, #D4B836 100%);
+  color: #12121a;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  min-width: 100px;
+  transition: all 0.3s ease;
+}
+
+.pagination .page-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 222, 0, 0.4);
+}
+
+.pagination .page-btn[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.pagination .page-info {
+  color: var(--pk-text);
   font-weight: 600;
-  color: var(--color-golden-yellow);
-  text-transform: capitalize;
-  transition: all 0.2s ease;
+  margin: 0 12px;
+  font-size: 14px;
 }
 
-.pokemon-type .type-emoji {
-  display: none;                           /* Ocultar emojis */
-}
-
-.pokemon-type .type-sprite {
-  width: 78px;                             /* Más grande para stats */
-  height: 78px;
-  object-fit: contain;
-  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.35));
-  margin-bottom: 0;                        /* Sin margen inferior */
-}
-
-.pokemon-type .type-name {
-  display: none;                           /* Ocultar el texto, solo mostrar sprite */
-}
-
-/* Eliminar hover de tipos ya que no tienen recuadro */
-  box-shadow: 0 2px 8px rgba(255, 222, 0, 0.3);
-}
-
-.type-sprite {
-  width: 14px;
-  height: 14px;
-  object-fit: contain;
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
-}
-
-.type-emoji {
-  font-size: 12px;
-  line-height: 1;
-}
-
-.type-name {
-  font-size: 11px;
-  font-weight: 600;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-}
-
-/* Enhanced card effects más sutiles */
-.card .front, .card .back { 
-  box-shadow: inset 0 0 20px rgba(59, 76, 202, 0.1), 
-              0 0 25px rgba(179, 161, 37, 0.15), 
-              0 5px 15px rgba(0,0,0,0.2); 
-}
-.card .front::after { 
-  content:''; 
-  position:absolute; 
-  inset:0; 
-  background:linear-gradient(125deg, rgba(255, 222, 0, 0) 0%, rgba(255, 222, 0, 0.05) 50%, rgba(179, 161, 37, 0) 100%); 
-  opacity:0; 
-  transition:opacity .3s; 
-}
-.card:hover .front::after { opacity:1; }
-
-/* Ensure cards remain visible; banner is non-modal so we no longer hide images */
-body.welcome-open .card-grid { 
-  display: grid; 
-}
-body.welcome-open img[data-src] { 
-  visibility: visible; 
-}
-
-/* utility: hide cards when filtered (UI-only) */
-.hidden-by-filter { 
-  display: none !important; 
-}
-
-/* Enhanced scrollbar styling más sutil */
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: rgba(30, 35, 56, 0.3);
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, var(--color-gold-foil), var(--color-golden-yellow));
-  border-radius: 10px;
-  box-shadow: 0 0 6px rgba(255, 222, 0, 0.2);
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, var(--color-golden-yellow), var(--color-gold-foil));
-}
-
-/* Enhanced loading and hover effects más discretos */
-.card {
-  position: relative;
-  width: 360px;                 /* Fijar ancho exacto para que no se reduzca */
-}
-
-/* Estados de la aplicación: Carga y Sin resultados */
+/* Loading and No Results */
 .loading,
 .no-results {
   grid-column: 1 / -1;
@@ -1382,150 +1613,649 @@ body.welcome-open img[data-src] {
   to { transform: rotate(360deg); }
 }
 
-.card::after {
+/* Welcome Banner */
+
+.welcome-banner {
+  position: fixed;
+  left: 50%;
+  top: calc(var(--app-header-height, 120px) + 50px);
+  /* Mostrar el banner visualmente más a la izquierda pero centrado respecto a su propio ancho */
+  transform: translate(-60%, 0);
+  z-index: 100;
+  width: min(85%, 700px);
+  transition: opacity 0.3s ease-out, visibility 0.3s ease-out, transform 0.4s ease;
+}
+
+/* Cuando la sidebar está abierta, correr el banner hacia la derecha para dejar espacio */
+.sidebar:not(.collapsed) ~ .content-container .welcome-banner {
+  transform: translate(-50%, 0) translateX(80px);
+}
+
+/* Cuando la sidebar está colapsada o body indica colapso, centrar el banner (compensar el desplazamiento inicial) */
+.sidebar.collapsed ~ .content-container .welcome-banner,
+body.sidebar-collapsed .welcome-banner {
+  transform: translate(-50%, 0) !important;
+}
+
+/* Responsive adjustments for welcome banner movement */
+@media (max-width: 1199px) {
+  .sidebar:not(.collapsed) ~ .content-container .welcome-banner {
+    transform: translate(-50%, 0) translateX(30px);
+  }
+}
+
+@media (max-width: 999px) {
+  .sidebar:not(.collapsed) ~ .content-container .welcome-banner {
+    transform: translate(-50%, 0) translateX(15px);
+  }
+}
+
+@media (max-width: 768px) {
+  .welcome-banner {
+    position: fixed;
+    left: 50%;
+    top: calc(var(--app-header-height, 120px) + 30px);
+    transform: translate(-50%, 0);
+    width: min(90vw, 380px);
+    z-index: 3000;
+  }
+  
+  .sidebar:not(.collapsed) ~ .content-container .welcome-banner {
+    transform: translate(-50%, 0);
+  }
+}.welcome-banner.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.welcome-banner .welcome-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 28px; /* Más padding para mejor apariencia */
+  border-radius: 16px; /* Bordes más redondeados */
+  background: linear-gradient(135deg, rgba(30, 35, 56, 0.98) 0%, rgba(42, 47, 74, 0.98) 100%); /* Más opaco */
+  color: var(--pk-text);
+  box-shadow: 0 15px 50px rgba(0,0,0,0.6), 0 0 40px rgba(255, 222, 0, 0.3); /* Sombra más fuerte */
+  text-align: center;
+  border: 3px solid rgba(255, 222, 0, 0.4); /* Borde más grueso y visible */
+  backdrop-filter: blur(12px); /* Más blur para mejor efecto */
+  position: relative;
+}
+
+.welcome-banner .welcome-inner::before {
   content: '';
   position: absolute;
-  top: -1px;
-  left: -1px;
-  right: -1px;
-  bottom: -1px;
-  background: linear-gradient(45deg, var(--color-golden-yellow), var(--color-cerulean), var(--color-red), var(--color-gold-foil));
+  inset: -3px;
+  padding: 3px;
+  background: linear-gradient(45deg, rgba(255, 222, 0, 0.6), rgba(179, 161, 37, 0.7), rgba(255, 222, 0, 0.6));
+  border-radius: inherit;
   z-index: -1;
-  border-radius: 13px;
-  opacity: 0;
-  transition: opacity 0.3s ease;
+  opacity: 0.8;
 }
 
-.card:hover::after {
-  opacity: 0.3;
+.welcome-close-btn {
+  position: absolute;
+  top: 12px;
+  right: 15px;
+  background: rgba(255, 222, 0, 0.1);
+  border: 2px solid rgba(255, 222, 0, 0.3);
+  color: var(--color-golden-yellow);
+  font-size: 1.4rem;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
 }
 
-/* Improved selection states */
+.welcome-close-btn:hover {
+  color: #fff;
+  background: rgba(255, 222, 0, 0.3);
+  border-color: rgba(255, 222, 0, 0.6);
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(255, 222, 0, 0.3);
+}
+
+.welcome-inner {
+  position: relative;
+}
+
+.welcome-banner .welcome-inner h2 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--color-golden-yellow);
+  margin: 0;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.7);
+  letter-spacing: 1px;
+}
+
+.welcome-banner .welcome-inner p {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0;
+  line-height: 1.5;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+/* Enhanced scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(30, 35, 56, 0.3);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, var(--color-gold-foil), var(--color-golden-yellow));
+  border-radius: 10px;
+  box-shadow: 0 0 6px rgba(255, 222, 0, 0.2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, var(--color-golden-yellow), var(--color-gold-foil));
+}
+
+/* Enhanced selection states */
 .search-input::selection {
   background: rgba(255, 222, 0, 0.2);
   color: var(--pk-text);
 }
 
-/* Enhanced focus indicators más sutiles */
 .search-input:focus,
 .search-btn:focus {
-  box-shadow: 0 0 0 2px rgba(255, 222, 0, 0.2), 0 0 15px rgba(255, 222, 0, 0.15);
+  box-shadow: 0 0 0 2px rgba(255, 222, 0, 0.3), 0 0 15px rgba(255, 222, 0, 0.15);
 }
 
-/* RESPONSIVE ENHANCEMENTS */
+/* ===================================
+   RESPONSIVE DESIGN
+   ================================== */
+
+/* Desktop Large */
 @media (min-width: 1400px) {
   .card-grid {
-    grid-template-columns: repeat(4, 300px); /* Forzar 4 columnas también en grandes */
-    gap: 30px; /* Un poco más de espacio en muy grandes */
+  /* columnas fijas para pantallas anchas; ancho de contenedor limitado para evitar 4 columnas */
+  grid-template-columns: repeat(3, 620px);
+  gap: 40px;
+  max-width: calc(3 * 620px + 2 * 40px);
+  }
+  .card {
+  max-width: 620px;
+  height: 620px;
   }
 }
 
+/* Desktop Medium */
 @media (min-width: 1000px) and (max-width: 1399px) {
   .card-grid {
-    grid-template-columns: repeat(4, 300px); /* 4 columnas en rango medio */
-    gap: 26px;
+    grid-template-columns: repeat(3, 374px);
+    gap: 35px;
+    max-width: 1408px;
+  }
+  .card {
+    max-width: 440px;
+    height: 560px;
+  }
+}
+
+/* Tablet */
+@media (max-width: 1199px) {
+  .sidebar {
+    width: 380px; /* Mantener el nuevo ancho */
+  }
+  
+  .title-primary {
+    font-size: 2rem;
+  }
+  
+  .card-grid {
+    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+    gap: 31px;
+    padding: 0 16px;
+  }
+  .card {
+    max-width: 380px;
+    height: 520px;
   }
 }
 
 @media (max-width: 999px) {
   .card-grid {
-    grid-template-columns: repeat(2, 300px); /* 2 columnas */
+    grid-template-columns: repeat(2, minmax(264px, 1fr));
     gap: 22px;
-    padding: 0 15px;
+    justify-content: center;
+  }
+  .card {
+    max-width: 320px;
+    height: 460px;
+  }
+  .back .img .pokemon-img {
+    max-width: 286px;
+    max-height: 286px;
   }
 }
 
-@media (max-width: 760px) {
-  .card-grid {
-    grid-template-columns: 300px;           /* 1 columna en móviles */
+/* Mobile */
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
   }
+  
+  .app-body {
+    flex-direction: column;
+  }
+  
+  .title-primary {
+    font-size: clamp(1.4rem, 5vw, 2rem);
+  }
+  
+  .title-secondary {
+    font-size: clamp(0.9rem, 3vw, 1.1rem);
+  }
+  
+  .sidebar {
+    width: 100%;
+    height: auto;
+    max-height: 380px; /* Ajustado para el nuevo diseño */
+    order: 1;
+    position: relative;
+  }
+  
+  .content-container {
+    order: 2;
+  }
+  
+  .header-content {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+    padding: 0 16px;
+  }
+  
+  .logo-section {
+    justify-content: center;
+  }
+  
+  .sidebar-content {
+    padding: 16px;
+    max-height: 350px; /* Ajustado */
+  }
+  
+  .search-section,
+  .filter-section,
+  .quick-actions {
+    margin-bottom: 16px;
+  }
+  
+  .filter-section .type-buttons {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  
+  .filter-section .type-btn {
+    padding: 12px;
+    min-height: 60px; /* Aumentado */
+    gap: 8px;
+  }
+  
+  .filter-section .type-btn .type-icon {
+    width: 120px !important; /* Responsive: más pequeño en tablets */
+    height: 75px !important;
+  }
+  
+  .filter-section .type-btn .type-label {
+    font-size: 0.9rem;
+  }
+  
+  .card-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 0 16px;
+    justify-items: center;
+  }
+  .card {
+    width: 100%;
+    max-width: 420px;
+    height: 420px;
+  }
+  
+  .back .img .pokemon-img {
+    max-width: 180px;
+    max-height: 180px;
+  }
+  
+  .pokemon-type .type-sprite {
+  width: 80px;
+  height: 50px;
+  }
+  
+  .welcome-banner {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: min(92vw, 400px);
+    z-index: 3000;
+  }
+  
+  .welcome-banner .welcome-inner {
+    padding: 16px 18px;
+  }
+  
+  .main-content {
+    padding: 1rem 0;
+  }
+  
+  .pagination .page-btn {
+    min-width: 80px;
+    padding: 8px 12px;
+    font-size: 0.9rem;
+  }
+  
+  .pagination .page-info {
+    font-size: 0.8rem;
+    margin: 0 8px;
+  }
+}/* Extra Small Mobile */
+@media (max-width: 480px) {
+  .card {
+    height: 360px;
+  }
+  
+  .card-grid {
+    padding: 0 12px;
+    gap: 12px;
+  }
+  
+  .sidebar-content {
+    padding: 12px;
+  }
+  
+  .filter-section .type-btn {
+    padding: 10px;
+    min-height: 55px; /* Ajustado para pantallas pequeñas */
+  }
+  
+  .filter-section .type-btn .type-icon {
+    width: 100px !important; /* Responsive: pequeño para móviles */
+    height: 65px !important;
+  }
+  
+  .filter-section .type-btn .type-label {
+    font-size: 0.8rem;
+  }
+  
+  .main-content {
+    padding: 0.5rem 0;
+  }
+  /* Sidebar overlay and mobile off-canvas behavior */
+  .sidebar-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 220ms ease, visibility 220ms ease;
+  z-index: 2000; /* elevado para cubrir contenido y cartas */
+    pointer-events: none;
+  }
+  .sidebar-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .sidebar {
+    position: fixed !important;
+    left: 0 !important;
+    top: 0 !important;
+    height: 100vh !important;
+    width: 100% !important;
+    transform: translateX(-100%) !important;
+    transition: transform 240ms ease !important;
+    z-index: 2100 !important; /* por encima del overlay */
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+  }
+
+  .sidebar.open {
+    transform: translateX(0) !important;
+  }
+
+  /* Ensure content container doesn't get pushed on mobile; sidebar overlays instead */
+  .content-container {
+    padding-left: 0 !important;
+  }
+
+  /* Make toggle button clearly visible on mobile and above overlay */
+  .sidebar-toggle-btn {
+    z-index: 1102 !important;
+    left: 12px !important;
+  }
+}
+/* ----------------------------------
+   Responsive enhancements for sidebar
+   and cards (more robust behavior)
+   ---------------------------------- */
+
+/* Use the CSS variable --sidebar-width to control spacing when sidebar is visible */
+:root {
+  --sidebar-collapsed-offset: -100%; /* default collapsed shift for small screens */
+}
+
+/* Large screens: treat collapsed as -sidebar-width */
+@media (min-width: 1000px) {
+  :root { --sidebar-collapsed-offset: calc(-1 * var(--sidebar-width)); }
+
+  /* ensure sidebar translates fully out when collapsed and is positioned when open */
+  .sidebar {
+    transform: translateX(0);
+    left: 0;
+    width: var(--sidebar-width);
+  }
+  .sidebar.collapsed {
+    transform: translateX(var(--sidebar-collapsed-offset));
+  }
+
+  /* When sidebar is visible, add left padding to content container so cards don't hide under it */
+  body:not(.sidebar-collapsed) .content-container {
+    padding-left: calc(var(--sidebar-width) + 24px);
+  }
+  /* When collapsed, remove extra padding */
+  body.sidebar-collapsed .content-container,
+  .sidebar.collapsed ~ .content-container {
+    padding-left: 24px;
+  }
+
+  /* Adjust the toggle button position using the sidebar width variable */
+  .sidebar-toggle-btn[aria-expanded="true"] {
+    left: calc(var(--sidebar-width) + 12px) !important;
+  }
+}
+
+/* Medium and small screens: sidebar is full width or off-canvas */
+@media (max-width: 999px) {
+  .sidebar {
+    width: 100%;
+    transform: translateX(-100%);
+  }
+  .sidebar.open,
+  .sidebar:not(.collapsed) {
+    transform: translateX(0);
+  }
+  .sidebar.collapsed {
+    transform: translateX(-100%);
+  }
+
+  /* Content container padding reset for smaller screens */
+  body:not(.sidebar-collapsed) .content-container {
+    padding-left: 0;
+  }
+  body.sidebar-collapsed .content-container {
+    padding-left: 0;
+  }
+
+  .sidebar-toggle-btn[aria-expanded="true"] {
+    left: calc(100% + 12px) !important;
+  }
+}
+
+/* Responsive card grid: use auto-fit to adapt number of columns to available width */
+.card-grid {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 28px;
+  padding: 0 18px;
+}
+
+/* Make individual cards adapt to container width instead of fixed min-widths */
+.card {
+  max-width: 100%;
+  min-width: 0;
+  height: auto;
+}
+
+/* Cards inner sizing for different breakpoints */
+@media (min-width: 1400px) {
+  .card { max-width: 620px; height: 620px; }
+}
+@media (min-width: 1000px) and (max-width: 1399px) {
+  .card { max-width: 440px; height: 560px; }
+}
+@media (max-width: 999px) {
+  .card { max-width: 420px; height: auto; }
+}
+
+/* Ensure main-content uses full width when sidebar is collapsed */
+.sidebar.collapsed ~ .content-container .main-content,
+body.sidebar-collapsed .content-container .main-content {
+  transform: none !important;
+  margin-left: 0 !important;
+}
+
+
+/* Override fuerte para asegurar 3 columnas en pantallas grandes */
+@media (min-width: 1000px) {
+  .card-grid {
+    grid-template-columns: repeat(3, minmax(300px, 1fr)) !important;
+    gap: 32px !important;
+    justify-items: center !important;
+  }
+}
+
+/* Mobile Sidebar específico para pantallas muy pequeñas */
+@media (max-width: 600px) {
+  .sidebar.mobile-overlay {
+    position: fixed !important;
+    top: 0 !important;
+    left: -100vw !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background: #181830 !important;
+    z-index: 9999 !important;
+    transition: left 0.3s ease !important;
+    max-height: none !important;
+  }
+
+  .sidebar.mobile-overlay.open {
+    left: 0 !important;
+  }
+  /* mobile-menu-btn styles removed (replaced by sidebar-toggle-btn) */
+
+/* Ensure mobile menu button is visible on small screens */
+.mobile-menu-btn {
+  display: none;
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  z-index: 40;
+  background: transparent;
+  color: var(--pk-text);
+  border: none;
+  font-size: 1.6rem;
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
 }
 
 @media (max-width: 768px) {
-    .navbar {
-        padding: 0.5rem 1rem;
-        flex-wrap: wrap;
-        gap: 0.5rem;
-    }
-    
-    .search-form {
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-    
-    .search-input { 
-        width: 140px; 
-        font-size: 0.9rem;
-    } 
-    
-    .search-btn {
-        padding: 0.4rem 0.8rem;
-        font-size: 0.9rem;
-    }
-    
-    .panel {
-        padding: 2rem 1.5rem;
-        margin: 1.5rem auto;
-    }
-    
-    /* Indicador más grande en móviles para mejor visibilidad */
-    .pokemon-card::after {
-        padding: 4px 8px;
-        font-size: 14px;
-        top: 6px;
-        right: 6px;
-    }
-    
-    .type-buttons {
-        gap: 6px;
-    }
-    
-    .type-btn {
-        padding: 5px 10px;
-        font-size: 0.8rem;
-    }
+  .mobile-menu-btn { display: block; }
 }
 
-@media (max-width: 600px) { 
-    body {
-        padding-top: 120px;
-    }
-    
-    .search-input { 
-        width: 120px; 
-        font-size: 0.85rem;
-    } 
-    .card { 
-        width: 100%; 
-        max-width: 320px; 
-        height: 380px; 
-    } 
-    .card-grid { 
-        grid-template-columns: 1fr; 
-        gap: 18px;
-        padding: 0 10px;
-    } 
-    
-    .welcome-banner .welcome-inner {
-        padding: 15px 20px;
-        margin: 0 10px;
-    }
-    
-    .welcome-banner h2 {
-        font-size: 1.1rem;
-    }
-    
-    .welcome-banner p {
-        font-size: 0.9rem;
-    }
-    
-    .type-btn {
-        padding: 4px 8px;
-        font-size: 0.75rem;
-    }
+  .sidebar-close-btn {
+    display: block;
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: var(--pk-chip-bg);
+    color: var(--pk-text);
+    border: none;
+    font-size: 1.2rem;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    z-index: 20;
+  }
+
+  .sidebar-close-btn:hover {
+    background: var(--color-golden-yellow);
+    color: #181830;
+  }
 }
 
-/* Dark theme refinements más sutiles */
+/* Hide desktop toggle on small screens and ensure mobile menu button is above the overlay */
+@media (max-width: 768px) {
+  /* En móvil usar el mismo botón toggle (.sidebar-toggle-btn) y ocultar el botón legacy .mobile-menu-btn */
+  .mobile-menu-btn {
+    display: none !important;
+  }
+  .sidebar-toggle-btn {
+    display: flex !important;
+    z-index: 3005 !important; /* por encima del overlay y sidebar */
+    position: fixed !important;
+    left: 12px !important;
+    top: 12px !important;
+    width: 44px !important;
+    height: 44px !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+}
+
+/* Make 'Todos' button less visually intrusive on hover */
+.type-btn.with-text {
+  transition: box-shadow 0.18s ease, background-color 0.18s ease, transform 0.12s ease;
+}
+.type-btn.with-text:hover,
+.type-btn.with-text:focus {
+  background-color: rgba(255, 222, 0, 0.06);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08), inset 0 0 0 2px rgba(255,222,0,0.08);
+  transform: translateY(-2px);
+}
+
+/* Ensure text/icon is centered in sidebar type buttons */
+.filter-section .type-btn .type-icon-wrapper,
+.filter-section .type-btn .type-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Utility Classes */
+.hidden-by-filter {
+  display: none !important;
+}
+
+/* Dark theme refinements para light mode */
 @media (prefers-color-scheme: light) {
   :root {
     --pk-text: #1a1d2e;
@@ -1538,761 +2268,93 @@ body.welcome-open img[data-src] {
     background: linear-gradient(135deg, var(--pk-bg-start) 0%, var(--pk-bg-end) 60%, #f5f5f5 100%);
   }
   
-  .navbar {
+  .main-header {
     background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08), 0 0 30px rgba(255, 222, 0, 0.03);
-    border-bottom: 1px solid rgba(255, 222, 0, 0.1);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    border-bottom: 3px solid var(--color-golden-yellow);
   }
   
-  .search-input {
-    background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+  .sidebar {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 255, 0.95) 100%);
+    border-right: 2px solid rgba(255, 222, 0, 0.2);
+  }
+  
+  .sidebar .search-input {
+    background: rgba(255, 255, 255, 0.8);
     color: var(--pk-text);
-    border: 1px solid rgba(255, 222, 0, 0.25);
+    border: 2px solid rgba(255, 222, 0, 0.25);
   }
   
   .welcome-banner .welcome-inner {
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 249, 255, 0.95) 100%);
     color: var(--pk-text);
-    box-shadow: 0 10px 40px rgba(0,0,0,0.1), 0 0 30px rgba(255, 222, 0, 0.05);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
   }
   
-  /* Indicadores más visibles en tema claro */
-  .pokemon-card::after {
-    border: 2px solid rgba(255, 215, 0, 0.8);
-    opacity: 0.95;
+  .front, .back {
+    border: 2px solid rgba(255, 222, 0, 0.3);
+  }
+  
+  .front .front-content {
+    background: linear-gradient(145deg, 
+      rgba(255, 255, 255, 0.9) 0%, 
+      rgba(248, 249, 255, 0.9) 50%, 
+      rgba(255, 251, 230, 0.9) 100%);
+    color: var(--pk-text);
   }
 }
 
-/* ===================================
-   NUEVO LAYOUT CON SIDEBAR
-   ================================== */
-
-/* Enhanced App Layout with Sidebar */
-.app-container {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  background: linear-gradient(135deg, var(--pk-bg-start) 0%, var(--pk-bg-end) 100%);
-}
-
-.app-body {
-  display: flex;
-  flex: 1;
-  min-height: 0;
-}
-
-/* Paginação fija: mostrar 2 filas x 4 columnas en pantallas de escritorio
-   y mantener el paginador visible en la parte inferior del área de contenido. */
-.cards-viewport {
-  width: 100%;
-  max-width: 1700px; /* ampliar viewport para alojar columnas más anchas */
-  margin: 0 auto;
-  box-sizing: border-box;
-  position: relative;
-}
-
-/* Hacer que el viewport de cartas ocupe la misma altura que el sidebar */
-.cards-viewport.full-height {
-  height: calc(100vh - var(--app-header-height));
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  overflow: hidden;
-  align-items: stretch;
-}
-
-.card-grid.two-rows {
-  /* Forzar 4 columnas y 2 filas con altura fija por fila para evitar solapamientos */
-  display: grid !important;
-  grid-template-columns: repeat(4, minmax(340px, 1fr)) !important;
-  /* filas con altura fija controlada por variable --card-height */
-  --card-height-desktop: 520px;
-  grid-auto-rows: var(--card-height-desktop) !important;
-  gap: var(--grid-gap) !important; /* más espacio entre filas/columnas */
-  padding: 28px 20px !important;
-  /* fijar altura del viewport en base al número de filas + gap para que el paginador quede fuera */
-  height: calc(2 * var(--card-height-desktop) + var(--grid-gap) + 56px) !important;
-  overflow: hidden !important; /* evitar scroll dentro del viewport */
-  align-items: stretch !important; /* que las cartas llenen la altura de su celda */
-  justify-items: center !important;
-  flex: 1 1 auto;
-}
-
-/* Contenedor que hace sticky el paginador */
-.pagination-wrap {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  position: relative; /* ahora está debajo del grid */
-  height: var(--pagination-height);
-  margin-top: 8px;
-  left: 0;
-  z-index: 80;
-  pointer-events: auto;
-}
-
-.pagination.card-style {
-  background: rgba(12,12,20,0.6);
-  border-radius: 12px;
-  padding: 10px 14px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.45);
-  align-items: center;
-}
-
-.pagination .page-info { color: var(--pk-text); font-weight: 600; margin: 0 12px; }
-
-/* Ajustes estéticos para las cartas dentro del grid de 2 filas */
-.card-grid.two-rows .card {
-  width: 100% !important;
-  max-width: 520px !important; /* permitir cartas más anchas */
-  height: var(--card-height-desktop) !important; /* altura fija por carta */
-  margin: 0 !important;
-  border-radius: 14px !important;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.45), inset 0 0 14px rgba(255,222,0,0.03) !important;
-  transition: transform 220ms ease, box-shadow 220ms ease !important;
-  box-sizing: border-box !important;
-  display: flex !important;
-  flex-direction: column !important;
-}
-.card-grid.two-rows .card:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 16px 40px rgba(0,0,0,0.6) !important; }
-
-/* Limitar tamaño de la imagen dentro de la carta para que no invada la fila */
-.card-grid.two-rows .back .img .pokemon-img,
-.card-grid.two-rows .front .img .pokemon-img {
-  width: auto !important;
-  height: auto !important;
-  max-height: 58% !important; /* limitar al 58% de la carta para que no rompa la altura */
-  object-fit: contain !important;
-}
-
-/* Asegurar que las caras de la carta llenen su contenedor y no desborden */
-.card-grid.two-rows .card .content,
-.card-grid.two-rows .card .front,
-.card-grid.two-rows .card .back {
-  height: 100% !important;
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: space-between !important;
-}
-
-/* Ajustes responsive: si la pantalla no tiene ancho para 4 columnas, reducir a 2 */
-@media (max-width: 1199px) {
-  .card-grid.two-rows {
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)) !important;
-    --card-height-desktop: 480px; /* cartas más pequeñas en tablet */
-    grid-auto-rows: var(--card-height-desktop) !important;
-    /* permitir que el grid sea fluido en tablet y no forzar altura fija */
-    height: auto !important;
-  }
-
-  /* En tablet no forzar la altura del viewport ni la sidebar: permitir scroll natural */
-  .cards-viewport.full-height { height: auto !important; }
-  .sidebar { height: auto !important; max-height: none !important; }
-}
-
-@media (max-width: 999px) {
-  .card-grid.two-rows {
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) !important;
-    --card-height-desktop: 420px; /* cartas más compactas en móvil */
-    grid-auto-rows: var(--card-height-desktop) !important;
-    height: auto !important;
-    overflow: visible !important;
-  }
-
-  .cards-viewport.full-height { height: auto !important; }
-  .sidebar { height: auto !important; max-height: none !important; }
-}
-
-.pagination .page-btn { min-width: 100px; }
-
-/* En pantallas pequeñas, revertir al comportamiento por defecto */
-@media (max-width: 999px) {
-  .card-grid.two-rows {
-    grid-template-columns: repeat(2, 1fr) !important;
-    grid-auto-rows: auto !important;
-    height: auto !important;
-    overflow: visible !important;
-  }
-}
-
-/* Header Principal */
-.main-header {
-  background: var(--pk-nav);
-  border-bottom: 3px solid var(--color-golden-yellow);
-  padding: 20px 0;  /* Sin padding lateral */
-  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-  position: relative;
-  z-index: 50;
-  width: 100%;     /* Asegurar que ocupe todo el ancho */
-}
-
-.header-content {
-  display: flex;
-  align-items: center;
-  justify-content: center;  /* Solo centrar el logo */
-  width: 100%;              /* Ocupar todo el ancho */
-  padding: 0;               /* Sin padding adicional */
-}
-
-.logo-section {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.logo-large {
-  height: 60px;
-  width: auto;
-  cursor: pointer;
-  transition: transform 0.3s ease, filter 0.3s ease;
-}
-
-.logo-large:hover {
-  transform: scale(1.05);
-  filter: brightness(1.1);
-}
-
-.main-title {
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  line-height: 1;
-}
-
-.title-primary {
-  font-size: 2.5rem;
-  font-weight: 800;
-  background: linear-gradient(45deg, var(--color-golden-yellow), var(--color-gold-foil));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-}
-
-.title-secondary {
-  font-size: 1.2rem;
-  font-weight: 400;
-  color: var(--pk-muted);
-  margin-top: -5px;
-}
-
-/* Header Stats */
-.header-stats {
-  display: flex;
-  gap: 30px;
-}
-
-.stat-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
-.stat-number {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: var(--color-golden-yellow);
-  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
-  text-align: center;
-}
-
-.stat-label {
-  font-size: 0.9rem;
-  color: var(--pk-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  text-align: center;
-}
-
-/* Sidebar con scroll */
-.sidebar {
-  width: 360px;
-  background: linear-gradient(180deg, rgba(30, 35, 56, 0.95) 0%, rgba(42, 47, 74, 0.95) 100%);
-  border-right: 2px solid rgba(255, 222, 0, 0.2);
-  backdrop-filter: blur(10px);
-  display: flex;
-  flex-direction: column;
-  height: calc(100vh - var(--app-header-height));        /* Altura fija igual al viewport menos header */
-  overflow: hidden;         /* Ocultar overflow del contenedor */
-  z-index: 40;
-  box-sizing: border-box;
-}
-
-.sidebar-content {
-  flex: 1;                  /* Tomar el espacio restante */
-  overflow-y: auto;         /* Scroll vertical cuando sea necesario */
-  padding: 20px;
-  /* Personalizar scrollbar */
-  scrollbar-width: thin;
-  scrollbar-color: rgba(255, 222, 0, 0.3) rgba(30, 35, 56, 0.3);
-}
-
-.sidebar-content::-webkit-scrollbar {
-  width: 6px;
-}
-
-.sidebar-content::-webkit-scrollbar-track {
-  background: rgba(30, 35, 56, 0.3);
-  border-radius: 3px;
-}
-
-.sidebar-content::-webkit-scrollbar-thumb {
-  background: rgba(255, 222, 0, 0.3);
-  border-radius: 3px;
-}
-
-.sidebar-content::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 222, 0, 0.5);
-}
-
-.sidebar-header {
-  padding: 20px;
-  border-bottom: 1px solid rgba(255, 222, 0, 0.1);
-  background: linear-gradient(135deg, rgba(255, 222, 0, 0.1) 0%, rgba(179, 161, 37, 0.1) 100%);
-}
-
-.sidebar-header h3 {
-  margin: 0;
-  color: var(--color-golden-yellow);
-  font-size: 1.1rem;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.sidebar-content {
-  padding: 20px;
-  flex: 1;
-}
-
-/* Secciones del sidebar */
-.search-section,
-.filter-section,
-.quick-actions {
-  margin-bottom: 30px;
-}
-
-.sidebar-content h4 {
-  margin: 0 0 15px 0;
-  color: var(--pk-text);
-  font-size: 1rem;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-/* Search Section */
-.search-input-container {
-  display: flex;
-  gap: 8px;
-}
-
-.sidebar .search-input {
-  flex: 1;
-  padding: 12px 16px;
-  border: 2px solid rgba(255, 222, 0, 0.2);
-  border-radius: 25px;
-  background: rgba(30, 35, 56, 0.7);
-  color: var(--pk-text);
-  font-size: 0.95rem;
-  transition: all 0.3s ease;
-}
-
-.sidebar .search-input:focus {
-  outline: none;
-  border-color: var(--color-golden-yellow);
-  background: rgba(30, 35, 56, 0.9);
-  box-shadow: 0 0 20px rgba(255, 222, 0, 0.2);
-}
-
-.sidebar .search-input::placeholder {
-  color: var(--pk-muted);
-}
-
-.sidebar .search-btn {
-  padding: 12px 16px;
-  border: none;
-  border-radius: 25px;
-  background: linear-gradient(135deg, var(--color-golden-yellow) 0%, var(--color-gold-foil) 100%);
-  color: var(--pk-bg-start);
-  cursor: pointer;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 48px;
-}
-
-.sidebar .search-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(255, 222, 0, 0.4);
-}
-
-/* Type Buttons en Sidebar - Sin recuadros, sprites gigantes */
-.filter-section .type-buttons {
-  display: grid;
-  grid-template-columns: 1fr;              /* Una sola columna */
-  gap: 12px;                               /* Más espacio entre sprites */
-}
-
-/* Botones con solo icono - Completamente sin fondo */
-.filter-section .type-btn.icon-only {
-  display: flex;
-  align-items: center;
-  justify-content: center;                 /* Centrar el icono */
-  padding: 0;                              /* Sin padding para eliminar bordes */
-  margin: 0;                               /* Sin margin */
-  border: none;                            /* Sin borde */
-  outline: none;                           /* Sin outline */
-  border-radius: 0;                        /* Sin bordes redondeados */
-  background: transparent;                 /* Completamente transparente */
-  box-shadow: none;                        /* Sin sombra */
-  color: var(--pk-text);
-  cursor: pointer;
-  transition: transform 0.2s ease;         /* Solo transición de escala */
-  width: 100%;
-  min-height: auto;                        /* Altura automática */
-}
-
-/* Botón "All" con texto - Mantener estilo con recuadro */
-.filter-section .type-btn.with-text {
-  display: flex;
-  align-items: center;
-  gap: 15px;                               /* Espacio entre icono y texto */
-  padding: 16px;                           /* Padding normal */
-  border: 2px solid transparent;
-  border-radius: 15px;
-  background: rgba(30, 35, 56, 0.6);
-  color: var(--pk-text);
-  cursor: pointer;
-  transition: all 0.3s ease;
-  width: 100%;
-  min-height: 60px;                        /* Altura normal */
-  justify-content: flex-start;             /* Alinear a la izquierda para el texto */
-  margin-bottom: 12px;                     /* Separar del resto */
-}
-
-/* Emoji específico para el botón "All" - más pequeño */
-.filter-section .type-btn.with-text .type-icon-wrapper {
-  font-size: 1.8rem;                       /* Emoji más pequeño para "All" */
-  min-width: auto;                         /* Sin ancho mínimo */
-}
-
-.filter-section .type-btn .type-icon-wrapper {
-  font-size: 6rem;                         /* Emojis aún más grandes */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-width: 110px;                        /* Ancho aún más grande */
-  line-height: 1;                          /* Mejor alineación vertical */
-}
-
-.filter-section .type-btn .type-icon {
-  width: 200px;                            /* Sprites aún más grandes */
-  height: 110px;
+/* Sprites de tipo en estadísticas (dentro de la card, no sidebar) */
+.pokemon-card .types-section .type-icon {
+  /* Iconos usados dentro de la card (stats/details): proporcional a 170px */
+  width: 120px;
+  height: 75px;
   object-fit: contain;
+  margin: 0 auto;
+  display: inline-block;
 }
 
-.filter-section .type-btn .type-label {
-  font-size: 1.1rem;                       /* Texto normal para "All" */
-  font-weight: 600;
-  letter-spacing: 0.5px;
-}
-
-/* Efectos hover solo para botones con recuadro (All) */
-.filter-section .type-btn.with-text:hover {
-  border-color: var(--type-color, var(--color-golden-yellow));
-  background: linear-gradient(135deg, 
-    rgba(var(--type-color-rgb, 255, 222, 0), 0.1) 0%, 
-    rgba(var(--type-color-rgb, 255, 222, 0), 0.2) 100%);
-  transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-}
-
-/* Efecto hover muy sutil para sprites sin recuadro */
-.filter-section .type-btn.icon-only:hover {
-  transform: scale(1.15);                  /* Escalar sprite */
-}
-
-/* Eliminar focus outline */
-.filter-section .type-btn.icon-only:focus {
-  outline: none;
-  border: none;
-  box-shadow: none;
-}
-
-.filter-section .type-btn.with-text.is-active {
-  border-color: var(--type-color, var(--color-golden-yellow));
-  background: linear-gradient(135deg, 
-    var(--type-color, var(--color-golden-yellow)) 0%, 
-    color-mix(in srgb, var(--type-color, var(--color-golden-yellow)) 80%, black 20%) 100%);
-  color: white;
-  transform: scale(1.1);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.4);
-  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
-}
-
-/* Efecto active para sprites sin recuadro - Solo brillo */
-.filter-section .type-btn.icon-only.is-active {
-  transform: scale(1.25);                  /* Más grande cuando está activo */
-  filter: brightness(1.4) drop-shadow(0 0 12px rgba(255, 222, 0, 0.8));
-}
-  transform: translateX(5px);
-}
-
-.type-icon-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 24px;
-}
-
-.type-label {
-  flex: 1;
-  text-transform: capitalize;
-}
-
-/* Quick Actions */
-.action-btn {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 12px 16px;
-  border: 2px solid rgba(255, 222, 0, 0.2);
-  border-radius: 12px;
-  background: rgba(30, 35, 56, 0.6);
-  color: var(--pk-text);
-  font-size: 0.9rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  width: 100%;
-  margin-bottom: 8px;
-}
-
-.action-btn:hover {
-  border-color: var(--color-golden-yellow);
-  background: linear-gradient(135deg, rgba(255, 222, 0, 0.1) 0%, rgba(255, 222, 0, 0.2) 100%);
-  transform: translateY(-2px);
-}
-
-/* Content Container - Actualizado para ocupar todo el espacio */
-.content-container {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  position: relative;
-  width: 100%;               /* Asegurar que ocupe todo el ancho disponible */
-  height: 100%;              /* Asegurar que ocupe toda la altura disponible */
-}
-
-/* Responsive design para sidebar */
-@media (max-width: 1024px) {
-  .sidebar {
-    width: 280px;
+/* Responsive adjustments for type sprites */
+@media (max-width: 1199px) {
+  .type-icon-sprite {
+    width: 140px;
+    height: 90px;
   }
   
-  .title-primary {
-    font-size: 2rem;
+  .filter-section .type-btn .type-icon {
+    width: 140px !important;
+    height: 90px !important;
   }
   
-  .header-stats {
-    gap: 20px;
+  .pokemon-type .type-sprite {
+    width: 100px !important;
+    height: 65px !important;
+  }
+  
+  .pokemon-card .types-section .type-icon {
+    width: 100px;
+    height: 65px;
   }
 }
 
-@media (max-width: 768px) {
-  .app-body {
-    flex-direction: column;
+@media (max-width: 999px) {
+  .type-icon-sprite {
+    width: 120px;
+    height: 75px;
   }
   
-  .sidebar {
-    width: 100%;
-    height: auto;
-    max-height: 300px;
-    order: 1;
+  .filter-section .type-btn .type-icon {
+    width: 120px !important;
+    height: 75px !important;
   }
   
-  .content-container {
-    order: 2;
+  .pokemon-type .type-sprite {
+    width: 90px !important;
+    height: 55px !important;
   }
   
-  .header-content {
-    flex-direction: column;
-    gap: 15px;
-    text-align: center;
+  .pokemon-card .types-section .type-icon {
+    width: 90px;
+    height: 55px;
   }
-  
-  .logo-section {
-    justify-content: center;
-  }
-  
-  .title-primary {
-    font-size: 1.8rem;
-  }
-  
-  .sidebar-content {
-    padding: 15px;
-  }
-  
-  .search-section,
-  .filter-section,
-  .quick-actions {
-    margin-bottom: 20px;
-  }
-  
-  .filter-section .type-buttons {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* ======= MOBILE FIXES (stronger overrides) ======= */
-@media (max-width: 768px) {
-  /* Scale base font slightly for small screens */
-  html { font-size: 15px; }
-
-  /* Fluid title and body type scaling */
-  .title-primary { font-size: clamp(1.2rem, 4.5vw, 1.8rem); }
-  .title-secondary { font-size: clamp(0.9rem, 2.4vw, 1.1rem); }
-
-  /* Ensure body spacing leaves room for fixed header */
-  body { padding-top: 72px; }
-
-  /* Sidebar: full-screen modal behavior on mobile */
-  .sidebar {
-    left: -100vw !important;
-    width: 100vw !important;
-    height: 100vh !important;
-    top: 0 !important;
-    position: fixed !important;
-    align-items: flex-start !important;
-    padding: 0 !important;
-    overflow-y: auto !important;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.6);
-  }
-  .sidebar.open { left: 0 !important; }
-
-  /* When open, lock background scroll and dim content */
-  body.sidebar-open { overflow: hidden; }
-  body.sidebar-open .content-container,
-  body.sidebar-open .main-content {
-    filter: blur(6px) brightness(0.6);
-    pointer-events: none;
-  }
-
-  /* Show sidebar also when body has class (some JS toggles body instead of sidebar) */
-  body.sidebar-open .sidebar { left: 0 !important; }
-
-  /* Overlay handling: fade in/out */
-  .sidebar-overlay {
-    position: fixed;
-    inset: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0,0,0,0.6);
-    z-index: 2040;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 220ms ease, visibility 220ms ease;
-  }
-  .sidebar-overlay.active,
-  body.sidebar-open .sidebar-overlay {
-    opacity: 1;
-    visibility: visible;
-  }
-
-  /* Make sidebar sit above overlay */
-  .sidebar { z-index: 2050 !important; }
-
-  /* Reserve space at top of sidebar for header spacing */
-  .sidebar::before {
-    content: '';
-    display: block;
-    height: 72px; /* same as header height */
-    width: 100%;
-    flex: 0 0 72px;
-  }
-
-  /* Sidebar content alignment and sizing */
-  .sidebar-content {
-    padding: 100px 6vw 24px 6vw !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    align-items: flex-start !important;
-  }
-  .sidebar-header { padding: 18px 6vw !important; text-align: left !important; }
-
-  /* Type buttons full width and centered icons */
-  .filter-section .type-btn.with-text,
-  .filter-section .type-btn.icon-only {
-    width: 100% !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: flex-start !important;
-    padding: 12px 14px !important;
-    gap: 12px !important;
-    box-sizing: border-box !important;
-  }
-
-  .filter-section .type-btn .type-icon-wrapper { font-size: 2.6rem !important; min-width: 56px !important; }
-
-  /* Card grid — allow 1 or 2 columns depending on width */
-  .card-grid {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
-    gap: 16px !important;
-    padding: 0 12px 18px 12px !important;
-  }
-
-  /* Cards: make images responsive and remove absolute positioning on small screens */
-  .card, .pokemon-card { max-width: 100% !important; width: 100% !important; }
-  .front .img, .back .img, .back .img .pokemon-img, .front .front-content {
-    position: relative !important;
-    width: 100% !important;
-    height: auto !important;
-    max-height: none !important;
-    object-fit: contain !important;
-    margin: 0 auto !important;
-  }
-  .back .back-content, .front .front-content {
-    position: relative !important;
-    padding: 12px !important;
-    height: auto !important;
-  }
-  .back .img .pokemon-img {
-    position: relative !important;
-    width: 160px !important;
-    height: auto !important;
-    transform: none !important;
-    margin: 6px auto !important;
-  }
-
-  /* Ensure any <img> scale within containers */
-  img, .pokemon-img, .type-icon, .type-sprite { max-width: 100% !important; height: auto !important; }
-
-  /* Welcome banner: center, responsive text and dismissable */
-  .welcome-banner {
-    position: fixed !important;
-    left: 50% !important;
-    top: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    width: min(92vw, 520px) !important;
-    padding: 0 !important;
-    z-index: 3050 !important;
-  }
-  .welcome-banner .welcome-inner {
-    padding: 18px 20px !important;
-    border-radius: 14px !important;
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 8px !important;
-    align-items: center !important;
-  }
-  .welcome-banner.hidden { display: none !important; opacity: 0 !important; visibility: hidden !important; }
-
-  /* Small tweaks for text readability */
-  .title, .card-footer, .stat-name, .stat-val { font-size: clamp(0.9rem, 2.4vw, 1.1rem) !important; }
 }

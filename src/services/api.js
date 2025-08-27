@@ -28,6 +28,9 @@ export async function getPokemonsInfoByType(type) {
 // Usar la variable de entorno definida en .env
 const BASE_URL = import.meta.env.VITE_POKEAPI_BASE_URL
 
+// Simple in-memory cache para responses de Pokemon por id/nombre
+const pokemonCache = new Map();
+
 /**
  * Obtiene los datos básicos de un Pokémon por id o nombre.
  * @param {string|number} idOrName - ID o nombre del Pokémon.
@@ -35,8 +38,12 @@ const BASE_URL = import.meta.env.VITE_POKEAPI_BASE_URL
  */
 export async function getPokemon(idOrName) {
   try {
+  // Revisar cache primero
+  const key = String(idOrName).toLowerCase();
+  if (pokemonCache.has(key)) return pokemonCache.get(key)
     const res = await axios.get(`${BASE_URL}/pokemon/${idOrName}`)
-    return res.data
+  pokemonCache.set(key, res.data)
+  return res.data
   } catch (error) {
     return { error: error.response?.data?.detail || 'Pokémon no encontrado' }
   }
